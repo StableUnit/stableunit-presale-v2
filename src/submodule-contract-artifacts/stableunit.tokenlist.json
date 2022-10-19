@@ -1,0 +1,175 @@
+{
+  "name": "StableUnit tokens",
+  "logoURI": "https://suui.netlify.app/logo96.png",
+  "keywords": [
+    "verified"
+  ],
+  "timestamp": "2020-06-27T00:00:00+00:00",
+  "tokens": [
+    {
+      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "chainId": 1,
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18
+    },
+    {
+      "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+      "chainId": 1,
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8
+    },
+    {
+      "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "chainId": 1,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6
+    },
+    {
+      "address": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+      "chainId": 1,
+      "name": "SHIBA INU",
+      "symbol": "SHIB",
+      "decimals": 18
+    },
+    {
+      "address": "0x111111111117dC0aa78b770fA6A738034120C302",
+      "chainId": 1,
+      "name": "1INCH Token",
+      "symbol": "1INCH",
+      "decimals": 18
+    },
+
+
+    {
+      "address": "0x7189C2F69Ed1D8e9C61aF5955e9B312966B2F81B",
+      "chainId": 4,
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18
+    },
+    {
+      "address": "0x8586594412DAC2621ABde8d422885EfFE63eCdff",
+      "chainId": 4,
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8
+    },
+    {
+      "address": "0xb61538Be717bA0d8BAb46E0699d7abb9C02D66fA",
+      "chainId": 4,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6
+    },
+    {
+      "address": "0xD90182FF01630B5343B17FA32b02113CbEFB2ed8",
+      "chainId": 4,
+      "name": "SHIBA INU",
+      "symbol": "SHIB",
+      "decimals": 18
+    },
+    {
+      "address": "0x2b52Aff165104f14ad30e867E9D69F7d74194FC9",
+      "chainId": 4,
+      "name": "1INCH Token",
+      "symbol": "1INCH",
+      "decimals": 18
+    },
+    {
+      "address": "0x7Ddd92A76d93A94393e2C1BA02853Fc3188288BB",
+      "chainId": 4,
+      "name": "USD Pro",
+      "symbol": "USDPro",
+      "decimals": 18
+    },
+
+
+    {
+      "address": "0xb4CE58d9CF3Dad7Ad72c2f676D75fe425c4931F7",
+      "chainId": 5,
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18
+    },
+    {
+      "address": "0x721953dF5B20C10dfE7F1feE373ED2f435C80ccC",
+      "chainId": 5,
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8
+    },
+    {
+      "address": "0xA92AD12CA88923Fe5C84F37031131C60cfCf4CEf",
+      "chainId": 5,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6
+    },
+    {
+      "address": "0x965eb1bDAFA9E89ac02c312d7D15D9Af26c6Daa0",
+      "chainId": 5,
+      "name": "SHIBA INU",
+      "symbol": "SHIB",
+      "decimals": 18
+    },
+    {
+      "address": "0x7628fFc11B00F4Af6824225E8e6a557575Ef70DE",
+      "chainId": 5,
+      "name": "1INCH Token",
+      "symbol": "1INCH",
+      "decimals": 18
+    },
+    {
+      "address": "0x3F8ECF6Ffc1D5344a7Cb235eab3949F4008242d6",
+      "chainId": 5,
+      "name": "StableUnit USD Pro",
+      "symbol": "USDPro",
+      "decimals": 18
+    },
+
+
+    {
+      "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+      "chainId": 137,
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18
+    },
+    {
+      "address": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",
+      "chainId": 137,
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8
+    },
+    {
+      "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+      "chainId": 137,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6
+    },
+    {
+      "address": "0x6f8a06447Ff6FcF75d803135a7de15CE88C1d4ec",
+      "chainId": 137,
+      "name": "SHIBA INU",
+      "symbol": "SHIB",
+      "decimals": 18
+    },
+    {
+      "address": "0x9c2C5fd7b07E95EE044DDeba0E97a665F142394f",
+      "chainId": 137,
+      "name": "1INCH Token",
+      "symbol": "1INCH",
+      "decimals": 18
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}

@@ -1,0 +1,56 @@
+@import "src/ui-kit/styles/vars";
+
+.token-picker {
+  &__selectedValue, &__menu-item {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    color: white !important;
+
+    &__icon {
+      height: 28px;
+      margin-right: 8px;
+    }
+  }
+
+  &__menu-item {
+    background: transparent;
+  }
+
+  &__menu {
+    width: 330px;
+    background: $dark-gray;
+    border-radius: 16px 16px 0px 0px;
+
+    .rs-picker-select-menu-item-active {
+      background: $dark;
+    }
+  }
+
+  .rs-picker-toggle {
+    border: none;
+    background-color: transparent !important;
+    padding-left: 0 !important;
+    outline: none;
+    box-shadow: none;
+    padding-right: 35px;
+
+    &-textbox {
+      border: none !important;
+    }
+
+    &-clean {
+      display: none;
+    }
+
+    &-caret {
+      top: 11px !important;
+
+      path {
+        fill: white;
+      }
+    }
+  }
+}

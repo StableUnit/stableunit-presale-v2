@@ -1,0 +1,27 @@
+@import "../../styles/vars";
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 19px;
+  background: $dark-green;
+  border-radius: 12px;
+}
+
+.progress-bar {
+  border-radius: 12px;
+  height: 19px;
+  background: $gradient;
+
+  &__percent {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: 0.5px 0.5px $dark2;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

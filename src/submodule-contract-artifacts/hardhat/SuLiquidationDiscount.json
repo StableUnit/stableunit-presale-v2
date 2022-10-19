@@ -1,0 +1,323 @@
+{
+  "address": "0x26B862f640357268Bd2d9E95bc81553a2Aa81D7E",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "IncorrectDiscount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ACCESS_CONTROL_SINGLETON",
+      "outputs": [
+        {
+          "internalType": "contract ISuAccessControl",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "LIQUIDATION_ACCESS_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MINTER_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "VAULT_ACCESS_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "enum DiscountType",
+          "name": "discountType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "liquidationBlock",
+          "type": "uint256"
+        }
+      ],
+      "name": "calculateDiscountE18",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "enum DiscountType",
+          "name": "discountType",
+          "type": "uint8"
+        }
+      ],
+      "name": "getDiscountInfo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "firstBlockE18",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "stepPerBlockE18",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct DiscountInfo",
+          "name": "discountInfo",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_authControl",
+          "type": "address"
+        }
+      ],
+      "name": "init",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "enum DiscountType",
+          "name": "discountType",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "firstBlockE18",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "stepPerBlockE18",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct DiscountInfo",
+          "name": "discountInfo",
+          "type": "tuple"
+        }
+      ],
+      "name": "setDiscountInfo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "numDeployments": 2,
+  "solcInputHash": "625ad26419abf2ed0c138f1436525766",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"IncorrectDiscount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ACCESS_CONTROL_SINGLETON\",\"outputs\":[{\"internalType\":\"contract ISuAccessControl\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"LIQUIDATION_ACCESS_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MINTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"VAULT_ACCESS_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"enum DiscountType\",\"name\":\"discountType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"liquidationBlock\",\"type\":\"uint256\"}],\"name\":\"calculateDiscountE18\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"enum DiscountType\",\"name\":\"discountType\",\"type\":\"uint8\"}],\"name\":\"getDiscountInfo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"firstBlockE18\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"stepPerBlockE18\",\"type\":\"uint256\"}],\"internalType\":\"struct DiscountInfo\",\"name\":\"discountInfo\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_authControl\",\"type\":\"address\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"enum DiscountType\",\"name\":\"discountType\",\"type\":\"uint8\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"firstBlockE18\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"stepPerBlockE18\",\"type\":\"uint256\"}],\"internalType\":\"struct DiscountInfo\",\"name\":\"discountInfo\",\"type\":\"tuple\"}],\"name\":\"setDiscountInfo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"calculateDiscountE18(address,uint8,uint256)\":{\"details\":\"This is a linear function of the discount change.     Calculates the liquidation discount by passed blocks.\",\"params\":{\"asset\":\"The address of the main collateral token\",\"discountType\":\"Determines how aggressively the lending module offers a discount\",\"liquidationBlock\":\"The block number when the liquidation was triggered\"},\"returns\":{\"_0\":\"Amount of discount in percents, E18 format\"}},\"getDiscountInfo(address,uint8)\":{\"params\":{\"asset\":\"The address of the asset token\",\"discountType\":\"Type of discount determines how aggressively the lending module offers a discount\"}},\"setDiscountInfo(address,uint8,(uint256,uint256))\":{\"details\":\"Sets the liquidation discount\",\"params\":{\"asset\":\"The address of the asset token\",\"discountInfo\":\"Determines discount percentages depending on a block number\",\"discountType\":\"Determines how aggressively the lending module offers a discount\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getDiscountInfo(address,uint8)\":{\"notice\":\"Returns information about discount percentages depending on a block number\"},\"setDiscountInfo(address,uint8,(uint256,uint256))\":{\"notice\":\"Only owner is able to call this function\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/liquidator/SuLiquidationDiscount.sol\":\"SuLiquidationDiscount\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.5.0) (proxy/utils/Initializable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../../utils/AddressUpgradeable.sol\\\";\\n\\n/**\\n * @dev This is a base contract to aid in writing upgradeable contracts, or any kind of contract that will be deployed\\n * behind a proxy. Since proxied contracts do not make use of a constructor, it's common to move constructor logic to an\\n * external initializer function, usually called `initialize`. It then becomes necessary to protect this initializer\\n * function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.\\n *\\n * TIP: To avoid leaving the proxy in an uninitialized state, the initializer function should be called as early as\\n * possible by providing the encoded function call as the `_data` argument to {ERC1967Proxy-constructor}.\\n *\\n * CAUTION: When used with inheritance, manual care must be taken to not invoke a parent initializer twice, or to ensure\\n * that all initializers are idempotent. This is not verified automatically as constructors are by Solidity.\\n *\\n * [CAUTION]\\n * ====\\n * Avoid leaving a contract uninitialized.\\n *\\n * An uninitialized contract can be taken over by an attacker. This applies to both a proxy and its implementation\\n * contract, which may impact the proxy. To initialize the implementation contract, you can either invoke the\\n * initializer manually, or you can include a constructor to automatically mark it as initialized when it is deployed:\\n *\\n * [.hljs-theme-light.nopadding]\\n * ```\\n * /// @custom:oz-upgrades-unsafe-allow constructor\\n * constructor() initializer {}\\n * ```\\n * ====\\n */\\nabstract contract Initializable {\\n    /**\\n     * @dev Indicates that the contract has been initialized.\\n     */\\n    bool private _initialized;\\n\\n    /**\\n     * @dev Indicates that the contract is in the process of being initialized.\\n     */\\n    bool private _initializing;\\n\\n    /**\\n     * @dev Modifier to protect an initializer function from being invoked twice.\\n     */\\n    modifier initializer() {\\n        // If the contract is initializing we ignore whether _initialized is set in order to support multiple\\n        // inheritance patterns, but we only do this in the context of a constructor, because in other contexts the\\n        // contract may have been reentered.\\n        require(_initializing ? _isConstructor() : !_initialized, \\\"Initializable: contract is already initialized\\\");\\n\\n        bool isTopLevelCall = !_initializing;\\n        if (isTopLevelCall) {\\n            _initializing = true;\\n            _initialized = true;\\n        }\\n\\n        _;\\n\\n        if (isTopLevelCall) {\\n            _initializing = false;\\n        }\\n    }\\n\\n    /**\\n     * @dev Modifier to protect an initialization function so that it can only be invoked by functions with the\\n     * {initializer} modifier, directly or indirectly.\\n     */\\n    modifier onlyInitializing() {\\n        require(_initializing, \\\"Initializable: contract is not initializing\\\");\\n        _;\\n    }\\n\\n    function _isConstructor() private view returns (bool) {\\n        return !AddressUpgradeable.isContract(address(this));\\n    }\\n}\\n\",\"keccak256\":\"0x372b0bc04e3b4c074559bbbfb1317afddb56de5504158ca25a7f9cd403980445\",\"license\":\"MIT\"},\"@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.5.0) (utils/Address.sol)\\n\\npragma solidity ^0.8.1;\\n\\n/**\\n * @dev Collection of functions related to the address type\\n */\\nlibrary AddressUpgradeable {\\n    /**\\n     * @dev Returns true if `account` is a contract.\\n     *\\n     * [IMPORTANT]\\n     * ====\\n     * It is unsafe to assume that an address for which this function returns\\n     * false is an externally-owned account (EOA) and not a contract.\\n     *\\n     * Among others, `isContract` will return false for the following\\n     * types of addresses:\\n     *\\n     *  - an externally-owned account\\n     *  - a contract in construction\\n     *  - an address where a contract will be created\\n     *  - an address where a contract lived, but was destroyed\\n     * ====\\n     *\\n     * [IMPORTANT]\\n     * ====\\n     * You shouldn't rely on `isContract` to protect against flash loan attacks!\\n     *\\n     * Preventing calls from contracts is highly discouraged. It breaks composability, breaks support for smart wallets\\n     * like Gnosis Safe, and does not provide security since it can be circumvented by calling from a contract\\n     * constructor.\\n     * ====\\n     */\\n    function isContract(address account) internal view returns (bool) {\\n        // This method relies on extcodesize/address.code.length, which returns 0\\n        // for contracts in construction, since the code is only stored at the end\\n        // of the constructor execution.\\n\\n        return account.code.length > 0;\\n    }\\n\\n    /**\\n     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to\\n     * `recipient`, forwarding all available gas and reverting on errors.\\n     *\\n     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost\\n     * of certain opcodes, possibly making contracts go over the 2300 gas limit\\n     * imposed by `transfer`, making them unable to receive funds via\\n     * `transfer`. {sendValue} removes this limitation.\\n     *\\n     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].\\n     *\\n     * IMPORTANT: because control is transferred to `recipient`, care must be\\n     * taken to not create reentrancy vulnerabilities. Consider using\\n     * {ReentrancyGuard} or the\\n     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].\\n     */\\n    function sendValue(address payable recipient, uint256 amount) internal {\\n        require(address(this).balance >= amount, \\\"Address: insufficient balance\\\");\\n\\n        (bool success, ) = recipient.call{value: amount}(\\\"\\\");\\n        require(success, \\\"Address: unable to send value, recipient may have reverted\\\");\\n    }\\n\\n    /**\\n     * @dev Performs a Solidity function call using a low level `call`. A\\n     * plain `call` is an unsafe replacement for a function call: use this\\n     * function instead.\\n     *\\n     * If `target` reverts with a revert reason, it is bubbled up by this\\n     * function (like regular Solidity function calls).\\n     *\\n     * Returns the raw returned data. To convert to the expected return value,\\n     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].\\n     *\\n     * Requirements:\\n     *\\n     * - `target` must be a contract.\\n     * - calling `target` with `data` must not revert.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCall(address target, bytes memory data) internal returns (bytes memory) {\\n        return functionCall(target, data, \\\"Address: low-level call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with\\n     * `errorMessage` as a fallback revert reason when `target` reverts.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCall(\\n        address target,\\n        bytes memory data,\\n        string memory errorMessage\\n    ) internal returns (bytes memory) {\\n        return functionCallWithValue(target, data, 0, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but also transferring `value` wei to `target`.\\n     *\\n     * Requirements:\\n     *\\n     * - the calling contract must have an ETH balance of at least `value`.\\n     * - the called Solidity function must be `payable`.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value\\n    ) internal returns (bytes memory) {\\n        return functionCallWithValue(target, data, value, \\\"Address: low-level call with value failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but\\n     * with `errorMessage` as a fallback revert reason when `target` reverts.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value,\\n        string memory errorMessage\\n    ) internal returns (bytes memory) {\\n        require(address(this).balance >= value, \\\"Address: insufficient balance for call\\\");\\n        require(isContract(target), \\\"Address: call to non-contract\\\");\\n\\n        (bool success, bytes memory returndata) = target.call{value: value}(data);\\n        return verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but performing a static call.\\n     *\\n     * _Available since v3.3._\\n     */\\n    function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {\\n        return functionStaticCall(target, data, \\\"Address: low-level static call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],\\n     * but performing a static call.\\n     *\\n     * _Available since v3.3._\\n     */\\n    function functionStaticCall(\\n        address target,\\n        bytes memory data,\\n        string memory errorMessage\\n    ) internal view returns (bytes memory) {\\n        require(isContract(target), \\\"Address: static call to non-contract\\\");\\n\\n        (bool success, bytes memory returndata) = target.staticcall(data);\\n        return verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Tool to verifies that a low level call was successful, and revert if it wasn't, either by bubbling the\\n     * revert reason using the provided one.\\n     *\\n     * _Available since v4.3._\\n     */\\n    function verifyCallResult(\\n        bool success,\\n        bytes memory returndata,\\n        string memory errorMessage\\n    ) internal pure returns (bytes memory) {\\n        if (success) {\\n            return returndata;\\n        } else {\\n            // Look for revert reason and bubble it up if present\\n            if (returndata.length > 0) {\\n                // The easiest way to bubble the revert reason is using memory via assembly\\n\\n                assembly {\\n                    let returndata_size := mload(returndata)\\n                    revert(add(32, returndata), returndata_size)\\n                }\\n            } else {\\n                revert(errorMessage);\\n            }\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x55cf2bd9fc76704ddcdc19834cd288b7de00fc0f298a40ea16a954ae8991db2d\",\"license\":\"MIT\"},\"contracts/access-control/SuAuthenticated.sol\":{\"content\":\"// SPDX-License-Identifier: BSL 1.1\\n\\npragma solidity >=0.7.6;\\n\\nimport \\\"../interfaces/ISuAccessControl.sol\\\";\\nimport \\\"@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol\\\";\\n\\n/**\\n * @title SuAuthenticated\\n * @dev other contracts should inherit to be authenticated\\n */\\nabstract contract SuAuthenticated is Initializable{\\n    bytes32 public constant MINTER_ROLE = keccak256(\\\"MINTER_ROLE\\\");\\n    bytes32 public constant VAULT_ACCESS_ROLE = keccak256(\\\"VAULT_ACCESS_ROLE\\\");\\n    bytes32 public constant LIQUIDATION_ACCESS_ROLE = keccak256(\\\"LIQUIDATION_ACCESS_ROLE\\\");\\n    bytes32 private constant DEFAULT_ADMIN_ROLE = 0x00;\\n\\n    /// @dev the address of SuAccessControlSingleton - it should be one for all contract that inherits SuAuthenticated\\n    ISuAccessControl public ACCESS_CONTROL_SINGLETON;\\n\\n    /// @dev should be passed in constructor\\n    function __SuAuthenticated_init(address _accessControlSingleton) internal onlyInitializing {\\n        ACCESS_CONTROL_SINGLETON = ISuAccessControl(_accessControlSingleton);\\n        // TODO: check that _accessControlSingleton points to ISuAccessControl instance\\n        // require(ISuAccessControl(_accessControlSingleton).supportsInterface(ISuAccessControl.hasRole.selector), \\\"bad dependency\\\");\\n    }\\n\\n    /// @dev check DEFAULT_ADMIN_ROLE\\n    modifier onlyOwner() {\\n        require(ACCESS_CONTROL_SINGLETON.hasRole(DEFAULT_ADMIN_ROLE, msg.sender), \\\"SuAuth: onlyOwner AUTH_FAILED\\\");\\n        _;\\n    }\\n\\n    /// @dev check VAULT_ACCESS_ROLE\\n    modifier onlyVaultAccess() {\\n        require(ACCESS_CONTROL_SINGLETON.hasRole(VAULT_ACCESS_ROLE, msg.sender), \\\"SuAuth: onlyVaultAccess AUTH_FAILED\\\");\\n        _;\\n    }\\n\\n    /// @dev check VAULT_ACCESS_ROLE\\n    modifier onlyLiquidationAccess() {\\n        require(ACCESS_CONTROL_SINGLETON.hasRole(LIQUIDATION_ACCESS_ROLE, msg.sender), \\\"SuAuth: onlyLiquidationAccess AUTH_FAILED\\\");\\n        _;\\n    }\\n\\n    /// @dev check MINTER_ROLE\\n    modifier onlyMinter() {\\n        require(ACCESS_CONTROL_SINGLETON.hasRole(MINTER_ROLE, msg.sender), \\\"SuAuth: onlyMinter AUTH_FAILED\\\");\\n        _;\\n    }\\n}\\n\",\"keccak256\":\"0x340220ca1c937826e44283ea69178ed0e8eff7e69926f51b599d905601458bd6\",\"license\":\"BSL 1.1\"},\"contracts/interfaces/ISuAccessControl.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.7.6;\\n\\n/**\\n * @dev External interface of AccessControl declared to support ERC165 detection.\\n */\\ninterface ISuAccessControl {\\n    function hasRole(bytes32 role, address account) external view returns (bool);\\n    function getRoleAdmin(bytes32 role) external view returns (bytes32);\\n    function grantRole(bytes32 role, address account) external;\\n    function revokeRole(bytes32 role, address account) external;\\n    function renounceRole(bytes32 role, address account) external;\\n\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n\\n    // TODO: remove legacy functionality\\n    function setVault(address _vault, bool _isVault) external;\\n    function setCdpManager(address _cdpManager, bool _isCdpManager) external;\\n    function setDAO(address _dao, bool _isDAO) external;\\n    function setManagerParameters(address _address, bool _permit) external;\\n    function transferOwnership(address newOwner) external;\\n}\\n\",\"keccak256\":\"0xd386f4bad5ae0d77788abea08ceec10dc02b02559465d8a8f4e30b58dfac2d2a\",\"license\":\"MIT\"},\"contracts/interfaces/ISuLiquidationDiscount.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\n\\npragma solidity ^0.8.0;\\nimport \\\"../liquidator/SuLiquidationStructs.sol\\\";\\n\\ninterface ISuLiquidationDiscount {\\n    /// @notice Sets percentages of discounts for different asset and discount types(aggressive/middle/conservative)\\n    ///     We can set different discounts for the first block and for other blocks per minute\\n    function setDiscountInfo(\\n        address asset,\\n        DiscountType discountType,\\n        DiscountInfo calldata discountInfo\\n    ) external;\\n    /// @notice Returns information about discount percentages which are used for discount calculation\\n    function getDiscountInfo(\\n        address asset,\\n        DiscountType discountType\\n    ) external view returns (DiscountInfo memory discountInfo);\\n    /// @notice Calculates the liquidation discount in percents by passed blocks.\\n    ///     We have three discount types(see SuLiquidationStruct.sol)\\n    function calculateDiscountE18(\\n        address asset,\\n        DiscountType discountType,\\n        uint256 liquidationBlock\\n    ) external view returns (uint256);\\n}\",\"keccak256\":\"0xaae552425b8202d8a270eb0e638290cfcaf56d9f463205051bbb26e8881e6e25\",\"license\":\"UNLICENSED\"},\"contracts/liquidator/SuLiquidationConstants.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\n\\npragma solidity ^0.8.0;\\n\\nlibrary SuLiquidationConstants {\\n    uint256 internal constant AGGRESSIVE_DISCOUNT_LIMIT_PERCENT_E18 = 5e16;\\n    uint256 internal constant ONE_HUNDRED_PERCENT_E18 = 1e18;\\n}\",\"keccak256\":\"0x163d9f9d922d978a3a7bc69baeae343765e143c20879433dbc1373f5d934f43f\",\"license\":\"UNLICENSED\"},\"contracts/liquidator/SuLiquidationDiscount.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity ^0.8.0;\\n\\nimport \\\"../access-control/SuAuthenticated.sol\\\";\\nimport \\\"../interfaces/ISuLiquidationDiscount.sol\\\";\\nimport \\\"./SuLiquidationConstants.sol\\\";\\nimport \\\"./SuLiquidationStructs.sol\\\";\\n\\ncontract SuLiquidationDiscount is ISuLiquidationDiscount, SuAuthenticated {\\n    error IncorrectDiscount();\\n\\n    // asset => discountType(aggressive, middle, conservative) => discount info:\\n    //    - percent of discount at the first block\\n    //    - increment of discount per block in percentages\\n    mapping(address => mapping(DiscountType => DiscountInfo)) internal _discountsInfo;\\n\\n    function init(address _authControl) public initializer {\\n        __SuAuthenticated_init(_authControl);\\n    }\\n\\n    /// @notice Only owner is able to call this function\\n    /// @dev Sets the liquidation discount\\n    /// @param asset The address of the asset token\\n    /// @param discountType Determines how aggressively the lending module offers a discount\\n    /// @param discountInfo Determines discount percentages depending on a block number\\n    function setDiscountInfo(\\n        address asset,\\n        DiscountType discountType,\\n        DiscountInfo calldata discountInfo\\n    ) external override onlyOwner {\\n        // check that discount percentage less than a limit(e.g. 100%)\\n        _verifyDiscountInfo(discountType, discountInfo);\\n        _discountsInfo[asset][discountType] = discountInfo;\\n    }\\n\\n    /// @notice Returns information about discount percentages depending on a block number\\n    /// @param asset The address of the asset token\\n    /// @param discountType Type of discount determines how aggressively the lending module offers a discount\\n    function getDiscountInfo(\\n        address asset,\\n        DiscountType discountType\\n    ) external view override returns (DiscountInfo memory discountInfo) {\\n        return _discountsInfo[asset][discountType];\\n    }\\n\\n    /// @dev This is a linear function of the discount change.\\n    ///     Calculates the liquidation discount by passed blocks.\\n    /// @param asset The address of the main collateral token\\n    /// @param discountType Determines how aggressively the lending module offers a discount\\n    /// @param liquidationBlock The block number when the liquidation was triggered\\n    /// @return Amount of discount in percents, E18 format\\n    function calculateDiscountE18(\\n        address asset,\\n        DiscountType discountType,\\n        uint256 liquidationBlock\\n    ) public view override returns (uint256) {\\n        DiscountInfo storage discountInfo = _discountsInfo[asset][discountType];\\n\\n        // number of blocks between the liquidation starts and now\\n        uint256 blocksPast = block.number - liquidationBlock;\\n\\n        if (blocksPast == 0) {\\n            return 0;\\n        } else if (blocksPast == 1) {\\n            return discountInfo.firstBlockE18;\\n        } else {\\n\\n            if (discountType == DiscountType.aggressive) {\\n                // the aggressive discount starts the second block with a number equals the stepPerBlockE18\\n                return _discountFormula(\\n                    blocksPast,\\n                    SuLiquidationConstants.AGGRESSIVE_DISCOUNT_LIMIT_PERCENT_E18,\\n                    discountInfo.stepPerBlockE18,\\n                    discountInfo.stepPerBlockE18,\\n                    2\\n                );\\n            } else {\\n                return _discountFormula(\\n                    blocksPast,\\n                    SuLiquidationConstants.ONE_HUNDRED_PERCENT_E18,\\n                    discountInfo.firstBlockE18,\\n                    discountInfo.stepPerBlockE18,\\n                    1\\n                );\\n            }\\n        }\\n    }\\n\\n    /// @notice Returns percentages of discount by passed blocks from liquidation start\\n    /// @param blocksPast The number of blocks passed after the liquidation was triggered\\n    /// @param limitDiscountE18 The upper limit of discount in percentage\\n    /// @param initialDiscountE18 Starting discount\\n    /// @param stepPerBlockE18 Increment of discount per block in percentages\\n    /// @param initialBlockNumber The block number which the increment of discount starts from\\n    function _discountFormula(\\n        uint256 blocksPast,\\n        uint256 limitDiscountE18,\\n        uint256 initialDiscountE18,\\n        uint256 stepPerBlockE18,\\n        uint256 initialBlockNumber\\n    ) internal pure returns (uint256) {\\n        uint256 discountE18 = initialDiscountE18 + (blocksPast - initialBlockNumber) * stepPerBlockE18;\\n\\n        // return the limit discount if the block number went over the limit\\n        return (discountE18 > limitDiscountE18) ? limitDiscountE18 : discountE18;\\n    }\\n\\n    function _verifyDiscountInfo(DiscountType discountType, DiscountInfo calldata discountInfo) internal pure {\\n\\n        // the aggressive discount has a special upper limit\\n        uint256 limitDiscountE18;\\n        if (discountType == DiscountType.aggressive) {\\n            limitDiscountE18 = SuLiquidationConstants.AGGRESSIVE_DISCOUNT_LIMIT_PERCENT_E18;\\n        } else {\\n            limitDiscountE18 = SuLiquidationConstants.ONE_HUNDRED_PERCENT_E18;\\n        }\\n\\n        if (discountInfo.firstBlockE18 >= limitDiscountE18 || discountInfo.stepPerBlockE18 >= limitDiscountE18) {\\n            revert IncorrectDiscount();\\n        }\\n    }\\n}\",\"keccak256\":\"0xf2c34c36cea2228c270fcbe36b835a3a53d94579bff91621505ed54317ec747b\",\"license\":\"UNLICENSED\"},\"contracts/liquidator/SuLiquidationStructs.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\npragma solidity ^0.8.0;\\n\\n// We have three discount strategies(numbers as an example):\\n//\\n// Mode #1 - aggressive: The lending module sells ASAP\\n// Discount goes from 0.1% first block, 1% second block, goes linear +1% minute\\n//\\n// Mode #2 - middle: The lending module sells some asset for whitelisted stablecoin as expensive as possible, no rush\\n// Discount goes from 0.1% first block, liner increase +0.1% minute\\n//\\n// Mode #3 - conservative: The lending module sells stablecoin(USDC) for USDPro as expensive as possible, no rush\\n// Discount goes from 0.01% first block, goes linear until 5% max in one day or so\\n\\nenum DiscountType {\\n    aggressive,\\n    middle,\\n    conservative\\n}\\n\\n// firstBlockE18 - percent of discount at the first block\\n// stepPerBlockE18 - percent of discount which will be incremented per block after N>=2 block\\nstruct DiscountInfo {\\n    uint256 firstBlockE18;\\n    uint256 stepPerBlockE18;\\n}\\n\\n// liquidationBlock - the block number when the liquidation was triggered.\\n//      It will turn into zero when all deferred stablecoins(toRepaymentE18 and toFoundationE18) be sold.\\n// toRepaymentE18 - amount of stablecoins which will be burned as debt repayment.\\n//      Actually, we can not burn it, because it is not a USDPro. So, we deferred that amounts of stablecoins\\n//      until someone swaps the stablecoins to USDPro(see swapUsdProToStablecoin())\\n// toFoundationE18 - amount of stablecoins which will be transfered to the foundation.\\n//      Has the same idea like \\\"toRepaymentE18\\\",\\n//      but about an excess of stablecoins over debt repayment\\nstruct DeferredStablecoinAmount {\\n    uint256 liquidationBlock;\\n    uint256 toRepaymentE18;\\n    uint256 toFoundationE18;\\n}\",\"keccak256\":\"0x948f8e21f85c18bd9c26c487a2532df297521efcbfd3479e54faf1a21b6b7acf\",\"license\":\"UNLICENSED\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506108ef806100206000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c8063c3009f361161005b578063c3009f361461013b578063d53913931461014e578063dc97e84e14610175578063f4e2ebeb1461019c57600080fd5b806303ee9f221461008d57806314c376dc146100c357806319ab453c146100f85780633599f0221461010d575b600080fd5b6000546100a6906201000090046001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6100ea7fe965846df3dd5b1dfa65f58e31477079e90140e0908b6dd31b5aead5a57cf36581565b6040519081526020016100ba565b61010b610106366004610761565b6101af565b005b61012061011b36600461077b565b610286565b604080518251815260209283015192810192909252016100ba565b6100ea6101493660046107fa565b610327565b6100ea7f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a681565b6100ea7f9a9aef7c1247d5fc769b0185c052913e39673da29a880317dfd20ebf86f26a4981565b61010b6101aa3660046107ad565b610436565b600054610100900460ff166101ca5760005460ff16156101ce565b303b155b6102455760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c697a61626c653a20636f6e747261637420697320616c72656160448201527f647920696e697469616c697a656400000000000000000000000000000000000060648201526084015b60405180910390fd5b600054610100900460ff16158015610267576000805461ffff19166101011790555b610270826105a9565b8015610282576000805461ff00191690555b5050565b60408051808201909152600080825260208201526001600160a01b0383166000908152600160205260408120908360028111156102d357634e487b7160e01b600052602160045260246000fd5b60028111156102f257634e487b7160e01b600052602160045260246000fd5b815260200190815260200160002060405180604001604052908160008201548152602001600182015481525050905092915050565b6001600160a01b038316600090815260016020526040812081908185600281111561036257634e487b7160e01b600052602160045260246000fd5b600281111561038157634e487b7160e01b600052602160045260246000fd5b815260200190815260200160002090506000834361039f919061088c565b9050806103b15760009250505061042f565b80600114156103c3575054905061042f565b60008560028111156103e557634e487b7160e01b600052602160045260246000fd5b1415610411576104088166b1a2bc2ec50000846001015485600101546002610666565b9250505061042f565b61040881670de0b6b3a7640000846000015485600101546001610666565b9392505050565b600080546040517f91d1485400000000000000000000000000000000000000000000000000000000815260048101929092523360248301526201000090046001600160a01b0316906391d148549060440160206040518083038186803b15801561049f57600080fd5b505afa1580156104b3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104d79190610835565b6105235760405162461bcd60e51b815260206004820152601d60248201527f5375417574683a206f6e6c794f776e657220415554485f4641494c4544000000604482015260640161023c565b61052d82826106a4565b6001600160a01b0383166000908152600160205260408120829184600281111561056757634e487b7160e01b600052602160045260246000fd5b600281111561058657634e487b7160e01b600052602160045260246000fd5b815260208082019290925260400160002082358155910135600190910155505050565b600054610100900460ff166106265760405162461bcd60e51b815260206004820152602b60248201527f496e697469616c697a61626c653a20636f6e7472616374206973206e6f74206960448201527f6e697469616c697a696e67000000000000000000000000000000000000000000606482015260840161023c565b600080546001600160a01b0390921662010000027fffffffffffffffffffff0000000000000000000000000000000000000000ffff909216919091179055565b60008083610674848961088c565b61067e919061086d565b6106889086610855565b90508581116106975780610699565b855b979650505050505050565b6000808360028111156106c757634e487b7160e01b600052602160045260246000fd5b14156106db575066b1a2bc2ec500006106e6565b50670de0b6b3a76400005b8135811115806106fa575080826020013510155b15610731576040517f8478aedc00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b505050565b80356001600160a01b038116811461074d57600080fd5b919050565b80356003811061074d57600080fd5b600060208284031215610772578081fd5b61042f82610736565b6000806040838503121561078d578081fd5b61079683610736565b91506107a460208401610752565b90509250929050565b600080600083850360808112156107c2578182fd5b6107cb85610736565b93506107d960208601610752565b92506040603f19820112156107ec578182fd5b506040840190509250925092565b60008060006060848603121561080e578283fd5b61081784610736565b925061082560208501610752565b9150604084013590509250925092565b600060208284031215610846578081fd5b8151801515811461042f578182fd5b60008219821115610868576108686108a3565b500190565b6000816000190483118215151615610887576108876108a3565b500290565b60008282101561089e5761089e6108a3565b500390565b634e487b7160e01b600052601160045260246000fdfea2646970667358221220fb3aae07565587189356deda46571fff7f6d6d7a45fded70ca7fcbd3e772164564736f6c63430008040033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100885760003560e01c8063c3009f361161005b578063c3009f361461013b578063d53913931461014e578063dc97e84e14610175578063f4e2ebeb1461019c57600080fd5b806303ee9f221461008d57806314c376dc146100c357806319ab453c146100f85780633599f0221461010d575b600080fd5b6000546100a6906201000090046001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6100ea7fe965846df3dd5b1dfa65f58e31477079e90140e0908b6dd31b5aead5a57cf36581565b6040519081526020016100ba565b61010b610106366004610761565b6101af565b005b61012061011b36600461077b565b610286565b604080518251815260209283015192810192909252016100ba565b6100ea6101493660046107fa565b610327565b6100ea7f9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a681565b6100ea7f9a9aef7c1247d5fc769b0185c052913e39673da29a880317dfd20ebf86f26a4981565b61010b6101aa3660046107ad565b610436565b600054610100900460ff166101ca5760005460ff16156101ce565b303b155b6102455760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c697a61626c653a20636f6e747261637420697320616c72656160448201527f647920696e697469616c697a656400000000000000000000000000000000000060648201526084015b60405180910390fd5b600054610100900460ff16158015610267576000805461ffff19166101011790555b610270826105a9565b8015610282576000805461ff00191690555b5050565b60408051808201909152600080825260208201526001600160a01b0383166000908152600160205260408120908360028111156102d357634e487b7160e01b600052602160045260246000fd5b60028111156102f257634e487b7160e01b600052602160045260246000fd5b815260200190815260200160002060405180604001604052908160008201548152602001600182015481525050905092915050565b6001600160a01b038316600090815260016020526040812081908185600281111561036257634e487b7160e01b600052602160045260246000fd5b600281111561038157634e487b7160e01b600052602160045260246000fd5b815260200190815260200160002090506000834361039f919061088c565b9050806103b15760009250505061042f565b80600114156103c3575054905061042f565b60008560028111156103e557634e487b7160e01b600052602160045260246000fd5b1415610411576104088166b1a2bc2ec50000846001015485600101546002610666565b9250505061042f565b61040881670de0b6b3a7640000846000015485600101546001610666565b9392505050565b600080546040517f91d1485400000000000000000000000000000000000000000000000000000000815260048101929092523360248301526201000090046001600160a01b0316906391d148549060440160206040518083038186803b15801561049f57600080fd5b505afa1580156104b3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104d79190610835565b6105235760405162461bcd60e51b815260206004820152601d60248201527f5375417574683a206f6e6c794f776e657220415554485f4641494c4544000000604482015260640161023c565b61052d82826106a4565b6001600160a01b0383166000908152600160205260408120829184600281111561056757634e487b7160e01b600052602160045260246000fd5b600281111561058657634e487b7160e01b600052602160045260246000fd5b815260208082019290925260400160002082358155910135600190910155505050565b600054610100900460ff166106265760405162461bcd60e51b815260206004820152602b60248201527f496e697469616c697a61626c653a20636f6e7472616374206973206e6f74206960448201527f6e697469616c697a696e67000000000000000000000000000000000000000000606482015260840161023c565b600080546001600160a01b0390921662010000027fffffffffffffffffffff0000000000000000000000000000000000000000ffff909216919091179055565b60008083610674848961088c565b61067e919061086d565b6106889086610855565b90508581116106975780610699565b855b979650505050505050565b6000808360028111156106c757634e487b7160e01b600052602160045260246000fd5b14156106db575066b1a2bc2ec500006106e6565b50670de0b6b3a76400005b8135811115806106fa575080826020013510155b15610731576040517f8478aedc00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b505050565b80356001600160a01b038116811461074d57600080fd5b919050565b80356003811061074d57600080fd5b600060208284031215610772578081fd5b61042f82610736565b6000806040838503121561078d578081fd5b61079683610736565b91506107a460208401610752565b90509250929050565b600080600083850360808112156107c2578182fd5b6107cb85610736565b93506107d960208601610752565b92506040603f19820112156107ec578182fd5b506040840190509250925092565b60008060006060848603121561080e578283fd5b61081784610736565b925061082560208501610752565b9150604084013590509250925092565b600060208284031215610846578081fd5b8151801515811461042f578182fd5b60008219821115610868576108686108a3565b500190565b6000816000190483118215151615610887576108876108a3565b500290565b60008282101561089e5761089e6108a3565b500390565b634e487b7160e01b600052601160045260246000fdfea2646970667358221220fb3aae07565587189356deda46571fff7f6d6d7a45fded70ca7fcbd3e772164564736f6c63430008040033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "calculateDiscountE18(address,uint8,uint256)": {
+        "details": "This is a linear function of the discount change.     Calculates the liquidation discount by passed blocks.",
+        "params": {
+          "asset": "The address of the main collateral token",
+          "discountType": "Determines how aggressively the lending module offers a discount",
+          "liquidationBlock": "The block number when the liquidation was triggered"
+        },
+        "returns": {
+          "_0": "Amount of discount in percents, E18 format"
+        }
+      },
+      "getDiscountInfo(address,uint8)": {
+        "params": {
+          "asset": "The address of the asset token",
+          "discountType": "Type of discount determines how aggressively the lending module offers a discount"
+        }
+      },
+      "setDiscountInfo(address,uint8,(uint256,uint256))": {
+        "details": "Sets the liquidation discount",
+        "params": {
+          "asset": "The address of the asset token",
+          "discountInfo": "Determines discount percentages depending on a block number",
+          "discountType": "Determines how aggressively the lending module offers a discount"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getDiscountInfo(address,uint8)": {
+        "notice": "Returns information about discount percentages depending on a block number"
+      },
+      "setDiscountInfo(address,uint8,(uint256,uint256))": {
+        "notice": "Only owner is able to call this function"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 454,
+        "contract": "contracts/liquidator/SuLiquidationDiscount.sol:SuLiquidationDiscount",
+        "label": "_initialized",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_bool"
+      },
+      {
+        "astId": 457,
+        "contract": "contracts/liquidator/SuLiquidationDiscount.sol:SuLiquidationDiscount",
+        "label": "_initializing",
+        "offset": 1,
+        "slot": "0",
+        "type": "t_bool"
+      },
+      {
+        "astId": 4355,
+        "contract": "contracts/liquidator/SuLiquidationDiscount.sol:SuLiquidationDiscount",
+        "label": "ACCESS_CONTROL_SINGLETON",
+        "offset": 2,
+        "slot": "0",
+        "type": "t_contract(ISuAccessControl)7493"
+      },
+      {
+        "astId": 12084,
+        "contract": "contracts/liquidator/SuLiquidationDiscount.sol:SuLiquidationDiscount",
+        "label": "_discountsInfo",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_mapping(t_enum(DiscountType)12308,t_struct(DiscountInfo)12313_storage))"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_contract(ISuAccessControl)7493": {
+        "encoding": "inplace",
+        "label": "contract ISuAccessControl",
+        "numberOfBytes": "20"
+      },
+      "t_enum(DiscountType)12308": {
+        "encoding": "inplace",
+        "label": "enum DiscountType",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_mapping(t_enum(DiscountType)12308,t_struct(DiscountInfo)12313_storage))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(enum DiscountType => struct DiscountInfo))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_enum(DiscountType)12308,t_struct(DiscountInfo)12313_storage)"
+      },
+      "t_mapping(t_enum(DiscountType)12308,t_struct(DiscountInfo)12313_storage)": {
+        "encoding": "mapping",
+        "key": "t_enum(DiscountType)12308",
+        "label": "mapping(enum DiscountType => struct DiscountInfo)",
+        "numberOfBytes": "32",
+        "value": "t_struct(DiscountInfo)12313_storage"
+      },
+      "t_struct(DiscountInfo)12313_storage": {
+        "encoding": "inplace",
+        "label": "struct DiscountInfo",
+        "members": [
+          {
+            "astId": 12310,
+            "contract": "contracts/liquidator/SuLiquidationDiscount.sol:SuLiquidationDiscount",
+            "label": "firstBlockE18",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 12312,
+            "contract": "contracts/liquidator/SuLiquidationDiscount.sol:SuLiquidationDiscount",
+            "label": "stepPerBlockE18",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

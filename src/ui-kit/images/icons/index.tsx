@@ -1,0 +1,15 @@
+export { ReactComponent as ArrowRightIcon } from "./arrow-right.svg";
+export { ReactComponent as EmptyLoanIcon } from "./empty-loan.svg";
+export { ReactComponent as CloseIcon } from "./close.svg";
+export { ReactComponent as SortIcon } from "./sort.svg";
+export { ReactComponent as StatsIcon } from "./stats.svg";
+export { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
+export { ReactComponent as BurgerIcon } from "./burger.svg";
+export { ReactComponent as DepositIcon } from "./deposit.svg";
+export { ReactComponent as RepayIcon } from "./repay.svg";
+export { ReactComponent as WithdrawIcon } from "./withdraw.svg";
+export { ReactComponent as BugIcon } from "./bug.svg";
+export { ReactComponent as MetamaskIcon } from "./metamask.svg";
+export { ReactComponent as CopyIcon } from "./copy.svg";
+export { ReactComponent as DisconnectIcon } from "./disconnect.svg";
+export { ReactComponent as ConnectedIcon } from "./connected.svg";

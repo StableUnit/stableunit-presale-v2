@@ -1,0 +1,148 @@
+@import "src/ui-kit/styles/vars";
+
+.App {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: $black;
+    height: 100vh;
+    overflow: hidden;
+
+    &__loader {
+        padding-top: 40px;
+    }
+
+    &__content {
+        padding-top: 180px;
+        border-radius: 24px;
+        width: 100vw;
+
+        height: 100vh;
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__scroller {
+        height: fit-content;
+        margin: 0 auto;
+
+        &--disabled {
+            opacity: 0.7;
+            user-select: none;
+            pointer-events: none;
+        }
+    }
+
+    &__disclaimer {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    @media only screen and (max-width: $mobile-width) {
+        &__content {
+            padding-top: 80px;
+        }
+    }
+}
+
+.green-color {
+    color: $green;
+}
+
+.red-color {
+    color: $red;
+}
+
+.web3modal {
+    &-modal-card {
+        display: flex !important;
+        width: 350px !important;
+        flex-direction: column !important;
+        padding: 32px 40px !important;
+
+        &:before {
+            content: 'Connect a wallet';
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 26px;
+        }
+    }
+
+    &-provider {
+        &-wrapper {
+            padding: 0 0 8px 0 !important;
+
+            &:first-child {
+                padding-top: 32px !important;
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+        &-container {
+            padding: 10px 16px !important;
+            background: $black !important;
+            border-radius: 8px !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            transition: background-color 0.1s ease-in-out 0s !important;
+            position: relative !important;
+
+            &:hover {
+                background-color: rgba(32, 32, 29, 0.5) !important;
+            }
+
+            &:after {
+                content: url("../../ui-kit/images/icons/arrow-right.svg");
+                position: absolute;
+                top: 16px;
+                right: 16px;
+            }
+        }
+        &-icon {
+            width: 28px !important;
+            height: 28px !important;
+        }
+        &-name {
+            font-size: 14px !important;
+            line-height: 18px !important;
+            text-align: left;
+            padding-left: 12px;
+            margin-top: 4px !important;
+        }
+        &-description {
+            display: none;
+        }
+    }
+}
+
+.bug-icon {
+    position: absolute;
+    z-index: 10;
+    bottom: 80px;
+    right: 80px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+    @media (max-width: $mobile-width) {
+        bottom: 30px;
+        right: 30px;
+        width: 40px;
+        height: 40px;
+    }
+}

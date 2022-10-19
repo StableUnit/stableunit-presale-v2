@@ -1,0 +1,13 @@
+@import "src/ui-kit/styles/vars";
+
+.max-button {
+    margin-left: 8px;
+    background: $dark2;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 13px;
+    color: white;
+    padding: 3px 5px;
+    cursor: pointer;
+}

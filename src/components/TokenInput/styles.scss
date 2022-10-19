@@ -1,0 +1,64 @@
+@import "src/ui-kit/styles/vars";
+
+.token-input {
+    width: 100%;
+    padding: 16px;
+    background: $dark-gray;
+    border-radius: 7px;
+    height: fit-content;
+    box-sizing: border-box;
+
+    &__balance {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+
+        &__value {
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+            color: $gray1;
+            min-width: 100px;
+        }
+    }
+
+    &__data {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+
+        &__input {
+            margin-left: 20px;
+            width: 100%;
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 28px;
+            color: white;
+            text-align: right;
+
+            background: transparent;
+            outline: none;
+            border: none;
+        }
+
+        &__fixed-token {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            color: white !important;
+
+            &__icon {
+                height: 28px;
+                margin-right: 8px;
+
+                svg {
+                    height: 28px;
+                    width: 28px;
+                }
+            }
+        }
+    }
+}

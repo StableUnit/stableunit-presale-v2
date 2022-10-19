@@ -1,0 +1,10 @@
+@import "src/ui-kit/styles/vars";
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 60px 0 20px 0;
+    color: $gray1;
+    user-select: none;
+}

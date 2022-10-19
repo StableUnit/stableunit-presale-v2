@@ -1,0 +1,3 @@
+[submodule "src/submodule-contract-artifacts"]
+	path = src/submodule-contract-artifacts
+	url = https://github.com/StableUnit/submodule-contract-artifacts

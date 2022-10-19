@@ -1,0 +1,429 @@
+{
+  "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "Added",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "Removed",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "owners",
+          "type": "address[]"
+        }
+      ],
+      "name": "batchCheckpoint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "owners",
+          "type": "address[]"
+        }
+      ],
+      "name": "batchCheckpointForAsset",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "checkpoint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "cr",
+      "outputs": [
+        {
+          "internalType": "contract ISuCollateralRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAllCdps",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "asset",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct SuCdpRegistry.CDP[]",
+          "name": "r",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "getCdpsByCollateral",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "asset",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct SuCdpRegistry.CDP[]",
+          "name": "cdps",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "getCdpsByOwner",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "asset",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct SuCdpRegistry.CDP[]",
+          "name": "r",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCdpsCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "totalCdpCount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "getCdpsCountForCollateral",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_vault",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_collateralRegistry",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "isAlive",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "isListed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "vault",
+      "outputs": [
+        {
+          "internalType": "contract ISuVault",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "1ee30c392eeeb5c03c3751ea96247c34",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"Added\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"Removed\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"}],\"name\":\"batchCheckpoint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address[]\",\"name\":\"owners\",\"type\":\"address[]\"}],\"name\":\"batchCheckpointForAsset\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"checkpoint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cr\",\"outputs\":[{\"internalType\":\"contract ISuCollateralRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllCdps\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"internalType\":\"struct SuCdpRegistry.CDP[]\",\"name\":\"r\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"}],\"name\":\"getCdpsByCollateral\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"internalType\":\"struct SuCdpRegistry.CDP[]\",\"name\":\"cdps\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"getCdpsByOwner\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"internalType\":\"struct SuCdpRegistry.CDP[]\",\"name\":\"r\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCdpsCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalCdpCount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"}],\"name\":\"getCdpsCountForCollateral\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_vault\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_collateralRegistry\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"isAlive\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"isListed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"vault\",\"outputs\":[{\"internalType\":\"contract ISuVault\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/lending/SuCdpRegistry.sol\":\"SuCdpRegistry\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.5.0) (proxy/utils/Initializable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../../utils/AddressUpgradeable.sol\\\";\\n\\n/**\\n * @dev This is a base contract to aid in writing upgradeable contracts, or any kind of contract that will be deployed\\n * behind a proxy. Since proxied contracts do not make use of a constructor, it's common to move constructor logic to an\\n * external initializer function, usually called `initialize`. It then becomes necessary to protect this initializer\\n * function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.\\n *\\n * TIP: To avoid leaving the proxy in an uninitialized state, the initializer function should be called as early as\\n * possible by providing the encoded function call as the `_data` argument to {ERC1967Proxy-constructor}.\\n *\\n * CAUTION: When used with inheritance, manual care must be taken to not invoke a parent initializer twice, or to ensure\\n * that all initializers are idempotent. This is not verified automatically as constructors are by Solidity.\\n *\\n * [CAUTION]\\n * ====\\n * Avoid leaving a contract uninitialized.\\n *\\n * An uninitialized contract can be taken over by an attacker. This applies to both a proxy and its implementation\\n * contract, which may impact the proxy. To initialize the implementation contract, you can either invoke the\\n * initializer manually, or you can include a constructor to automatically mark it as initialized when it is deployed:\\n *\\n * [.hljs-theme-light.nopadding]\\n * ```\\n * /// @custom:oz-upgrades-unsafe-allow constructor\\n * constructor() initializer {}\\n * ```\\n * ====\\n */\\nabstract contract Initializable {\\n    /**\\n     * @dev Indicates that the contract has been initialized.\\n     */\\n    bool private _initialized;\\n\\n    /**\\n     * @dev Indicates that the contract is in the process of being initialized.\\n     */\\n    bool private _initializing;\\n\\n    /**\\n     * @dev Modifier to protect an initializer function from being invoked twice.\\n     */\\n    modifier initializer() {\\n        // If the contract is initializing we ignore whether _initialized is set in order to support multiple\\n        // inheritance patterns, but we only do this in the context of a constructor, because in other contexts the\\n        // contract may have been reentered.\\n        require(_initializing ? _isConstructor() : !_initialized, \\\"Initializable: contract is already initialized\\\");\\n\\n        bool isTopLevelCall = !_initializing;\\n        if (isTopLevelCall) {\\n            _initializing = true;\\n            _initialized = true;\\n        }\\n\\n        _;\\n\\n        if (isTopLevelCall) {\\n            _initializing = false;\\n        }\\n    }\\n\\n    /**\\n     * @dev Modifier to protect an initialization function so that it can only be invoked by functions with the\\n     * {initializer} modifier, directly or indirectly.\\n     */\\n    modifier onlyInitializing() {\\n        require(_initializing, \\\"Initializable: contract is not initializing\\\");\\n        _;\\n    }\\n\\n    function _isConstructor() private view returns (bool) {\\n        return !AddressUpgradeable.isContract(address(this));\\n    }\\n}\\n\",\"keccak256\":\"0x372b0bc04e3b4c074559bbbfb1317afddb56de5504158ca25a7f9cd403980445\",\"license\":\"MIT\"},\"@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.5.0) (utils/Address.sol)\\n\\npragma solidity ^0.8.1;\\n\\n/**\\n * @dev Collection of functions related to the address type\\n */\\nlibrary AddressUpgradeable {\\n    /**\\n     * @dev Returns true if `account` is a contract.\\n     *\\n     * [IMPORTANT]\\n     * ====\\n     * It is unsafe to assume that an address for which this function returns\\n     * false is an externally-owned account (EOA) and not a contract.\\n     *\\n     * Among others, `isContract` will return false for the following\\n     * types of addresses:\\n     *\\n     *  - an externally-owned account\\n     *  - a contract in construction\\n     *  - an address where a contract will be created\\n     *  - an address where a contract lived, but was destroyed\\n     * ====\\n     *\\n     * [IMPORTANT]\\n     * ====\\n     * You shouldn't rely on `isContract` to protect against flash loan attacks!\\n     *\\n     * Preventing calls from contracts is highly discouraged. It breaks composability, breaks support for smart wallets\\n     * like Gnosis Safe, and does not provide security since it can be circumvented by calling from a contract\\n     * constructor.\\n     * ====\\n     */\\n    function isContract(address account) internal view returns (bool) {\\n        // This method relies on extcodesize/address.code.length, which returns 0\\n        // for contracts in construction, since the code is only stored at the end\\n        // of the constructor execution.\\n\\n        return account.code.length > 0;\\n    }\\n\\n    /**\\n     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to\\n     * `recipient`, forwarding all available gas and reverting on errors.\\n     *\\n     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost\\n     * of certain opcodes, possibly making contracts go over the 2300 gas limit\\n     * imposed by `transfer`, making them unable to receive funds via\\n     * `transfer`. {sendValue} removes this limitation.\\n     *\\n     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].\\n     *\\n     * IMPORTANT: because control is transferred to `recipient`, care must be\\n     * taken to not create reentrancy vulnerabilities. Consider using\\n     * {ReentrancyGuard} or the\\n     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].\\n     */\\n    function sendValue(address payable recipient, uint256 amount) internal {\\n        require(address(this).balance >= amount, \\\"Address: insufficient balance\\\");\\n\\n        (bool success, ) = recipient.call{value: amount}(\\\"\\\");\\n        require(success, \\\"Address: unable to send value, recipient may have reverted\\\");\\n    }\\n\\n    /**\\n     * @dev Performs a Solidity function call using a low level `call`. A\\n     * plain `call` is an unsafe replacement for a function call: use this\\n     * function instead.\\n     *\\n     * If `target` reverts with a revert reason, it is bubbled up by this\\n     * function (like regular Solidity function calls).\\n     *\\n     * Returns the raw returned data. To convert to the expected return value,\\n     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].\\n     *\\n     * Requirements:\\n     *\\n     * - `target` must be a contract.\\n     * - calling `target` with `data` must not revert.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCall(address target, bytes memory data) internal returns (bytes memory) {\\n        return functionCall(target, data, \\\"Address: low-level call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with\\n     * `errorMessage` as a fallback revert reason when `target` reverts.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCall(\\n        address target,\\n        bytes memory data,\\n        string memory errorMessage\\n    ) internal returns (bytes memory) {\\n        return functionCallWithValue(target, data, 0, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but also transferring `value` wei to `target`.\\n     *\\n     * Requirements:\\n     *\\n     * - the calling contract must have an ETH balance of at least `value`.\\n     * - the called Solidity function must be `payable`.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value\\n    ) internal returns (bytes memory) {\\n        return functionCallWithValue(target, data, value, \\\"Address: low-level call with value failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but\\n     * with `errorMessage` as a fallback revert reason when `target` reverts.\\n     *\\n     * _Available since v3.1._\\n     */\\n    function functionCallWithValue(\\n        address target,\\n        bytes memory data,\\n        uint256 value,\\n        string memory errorMessage\\n    ) internal returns (bytes memory) {\\n        require(address(this).balance >= value, \\\"Address: insufficient balance for call\\\");\\n        require(isContract(target), \\\"Address: call to non-contract\\\");\\n\\n        (bool success, bytes memory returndata) = target.call{value: value}(data);\\n        return verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],\\n     * but performing a static call.\\n     *\\n     * _Available since v3.3._\\n     */\\n    function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {\\n        return functionStaticCall(target, data, \\\"Address: low-level static call failed\\\");\\n    }\\n\\n    /**\\n     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],\\n     * but performing a static call.\\n     *\\n     * _Available since v3.3._\\n     */\\n    function functionStaticCall(\\n        address target,\\n        bytes memory data,\\n        string memory errorMessage\\n    ) internal view returns (bytes memory) {\\n        require(isContract(target), \\\"Address: static call to non-contract\\\");\\n\\n        (bool success, bytes memory returndata) = target.staticcall(data);\\n        return verifyCallResult(success, returndata, errorMessage);\\n    }\\n\\n    /**\\n     * @dev Tool to verifies that a low level call was successful, and revert if it wasn't, either by bubbling the\\n     * revert reason using the provided one.\\n     *\\n     * _Available since v4.3._\\n     */\\n    function verifyCallResult(\\n        bool success,\\n        bytes memory returndata,\\n        string memory errorMessage\\n    ) internal pure returns (bytes memory) {\\n        if (success) {\\n            return returndata;\\n        } else {\\n            // Look for revert reason and bubble it up if present\\n            if (returndata.length > 0) {\\n                // The easiest way to bubble the revert reason is using memory via assembly\\n\\n                assembly {\\n                    let returndata_size := mload(returndata)\\n                    revert(add(32, returndata), returndata_size)\\n                }\\n            } else {\\n                revert(errorMessage);\\n            }\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x55cf2bd9fc76704ddcdc19834cd288b7de00fc0f298a40ea16a954ae8991db2d\",\"license\":\"MIT\"},\"contracts/interfaces/ISuCollateralRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\n\\npragma solidity ^0.8.0;\\n\\ninterface ISuCollateralRegistry {\\n    function addCollateral ( address asset ) external;\\n    function collateralId ( address ) external view returns ( uint256 );\\n    function collaterals (  ) external view returns ( address[] memory );\\n    function removeCollateral ( address asset ) external;\\n    function vaultParameters (  ) external view returns ( address );\\n    function isCollateral ( address asset ) external view returns ( bool );\\n    function collateralList ( uint id ) external view returns ( address );\\n    function collateralsCount (  ) external view returns ( uint );\\n}\\n\",\"keccak256\":\"0xb1af9b686ec2dfb58cfd9a1e156c3bcf6e6cfcf482ad292926ce3e54b92a6126\",\"license\":\"UNLICENSED\"},\"contracts/interfaces/ISuVault.sol\":{\"content\":\"// SPDX-License-Identifier: UNLICENSED\\n\\npragma solidity ^0.8.0;\\n\\ninterface ISuVault {\\n    function borrow ( address asset, address user, uint256 amountE18 ) external returns ( uint256 );\\n    function calculateFeeE18 ( address asset, address user, uint256 amountE18 ) external view returns ( uint256 );\\n    function collateralsEDecimal ( address, address ) external view returns ( uint256 );\\n    function debtsE18 ( address, address ) external view returns ( uint256 );\\n    function deposit ( address asset, address user, uint256 amountEDecimal, uint256 lockupPeriodSeconds ) external;\\n    function destroy ( address asset, address user ) external;\\n    function emergencyWithdraw ( address asset, address user, uint amountEDecimal ) external;\\n    function getTotalDebtE18 ( address asset, address user ) external view returns ( uint256 );\\n    function liquidate(\\n        address asset,\\n        address owner,\\n        address recipient,\\n        uint assetAmountEDecimal,\\n        uint stablecoinAmountE18\\n    ) external returns (bool);\\n    function setRewardChef(address rewardChef) external;\\n    function triggerLiquidation(address asset, address positionOwner) external;\\n    function lastUpdate ( address, address ) external view returns ( uint256 );\\n    function stabilityFeeE18 ( address, address ) external view returns ( uint256 );\\n    function tokenDebtsE18 ( address ) external view returns ( uint256 );\\n    function update ( address asset, address user ) external;\\n    function liquidationBlock (address, address) external view returns (uint256);\\n    function withdraw ( address asset, address user, address recipient, uint256 amountEDecimal ) external;\\n    function repay ( address repayer, uint256 repaymentE18, uint256 excessAndFeeE18 ) external;\\n}\\n\",\"keccak256\":\"0xa28123be73187a0b9347cbf01a070c68280989d964cf6fdfd91c882cc420dd9f\",\"license\":\"UNLICENSED\"},\"contracts/lending/SuCdpRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: BSL 1.1\\r\\n\\r\\n/*\\r\\n  Copyright 2020 Unit Protocol: Artem Zakharov (az@unit.xyz).\\r\\n*/\\r\\npragma solidity ^0.8.0;\\r\\npragma experimental ABIEncoderV2;\\r\\n\\r\\nimport \\\"../interfaces/ISuVault.sol\\\";\\r\\nimport \\\"../interfaces/ISuCollateralRegistry.sol\\\";\\r\\nimport \\\"@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol\\\";\\r\\n\\r\\n\\r\\n// [deprecated]\\r\\n// This contract is needed to index all opened CDPs.\\r\\n// It can be removed if there's more gas-efficient way to do that, such as graphQL, NFT-lps or other methods\\r\\ncontract SuCdpRegistry is Initializable {\\r\\n    // Collateral Debt Position\\r\\n    struct CDP {\\r\\n        address asset; // collateral token\\r\\n        address owner; // borrower account\\r\\n    }\\r\\n\\r\\n    // mapping from collateral token to list of borrowers?\\r\\n    mapping (address => address[]) cdpList;\\r\\n\\r\\n    // mapping from collateral token to borrower to the INDEX, index in the previous list?\\r\\n    mapping (address => mapping (address => uint)) cdpIndex;\\r\\n\\r\\n    // address of the vault contract\\r\\n    ISuVault public vault;\\r\\n\\r\\n    // address of the collateral registry contract\\r\\n    ISuCollateralRegistry public cr;\\r\\n\\r\\n    // event emitted when a new CDP is created\\r\\n    event Added(address indexed asset, address indexed owner);\\r\\n\\r\\n    // event emitted when a CDP is closed\\r\\n    event Removed(address indexed asset, address indexed owner);\\r\\n\\r\\n    // this contract is deployed after the vault and collateral registry\\r\\n    function initialize(address _vault, address _collateralRegistry) public initializer {\\r\\n        require(_vault != address(0) && _collateralRegistry != address(0), \\\"SU Protocol: ZERO_ADDRESS\\\");\\r\\n        vault = ISuVault(_vault);\\r\\n        cr = ISuCollateralRegistry(_collateralRegistry);\\r\\n    }\\r\\n\\r\\n    // anyone can create checkpoint?\\r\\n    function checkpoint(address asset, address owner) public {\\r\\n        require(asset != address(0) && owner != address(0), \\\"SU Protocol: ZERO_ADDRESS\\\");\\r\\n\\r\\n        // only for listed assets\\r\\n        bool listed = isListed(asset, owner);\\r\\n\\r\\n        // only for alive assets\\r\\n        bool alive = isAlive(asset, owner);\\r\\n\\r\\n        if (alive && !listed) {\\r\\n            _addCdp(asset, owner);\\r\\n        } else if (listed && !alive) {\\r\\n            _removeCdp(asset, owner);\\r\\n        }\\r\\n    }\\r\\n\\r\\n    // checkpoint in loop\\r\\n    function batchCheckpointForAsset(address asset, address[] calldata owners) external {\\r\\n        for (uint i = 0; i < owners.length; i++) {\\r\\n            checkpoint(asset, owners[i]);\\r\\n        }\\r\\n    }\\r\\n\\r\\n    // multiple checkpoints for different collaterals\\r\\n    function batchCheckpoint(address[] calldata assets, address[] calldata owners) external {\\r\\n        require(assets.length == owners.length, \\\"SU Protocol: ARGUMENTS_LENGTH_MISMATCH\\\");\\r\\n        for (uint i = 0; i < owners.length; i++) {\\r\\n            checkpoint(assets[i], owners[i]);\\r\\n        }\\r\\n    }\\r\\n\\r\\n    // alive means there are debts in the vault for this collateral of this borrower\\r\\n    function isAlive(address asset, address owner) public view returns (bool) {\\r\\n        return vault.debtsE18(asset, owner) != 0;\\r\\n    }\\r\\n\\r\\n    // listed means there are created cdps in this contract for this collateral of this borrower\\r\\n    function isListed(address asset, address owner) public view returns (bool) {\\r\\n        if (cdpList[asset].length == 0) { return false; }\\r\\n        return cdpIndex[asset][owner] != 0 || cdpList[asset][0] == owner;\\r\\n    }\\r\\n\\r\\n    // internal function to perform removal of cdp from the list\\r\\n    function _removeCdp(address asset, address owner) internal {\\r\\n        // take the index by collateral and borrower\\r\\n        uint id = cdpIndex[asset][owner];\\r\\n\\r\\n        // then delete this index\\r\\n        delete cdpIndex[asset][owner];\\r\\n\\r\\n        // if the index is not the last one\\r\\n        uint lastId = cdpList[asset].length - 1;\\r\\n\\r\\n        // swap the last element with the element to be deleted\\r\\n        if (id != lastId) {\\r\\n            address lastOwner = cdpList[asset][lastId];\\r\\n            cdpList[asset][id] = lastOwner;\\r\\n            cdpIndex[asset][lastOwner] = id;\\r\\n        }\\r\\n\\r\\n        // delete the last element\\r\\n        cdpList[asset].pop();\\r\\n\\r\\n        // can we optimize this remove function by changing the structure?\\r\\n\\r\\n        emit Removed(asset, owner);\\r\\n    }\\r\\n\\r\\n    function _addCdp(address asset, address owner) internal {\\r\\n        // remember the index of the new element\\r\\n        cdpIndex[asset][owner] = cdpList[asset].length;\\r\\n\\r\\n        // add the new element to the end of the list\\r\\n        cdpList[asset].push(owner);\\r\\n\\r\\n        emit Added(asset, owner);\\r\\n    }\\r\\n\\r\\n    // read-only function to get the list of cdps for a given collateral\\r\\n    function getCdpsByCollateral(address asset) external view returns (CDP[] memory cdps) {\\r\\n        address[] memory owners = cdpList[asset];\\r\\n        cdps = new CDP[](owners.length);\\r\\n        for (uint i = 0; i < owners.length; i++) {\\r\\n            cdps[i] = CDP(asset, owners[i]);\\r\\n        }\\r\\n    }\\r\\n\\r\\n    // read-only function to get the list of all cdps by borrower\\r\\n    function getCdpsByOwner(address owner) external view returns (CDP[] memory r) {\\r\\n        address[] memory assets = cr.collaterals();\\r\\n        CDP[] memory cdps = new CDP[](assets.length);\\r\\n        uint actualCdpsCount;\\r\\n\\r\\n        for (uint i = 0; i < assets.length; i++) {\\r\\n            if (isListed(assets[i], owner)) {\\r\\n                cdps[actualCdpsCount++] = CDP(assets[i], owner);\\r\\n            }\\r\\n        }\\r\\n\\r\\n        r = new CDP[](actualCdpsCount);\\r\\n\\r\\n        for (uint i = 0; i < actualCdpsCount; i++) {\\r\\n            r[i] = cdps[i];\\r\\n        }\\r\\n\\r\\n    }\\r\\n\\r\\n    // read-only function to get the list of all cdps\\r\\n    function getAllCdps() external view returns (CDP[] memory r) {\\r\\n        uint totalCdpCount = getCdpsCount();\\r\\n\\r\\n        uint cdpCount;\\r\\n\\r\\n        r = new CDP[](totalCdpCount);\\r\\n\\r\\n        address[] memory assets = cr.collaterals();\\r\\n        for (uint i = 0; i < assets.length; i++) {\\r\\n            address[] memory owners = cdpList[assets[i]];\\r\\n            for (uint j = 0; j < owners.length; j++) {\\r\\n                r[cdpCount++] = CDP(assets[i], owners[j]);\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n\\r\\n    // total number of cdps\\r\\n    function getCdpsCount() public view returns (uint totalCdpCount) {\\r\\n        address[] memory assets = cr.collaterals();\\r\\n        for (uint i = 0; i < assets.length; i++) {\\r\\n            totalCdpCount += cdpList[assets[i]].length;\\r\\n        }\\r\\n    }\\r\\n\\r\\n    // number of cdps for a given collateral\\r\\n    function getCdpsCountForCollateral(address asset) public view returns (uint) {\\r\\n        return cdpList[asset].length;\\r\\n    }\\r\\n}\\r\\n\",\"keccak256\":\"0x814c5116c946aa88801f6d4d50c6acedabf0267ae6b7c85181c9e1d486bc5c3d\",\"license\":\"BSL 1.1\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506114b0806100206000396000f3fe608060405234801561001057600080fd5b50600436106100df5760003560e01c8063b0113e6b1161008c578063e5011ac611610066578063e5011ac6146101cd578063f45a4320146101e0578063f8aa43f714610203578063fbfa77cf1461021657600080fd5b8063b0113e6b1461017b578063bb55b7fc146101b2578063bce092c4146101c557600080fd5b80635a5fdfe5116100bd5780635a5fdfe51461013557806362eb33e31461013d578063a04a7c691461016857600080fd5b80633e18638f146100e4578063485cc9551461010d57806348e3da3c14610122575b600080fd5b6100f76100f236600461119a565b610229565b6040516101049190611390565b60405180910390f35b61012061011b3660046111bd565b6103a8565b005b610120610130366004611248565b610520565b6100f7610626565b600454610150906001600160a01b031681565b6040516001600160a01b039091168152602001610104565b6101206101763660046111f5565b6108cf565b6101a461018936600461119a565b6001600160a01b031660009081526001602052604090205490565b604051908152602001610104565b6101206101c03660046111bd565b610916565b6101a46109d7565b6100f76101db36600461119a565b610ad8565b6101f36101ee3660046111bd565b610d91565b6040519015158152602001610104565b6101f36102113660046111bd565b610e40565b600354610150906001600160a01b031681565b6001600160a01b038116600090815260016020908152604080832080548251818502810185019093528083526060949383018282801561029257602002820191906000526020600020905b81546001600160a01b03168152600190910190602001808311610274575b50505050509050805167ffffffffffffffff8111156102c157634e487b7160e01b600052604160045260246000fd5b60405190808252806020026020018201604052801561030657816020015b60408051808201909152600080825260208201528152602001906001900390816102df5790505b50915060005b81518110156103a1576040518060400160405280856001600160a01b0316815260200183838151811061034f57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b031681525083828151811061038357634e487b7160e01b600052603260045260246000fd5b602002602001018190525080806103999061141b565b91505061030c565b5050919050565b600054610100900460ff166103c35760005460ff16156103c7565b303b155b61043e5760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c697a61626c653a20636f6e747261637420697320616c72656160448201527f647920696e697469616c697a656400000000000000000000000000000000000060648201526084015b60405180910390fd5b600054610100900460ff16158015610460576000805461ffff19166101011790555b6001600160a01b0383161580159061048057506001600160a01b03821615155b6104cc5760405162461bcd60e51b815260206004820152601960248201527f53552050726f746f636f6c3a205a45524f5f41444452455353000000000000006044820152606401610435565b600380546001600160a01b0380861673ffffffffffffffffffffffffffffffffffffffff19928316179092556004805492851692909116919091179055801561051b576000805461ff00191690555b505050565b8281146105955760405162461bcd60e51b815260206004820152602660248201527f53552050726f746f636f6c3a20415247554d454e54535f4c454e4754485f4d4960448201527f534d4154434800000000000000000000000000000000000000000000000000006064820152608401610435565b60005b8181101561061f5761060d8585838181106105c357634e487b7160e01b600052603260045260246000fd5b90506020020160208101906105d8919061119a565b8484848181106105f857634e487b7160e01b600052603260045260246000fd5b90506020020160208101906101c0919061119a565b806106178161141b565b915050610598565b5050505050565b606060006106326109d7565b905060008167ffffffffffffffff81111561065d57634e487b7160e01b600052604160045260246000fd5b6040519080825280602002602001820160405280156106a257816020015b604080518082019091526000808252602082015281526020019060019003908161067b5790505b5092506000600460009054906101000a90046001600160a01b03166001600160a01b0316634113e5ca6040518163ffffffff1660e01b815260040160006040518083038186803b1580156106f557600080fd5b505afa158015610709573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f1916820160405261073191908101906112b1565b905060005b81518110156108c85760006001600084848151811061076557634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03166001600160a01b031681526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156107e157602002820191906000526020600020905b81546001600160a01b031681526001909101906020018083116107c3575b5050505050905060005b81518110156108b357604051806040016040528085858151811061081f57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b0316815260200183838151811061085557634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03168152508786806108759061141b565b97508151811061089557634e487b7160e01b600052603260045260246000fd5b602002602001018190525080806108ab9061141b565b9150506107eb565b505080806108c09061141b565b915050610736565b5050505090565b60005b81811015610910576108fe848484848181106105f857634e487b7160e01b600052603260045260246000fd5b806109088161141b565b9150506108d2565b50505050565b6001600160a01b0382161580159061093657506001600160a01b03811615155b6109825760405162461bcd60e51b815260206004820152601960248201527f53552050726f746f636f6c3a205a45524f5f41444452455353000000000000006044820152606401610435565b600061098e8383610d91565b9050600061099c8484610e40565b90508080156109a9575081155b156109bd576109b88484610ee8565b610910565b8180156109c8575080155b15610910576109108484610f72565b6004805460408051632089f2e560e11b8152905160009384936001600160a01b031692634113e5ca92818301928692829003018186803b158015610a1a57600080fd5b505afa158015610a2e573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f19168201604052610a5691908101906112b1565b905060005b8151811015610ad35760016000838381518110610a8857634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03166001600160a01b031681526020019081526020016000208054905083610abf91906113ec565b925080610acb8161141b565b915050610a5b565b505090565b6004805460408051632089f2e560e11b815290516060936000936001600160a01b031692634113e5ca92818301928692829003018186803b158015610b1c57600080fd5b505afa158015610b30573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f19168201604052610b5891908101906112b1565b90506000815167ffffffffffffffff811115610b8457634e487b7160e01b600052604160045260246000fd5b604051908082528060200260200182016040528015610bc957816020015b6040805180820190915260008082526020820152815260200190600190039081610ba25790505b5090506000805b8351811015610ca757610c0a848281518110610bfc57634e487b7160e01b600052603260045260246000fd5b602002602001015187610d91565b15610c95576040518060400160405280858381518110610c3a57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03168152602001876001600160a01b0316815250838380610c699061141b565b945081518110610c8957634e487b7160e01b600052603260045260246000fd5b60200260200101819052505b80610c9f8161141b565b915050610bd0565b508067ffffffffffffffff811115610ccf57634e487b7160e01b600052604160045260246000fd5b604051908082528060200260200182016040528015610d1457816020015b6040805180820190915260008082526020820152815260200190600190039081610ced5790505b50935060005b81811015610d8857828181518110610d4257634e487b7160e01b600052603260045260246000fd5b6020026020010151858281518110610d6a57634e487b7160e01b600052603260045260246000fd5b60200260200101819052508080610d809061141b565b915050610d1a565b50505050919050565b6001600160a01b038216600090815260016020526040812054610db657506000610e3a565b6001600160a01b03808416600090815260026020908152604080832093861683529290522054151580610e3757506001600160a01b038381166000908152600160205260408120805492851692909190610e2057634e487b7160e01b600052603260045260246000fd5b6000918252602090912001546001600160a01b0316145b90505b92915050565b6003546040517fd5dc24ba0000000000000000000000000000000000000000000000000000000081526001600160a01b0384811660048301528381166024830152600092169063d5dc24ba9060440160206040518083038186803b158015610ea757600080fd5b505afa158015610ebb573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610edf9190611378565b15159392505050565b6001600160a01b03808316600081815260016020818152604080842080546002845282862097891680875297845282862081905584845293840181558452908320909101805473ffffffffffffffffffffffffffffffffffffffff191685179055517f938c63ac3d228b23f6bee7618fefc6790522e338ac202c958a2ea9eb9706c5d19190a35050565b6001600160a01b03808316600081815260026020908152604080832094861683529381528382208054908390559282526001908190529281205491929091610fba9190611404565b905080821461109c576001600160a01b0384166000908152600160205260408120805483908110610ffb57634e487b7160e01b600052603260045260246000fd5b60009182526020808320909101546001600160a01b0388811684526001909252604090922080549190921692508291908590811061104957634e487b7160e01b600052603260045260246000fd5b6000918252602080832091909101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0394851617905587831682526002815260408083209490931682529290925290208290555b6001600160a01b03841660009081526001602052604090208054806110d157634e487b7160e01b600052603160045260246000fd5b6000828152602081208201600019908101805473ffffffffffffffffffffffffffffffffffffffff191690559091019091556040516001600160a01b0385811692908716917f40e634d0e26d9ec2e860e4dd9b7b2cfbb569b6058362a1a54d3a94718bc495879190a350505050565b805161114b81611462565b919050565b60008083601f840112611161578081fd5b50813567ffffffffffffffff811115611178578182fd5b6020830191508360208260051b850101111561119357600080fd5b9250929050565b6000602082840312156111ab578081fd5b81356111b681611462565b9392505050565b600080604083850312156111cf578081fd5b82356111da81611462565b915060208301356111ea81611462565b809150509250929050565b600080600060408486031215611209578081fd5b833561121481611462565b9250602084013567ffffffffffffffff81111561122f578182fd5b61123b86828701611150565b9497909650939450505050565b6000806000806040858703121561125d578081fd5b843567ffffffffffffffff80821115611274578283fd5b61128088838901611150565b90965094506020870135915080821115611298578283fd5b506112a587828801611150565b95989497509550505050565b600060208083850312156112c3578182fd5b825167ffffffffffffffff808211156112da578384fd5b818501915085601f8301126112ed578384fd5b8151818111156112ff576112ff61144c565b8060051b604051601f19603f830116810181811085821117156113245761132461144c565b604052828152858101935084860182860187018a1015611342578788fd5b8795505b8386101561136b5761135781611140565b855260019590950194938601938601611346565b5098975050505050505050565b600060208284031215611389578081fd5b5051919050565b602080825282518282018190526000919060409081850190868401855b828110156113df57815180516001600160a01b03908116865290870151168685015292840192908501906001016113ad565b5091979650505050505050565b600082198211156113ff576113ff611436565b500190565b60008282101561141657611416611436565b500390565b600060001982141561142f5761142f611436565b5060010190565b634e487b7160e01b600052601160045260246000fd5b634e487b7160e01b600052604160045260246000fd5b6001600160a01b038116811461147757600080fd5b5056fea26469706673582212207f80f36dd18718db25f5af137c93c8debf431d9736c0e01c3ddf9a92ed2d92a764736f6c63430008040033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100df5760003560e01c8063b0113e6b1161008c578063e5011ac611610066578063e5011ac6146101cd578063f45a4320146101e0578063f8aa43f714610203578063fbfa77cf1461021657600080fd5b8063b0113e6b1461017b578063bb55b7fc146101b2578063bce092c4146101c557600080fd5b80635a5fdfe5116100bd5780635a5fdfe51461013557806362eb33e31461013d578063a04a7c691461016857600080fd5b80633e18638f146100e4578063485cc9551461010d57806348e3da3c14610122575b600080fd5b6100f76100f236600461119a565b610229565b6040516101049190611390565b60405180910390f35b61012061011b3660046111bd565b6103a8565b005b610120610130366004611248565b610520565b6100f7610626565b600454610150906001600160a01b031681565b6040516001600160a01b039091168152602001610104565b6101206101763660046111f5565b6108cf565b6101a461018936600461119a565b6001600160a01b031660009081526001602052604090205490565b604051908152602001610104565b6101206101c03660046111bd565b610916565b6101a46109d7565b6100f76101db36600461119a565b610ad8565b6101f36101ee3660046111bd565b610d91565b6040519015158152602001610104565b6101f36102113660046111bd565b610e40565b600354610150906001600160a01b031681565b6001600160a01b038116600090815260016020908152604080832080548251818502810185019093528083526060949383018282801561029257602002820191906000526020600020905b81546001600160a01b03168152600190910190602001808311610274575b50505050509050805167ffffffffffffffff8111156102c157634e487b7160e01b600052604160045260246000fd5b60405190808252806020026020018201604052801561030657816020015b60408051808201909152600080825260208201528152602001906001900390816102df5790505b50915060005b81518110156103a1576040518060400160405280856001600160a01b0316815260200183838151811061034f57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b031681525083828151811061038357634e487b7160e01b600052603260045260246000fd5b602002602001018190525080806103999061141b565b91505061030c565b5050919050565b600054610100900460ff166103c35760005460ff16156103c7565b303b155b61043e5760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c697a61626c653a20636f6e747261637420697320616c72656160448201527f647920696e697469616c697a656400000000000000000000000000000000000060648201526084015b60405180910390fd5b600054610100900460ff16158015610460576000805461ffff19166101011790555b6001600160a01b0383161580159061048057506001600160a01b03821615155b6104cc5760405162461bcd60e51b815260206004820152601960248201527f53552050726f746f636f6c3a205a45524f5f41444452455353000000000000006044820152606401610435565b600380546001600160a01b0380861673ffffffffffffffffffffffffffffffffffffffff19928316179092556004805492851692909116919091179055801561051b576000805461ff00191690555b505050565b8281146105955760405162461bcd60e51b815260206004820152602660248201527f53552050726f746f636f6c3a20415247554d454e54535f4c454e4754485f4d4960448201527f534d4154434800000000000000000000000000000000000000000000000000006064820152608401610435565b60005b8181101561061f5761060d8585838181106105c357634e487b7160e01b600052603260045260246000fd5b90506020020160208101906105d8919061119a565b8484848181106105f857634e487b7160e01b600052603260045260246000fd5b90506020020160208101906101c0919061119a565b806106178161141b565b915050610598565b5050505050565b606060006106326109d7565b905060008167ffffffffffffffff81111561065d57634e487b7160e01b600052604160045260246000fd5b6040519080825280602002602001820160405280156106a257816020015b604080518082019091526000808252602082015281526020019060019003908161067b5790505b5092506000600460009054906101000a90046001600160a01b03166001600160a01b0316634113e5ca6040518163ffffffff1660e01b815260040160006040518083038186803b1580156106f557600080fd5b505afa158015610709573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f1916820160405261073191908101906112b1565b905060005b81518110156108c85760006001600084848151811061076557634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03166001600160a01b031681526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156107e157602002820191906000526020600020905b81546001600160a01b031681526001909101906020018083116107c3575b5050505050905060005b81518110156108b357604051806040016040528085858151811061081f57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b0316815260200183838151811061085557634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03168152508786806108759061141b565b97508151811061089557634e487b7160e01b600052603260045260246000fd5b602002602001018190525080806108ab9061141b565b9150506107eb565b505080806108c09061141b565b915050610736565b5050505090565b60005b81811015610910576108fe848484848181106105f857634e487b7160e01b600052603260045260246000fd5b806109088161141b565b9150506108d2565b50505050565b6001600160a01b0382161580159061093657506001600160a01b03811615155b6109825760405162461bcd60e51b815260206004820152601960248201527f53552050726f746f636f6c3a205a45524f5f41444452455353000000000000006044820152606401610435565b600061098e8383610d91565b9050600061099c8484610e40565b90508080156109a9575081155b156109bd576109b88484610ee8565b610910565b8180156109c8575080155b15610910576109108484610f72565b6004805460408051632089f2e560e11b8152905160009384936001600160a01b031692634113e5ca92818301928692829003018186803b158015610a1a57600080fd5b505afa158015610a2e573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f19168201604052610a5691908101906112b1565b905060005b8151811015610ad35760016000838381518110610a8857634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03166001600160a01b031681526020019081526020016000208054905083610abf91906113ec565b925080610acb8161141b565b915050610a5b565b505090565b6004805460408051632089f2e560e11b815290516060936000936001600160a01b031692634113e5ca92818301928692829003018186803b158015610b1c57600080fd5b505afa158015610b30573d6000803e3d6000fd5b505050506040513d6000823e601f3d908101601f19168201604052610b5891908101906112b1565b90506000815167ffffffffffffffff811115610b8457634e487b7160e01b600052604160045260246000fd5b604051908082528060200260200182016040528015610bc957816020015b6040805180820190915260008082526020820152815260200190600190039081610ba25790505b5090506000805b8351811015610ca757610c0a848281518110610bfc57634e487b7160e01b600052603260045260246000fd5b602002602001015187610d91565b15610c95576040518060400160405280858381518110610c3a57634e487b7160e01b600052603260045260246000fd5b60200260200101516001600160a01b03168152602001876001600160a01b0316815250838380610c699061141b565b945081518110610c8957634e487b7160e01b600052603260045260246000fd5b60200260200101819052505b80610c9f8161141b565b915050610bd0565b508067ffffffffffffffff811115610ccf57634e487b7160e01b600052604160045260246000fd5b604051908082528060200260200182016040528015610d1457816020015b6040805180820190915260008082526020820152815260200190600190039081610ced5790505b50935060005b81811015610d8857828181518110610d4257634e487b7160e01b600052603260045260246000fd5b6020026020010151858281518110610d6a57634e487b7160e01b600052603260045260246000fd5b60200260200101819052508080610d809061141b565b915050610d1a565b50505050919050565b6001600160a01b038216600090815260016020526040812054610db657506000610e3a565b6001600160a01b03808416600090815260026020908152604080832093861683529290522054151580610e3757506001600160a01b038381166000908152600160205260408120805492851692909190610e2057634e487b7160e01b600052603260045260246000fd5b6000918252602090912001546001600160a01b0316145b90505b92915050565b6003546040517fd5dc24ba0000000000000000000000000000000000000000000000000000000081526001600160a01b0384811660048301528381166024830152600092169063d5dc24ba9060440160206040518083038186803b158015610ea757600080fd5b505afa158015610ebb573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610edf9190611378565b15159392505050565b6001600160a01b03808316600081815260016020818152604080842080546002845282862097891680875297845282862081905584845293840181558452908320909101805473ffffffffffffffffffffffffffffffffffffffff191685179055517f938c63ac3d228b23f6bee7618fefc6790522e338ac202c958a2ea9eb9706c5d19190a35050565b6001600160a01b03808316600081815260026020908152604080832094861683529381528382208054908390559282526001908190529281205491929091610fba9190611404565b905080821461109c576001600160a01b0384166000908152600160205260408120805483908110610ffb57634e487b7160e01b600052603260045260246000fd5b60009182526020808320909101546001600160a01b0388811684526001909252604090922080549190921692508291908590811061104957634e487b7160e01b600052603260045260246000fd5b6000918252602080832091909101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0394851617905587831682526002815260408083209490931682529290925290208290555b6001600160a01b03841660009081526001602052604090208054806110d157634e487b7160e01b600052603160045260246000fd5b6000828152602081208201600019908101805473ffffffffffffffffffffffffffffffffffffffff191690559091019091556040516001600160a01b0385811692908716917f40e634d0e26d9ec2e860e4dd9b7b2cfbb569b6058362a1a54d3a94718bc495879190a350505050565b805161114b81611462565b919050565b60008083601f840112611161578081fd5b50813567ffffffffffffffff811115611178578182fd5b6020830191508360208260051b850101111561119357600080fd5b9250929050565b6000602082840312156111ab578081fd5b81356111b681611462565b9392505050565b600080604083850312156111cf578081fd5b82356111da81611462565b915060208301356111ea81611462565b809150509250929050565b600080600060408486031215611209578081fd5b833561121481611462565b9250602084013567ffffffffffffffff81111561122f578182fd5b61123b86828701611150565b9497909650939450505050565b6000806000806040858703121561125d578081fd5b843567ffffffffffffffff80821115611274578283fd5b61128088838901611150565b90965094506020870135915080821115611298578283fd5b506112a587828801611150565b95989497509550505050565b600060208083850312156112c3578182fd5b825167ffffffffffffffff808211156112da578384fd5b818501915085601f8301126112ed578384fd5b8151818111156112ff576112ff61144c565b8060051b604051601f19603f830116810181811085821117156113245761132461144c565b604052828152858101935084860182860187018a1015611342578788fd5b8795505b8386101561136b5761135781611140565b855260019590950194938601938601611346565b5098975050505050505050565b600060208284031215611389578081fd5b5051919050565b602080825282518282018190526000919060409081850190868401855b828110156113df57815180516001600160a01b03908116865290870151168685015292840192908501906001016113ad565b5091979650505050505050565b600082198211156113ff576113ff611436565b500190565b60008282101561141657611416611436565b500390565b600060001982141561142f5761142f611436565b5060010190565b634e487b7160e01b600052601160045260246000fd5b634e487b7160e01b600052604160045260246000fd5b6001600160a01b038116811461147757600080fd5b5056fea26469706673582212207f80f36dd18718db25f5af137c93c8debf431d9736c0e01c3ddf9a92ed2d92a764736f6c63430008040033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 454,
+        "contract": "contracts/lending/SuCdpRegistry.sol:SuCdpRegistry",
+        "label": "_initialized",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_bool"
+      },
+      {
+        "astId": 457,
+        "contract": "contracts/lending/SuCdpRegistry.sol:SuCdpRegistry",
+        "label": "_initializing",
+        "offset": 1,
+        "slot": "0",
+        "type": "t_bool"
+      },
+      {
+        "astId": 8128,
+        "contract": "contracts/lending/SuCdpRegistry.sol:SuCdpRegistry",
+        "label": "cdpList",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_array(t_address)dyn_storage)"
+      },
+      {
+        "astId": 8134,
+        "contract": "contracts/lending/SuCdpRegistry.sol:SuCdpRegistry",
+        "label": "cdpIndex",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+      },
+      {
+        "astId": 8137,
+        "contract": "contracts/lending/SuCdpRegistry.sol:SuCdpRegistry",
+        "label": "vault",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_contract(ISuVault)8052"
+      },
+      {
+        "astId": 8140,
+        "contract": "contracts/lending/SuCdpRegistry.sol:SuCdpRegistry",
+        "label": "cr",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_contract(ISuCollateralRegistry)7640"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_address)dyn_storage": {
+        "base": "t_address",
+        "encoding": "dynamic_array",
+        "label": "address[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_contract(ISuCollateralRegistry)7640": {
+        "encoding": "inplace",
+        "label": "contract ISuCollateralRegistry",
+        "numberOfBytes": "20"
+      },
+      "t_contract(ISuVault)8052": {
+        "encoding": "inplace",
+        "label": "contract ISuVault",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => address[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_address)dyn_storage"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

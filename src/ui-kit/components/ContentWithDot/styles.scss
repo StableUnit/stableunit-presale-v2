@@ -1,0 +1,11 @@
+.content-with-dot {
+  display: flex;
+  align-items: center;
+
+  &__dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 8px;
+    margin-right: 8px;
+  }
+}

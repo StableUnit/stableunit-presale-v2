@@ -1,0 +1,44 @@
+@import "src/ui-kit/styles/vars";
+
+.input {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 8px;
+
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      margin-right: 6px;
+    }
+  }
+
+  &__text {
+    white-space: nowrap;
+    padding-right: 6px;
+  }
+
+  &__input {
+    background: transparent;
+    outline: none;
+    border: none;
+
+    width: 215px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 40px;
+  }
+}

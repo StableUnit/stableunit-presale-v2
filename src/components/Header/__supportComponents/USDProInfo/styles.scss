@@ -1,0 +1,21 @@
+@import "src/ui-kit/styles/vars";
+
+.usd-pro-info {
+  height: 50px;
+  display: flex;
+  align-items: center;
+
+  &__info {
+    padding-left: 9px;
+    color: white;
+
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+
+    &__details {
+      padding-left: 9px;
+      color: $green;
+    }
+  }
+}
