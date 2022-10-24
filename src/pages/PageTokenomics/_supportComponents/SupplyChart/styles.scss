@@ -1,0 +1,29 @@
+@import "../../../../ui-kit/styles/vars";
+
+
+.supply-chart {
+  margin: 40px 0;
+
+  &__content {
+    margin-top: 20px;
+
+    .recharts-label {
+      padding-top: 10px;
+      fill: white;
+    }
+
+    .recharts-surface {
+      overflow: visible;
+    }
+  }
+
+  &__custom-tooltip {
+    background: $dark;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  @media only screen and (max-width: $mobile-width) {
+    margin-bottom: 16px;
+  }
+}
