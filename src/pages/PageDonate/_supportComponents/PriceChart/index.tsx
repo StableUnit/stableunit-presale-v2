@@ -3,7 +3,7 @@ import { ComposedChart, Line, XAxis, YAxis, Area, CartesianGrid, Tooltip } from 
 
 import "./styles.scss";
 
-const getPrice = (x: number) => 100 + (x * x) / 1e9;
+const getPrice = (x: number) => 0.9 + x * (0.15 * 1e-6) + x * x * (0.15 * 1e-12);
 
 const DOT_STEP = 5000;
 
@@ -33,7 +33,7 @@ const CustomTooltip = ({ active, label }: TooltipProps) => {
         return (
             <div className="custom-tooltip">
                 <p className="donation">Donation count: {label.toLocaleString()}</p>
-                <p className="rewards">Reward per donation: {getPrice(label).toFixed(1).toLocaleString()}</p>
+                <p className="rewards">Reward per donation: {getPrice(label).toFixed(4).toLocaleString()}</p>
             </div>
         );
     }
@@ -83,6 +83,7 @@ export const PriceChart = () => {
                             <stop offset="110%" stopColor="#FECBFF" stopOpacity={1} />
                         </linearGradient>
                     </defs>
+                    {/* @ts-ignore */}
                     <Tooltip content={<CustomTooltip />} />
                     <CartesianGrid vertical={false} stroke="#313131" />
                     <XAxis

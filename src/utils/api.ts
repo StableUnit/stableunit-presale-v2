@@ -1,8 +1,43 @@
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
 import { ethers } from "ethers";
+import { Contract } from "web3-eth-contract";
 
 import CONTRACT_ERC20 from "contracts/ERC20.json";
+import Bonus from "contracts/Bonus.json";
+import Distributor from "contracts/TokenDistributor_v4.json";
+import SuDAO from "contracts/SuDAO.json";
+import VeERC20 from "contracts/veERC20.json";
+import { DistributionDataType } from "./types";
+
+type ContractsType = "BonusContract" | "DistributorContract" | "SuDAOContract" | "VeERC20Contract";
+
+export const contracts: Record<ContractsType, Contract | undefined> = {
+    BonusContract: undefined,
+    DistributorContract: undefined,
+    SuDAOContract: undefined,
+    VeERC20Contract: undefined,
+};
+
+export const initAllContracts = (web3: Web3) => {
+    setBonusContract(new web3.eth.Contract(Bonus.abi as any, Bonus.address));
+    setDistributorContract(new web3.eth.Contract(Distributor.abi as any, Distributor.address));
+    setSuDAOContract(new web3.eth.Contract(SuDAO.abi as any, SuDAO.address));
+    setVeERC20Contract(new web3.eth.Contract(VeERC20.abi as any, VeERC20.address));
+};
+
+export const setBonusContract = (newContract: Contract) => {
+    contracts.BonusContract = newContract;
+};
+export const setDistributorContract = (newContract: Contract) => {
+    contracts.DistributorContract = newContract;
+};
+export const setSuDAOContract = (newContract: Contract) => {
+    contracts.SuDAOContract = newContract;
+};
+export const setVeERC20Contract = (newContract: Contract) => {
+    contracts.VeERC20Contract = newContract;
+};
 
 let currentAddress: string;
 export const setUtilsCurrentAddress = (newAddress: string) => {
@@ -12,6 +47,30 @@ export const setUtilsCurrentAddress = (newAddress: string) => {
 let web3: Web3;
 export const setUtilsWeb3 = (newWeb3: Web3) => {
     web3 = newWeb3;
+};
+
+export const BonusFactory = {
+    getAllocation: async (address: string) => {
+        if (address && contracts.BonusContract) {
+            return new BigNumber(await contracts.BonusContract.methods.getAllocation(address).call());
+        }
+        return undefined;
+    },
+    getDiscount: async (address: string) => {
+        if (address && contracts.BonusContract) {
+            return new BigNumber(await contracts.BonusContract.methods.getDiscount(address).call());
+        }
+        return undefined;
+    },
+};
+
+export const DistributorFactory = {
+    getDistributionData: async () => {
+        if (contracts.DistributorContract) {
+            return (await contracts.DistributorContract.methods.getDistributorData().call()) as DistributionDataType;
+        }
+        return undefined;
+    },
 };
 
 export const CommonFactory = {

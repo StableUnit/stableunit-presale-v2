@@ -7,7 +7,7 @@ import cn from "classnames";
 
 import { Actions } from "reducer";
 import { DispatchContext, StateContext } from "reducer/constants";
-import { setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
+import { initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
 import {
     DEFAULT_NETWORK,
     getIdByNetworkName,
@@ -116,6 +116,7 @@ export const App = React.memo(() => {
         const newWeb3: Web3 = new Web3(provider);
         setUtilsWeb3(newWeb3);
         setWeb3(newWeb3);
+        initAllContracts(newWeb3);
         dispatch({ type: Actions.SetWeb3, payload: newWeb3 });
 
         const accounts = await newWeb3.eth.getAccounts();
@@ -127,6 +128,7 @@ export const App = React.memo(() => {
     };
 
     useEffect(() => {
+        initAllContracts(new Web3(Web3.givenProvider));
         onConnect();
     }, []);
 
