@@ -26,7 +26,14 @@ const CustomTooltip = ({ active, label, ...props }: TooltipProps) => {
     return null;
 };
 
-const getSupply = (x: number) => 8634 * x * x - 10 * x * x * x;
+const getSupply = (x: number) => {
+    let res = 0;
+    for (let i = 0; i < x; i += 1) {
+        const step = 2 ** Math.floor(i / 48);
+        res += 218750 / step;
+    }
+    return res;
+};
 
 const getDistribution = (n: number) => {
     const supply = getSupply(n);
@@ -42,7 +49,7 @@ const getDistribution = (n: number) => {
 };
 
 export const SupplyChart = () => {
-    const data = new Array(48).fill(0).map((_, i) => getDistribution(i + 1));
+    const data = new Array(20 * 12).fill(0).map((_, i) => getDistribution(i + 1));
 
     return (
         <div className="supply-chart">
