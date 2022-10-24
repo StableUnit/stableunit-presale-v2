@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 
 import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from "ui-kit";
@@ -21,6 +21,7 @@ export const Donate = () => {
     const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(tokenAddress);
     const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
     const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
+    const [rewards, setRewards] = useState(0);
 
     const startDate = new Date(distributionStaticData?.startTimestamp ?? 0).toLocaleDateString();
     const endDate = new Date(distributionStaticData?.deadlineTimestamp ?? 0).toLocaleDateString();
@@ -52,6 +53,10 @@ export const Donate = () => {
         addSuccessNotification("Donate finished successfully");
         stopDonateLoader();
     };
+
+    useEffect(() => {
+        setRewards(tokenValue ?? 0);
+    }, [tokenValue]);
 
     return (
         <GradientBorder borderRadius={24} className="donate-container">
@@ -97,7 +102,9 @@ export const Donate = () => {
 
                 <div className="donate__section">
                     <div className="donate__section__title">Total VeSuDAO reward</div>
-                    <div className="donate__section__description--large">0</div>
+                    <div className="donate__section__description--large">
+                        {rewards.toLocaleString([], { maximumFractionDigits: 6 })}
+                    </div>
                 </div>
 
                 <div className="donate__button-container">
@@ -107,7 +114,7 @@ export const Donate = () => {
                         className="donate__button"
                         onClick={handleApprove}
                     >
-                        Approve
+                        {isApproveLoading ? "Loading..." : "Approve"}
                     </ButtonGradient>
                     <ButtonGradient
                         loading={isDonateLoading}
@@ -120,7 +127,7 @@ export const Donate = () => {
                         className="donate__button"
                         onClick={handleContribute}
                     >
-                        Contribute
+                        {isDonateLoading ? "Loading..." : "Contribute"}
                     </ButtonGradient>
                 </div>
             </div>

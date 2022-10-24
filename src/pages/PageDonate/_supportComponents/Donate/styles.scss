@@ -40,6 +40,8 @@
                 font-size: 32px;
                 line-height: 42px;
                 color: $gray1;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
