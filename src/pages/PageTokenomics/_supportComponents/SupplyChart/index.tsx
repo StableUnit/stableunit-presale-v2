@@ -11,14 +11,16 @@ interface TooltipProps {
 const CustomTooltip = ({ active, label, ...props }: TooltipProps) => {
     if (active) {
         const distribution = getDistribution(label);
+        const distributionOld = getDistribution(label - 1);
+
+        const diff = distribution.supply - distributionOld.supply;
         return (
             <div className="supply-chart__custom-tooltip">
                 <p>Month: {label.toLocaleString()}</p>
                 <p>Total supply: {distribution.supply.toLocaleString()}</p>
-                <p>Investors: {distribution.investors.toLocaleString()}</p>
-                <p>Ecosystem growth & rewards: {distribution.ecosystem.toLocaleString()}</p>
-                <p>Development: {distribution.dev.toLocaleString()}</p>
-                <p>DAO treasury: {distribution.treasury.toLocaleString()}</p>
+                <p>Total supply (prev): {distributionOld.supply.toLocaleString()}</p>
+                <p>Diff: {diff.toLocaleString()}</p>
+                <p>Inflation: {(diff / distribution.supply) * 100 * 12}</p>
             </div>
         );
     }
@@ -27,14 +29,19 @@ const CustomTooltip = ({ active, label, ...props }: TooltipProps) => {
 };
 
 const getSupply = (x: number) => {
-    let res = 0;
-    for (let i = 0; i < x; i += 1) {
-        const step = 2 ** Math.floor(i / 48);
-        res += 218750 / step;
+    if (x < 48) {
+        return x * 333333;
+    }
+
+    let res = 16000000;
+    for (let i = 0; i < x - 48; i += 1) {
+        const step = 2 ** (Math.floor(i / 48) + 1);
+        res += 5000000 / step / 48;
     }
     return res;
 };
 
+// TODO: add real supply
 const getDistribution = (n: number) => {
     const supply = getSupply(n);
 
