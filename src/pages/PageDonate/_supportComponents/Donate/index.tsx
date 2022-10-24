@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import BigNumber from "bignumber.js";
+import debounce from "lodash.debounce";
 
 import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from "ui-kit";
-import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation } from "hooks";
+import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation, useAccessNFTs } from "hooks";
 import { TokenInput } from "components/TokenInput";
 import { StateContext } from "reducer/constants";
 import { getAddress } from "utils/currency";
@@ -21,7 +22,9 @@ export const Donate = () => {
     const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(tokenAddress);
     const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
     const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
+    const { isLoading: isRewardsLoading, start: startRewardsLoader, stop: stopRewardsLoader } = useLoader();
     const [rewards, setRewards] = useState(0);
+    const accessNFTs = useAccessNFTs();
 
     const startDate = new Date(distributionStaticData?.startTimestamp ?? 0).toLocaleDateString();
     const endDate = new Date(distributionStaticData?.deadlineTimestamp ?? 0).toLocaleDateString();
@@ -42,21 +45,34 @@ export const Donate = () => {
     };
 
     const handleContribute = async () => {
-        if (!tokenValue) {
+        if (!tokenValue || !accessNFTs?.length) {
             return;
         }
         const amount = fromHRNumber(tokenValue, 18);
         startDonateLoader();
-        // TODO: nft requirement
-        await DistributorFactory.participate(amount, "");
+        await DistributorFactory.participate(amount, accessNFTs[0]);
         update();
         addSuccessNotification("Donate finished successfully");
         stopDonateLoader();
     };
 
+    const updateRewards = useMemo(
+        () =>
+            debounce((value: number) => {
+                startRewardsLoader();
+                DistributorFactory.getRewardAmount(fromHRNumber(value, 18)).then((newRewards) => {
+                    setRewards(newRewards);
+                    stopRewardsLoader();
+                });
+            }, 500),
+        []
+    );
+
     useEffect(() => {
-        setRewards(tokenValue ?? 0);
-    }, [tokenValue]);
+        if (tokenValue !== undefined) {
+            updateRewards(tokenValue);
+        }
+    }, [tokenValue, updateRewards]);
 
     return (
         <GradientBorder borderRadius={24} className="donate-container">
@@ -100,11 +116,15 @@ export const Donate = () => {
                     )}
                 </div>
 
-                <div className="donate__section">
+                <div className="donate__section" style={{ height: 42 }}>
                     <div className="donate__section__title">Total VeSuDAO reward</div>
-                    <div className="donate__section__description--large">
-                        {rewards.toLocaleString([], { maximumFractionDigits: 6 })}
-                    </div>
+                    {isRewardsLoading ? (
+                        <LoaderLine height={20} width={100} borderRadius={8} />
+                    ) : (
+                        <div className="donate__section__description--large">
+                            {rewards.toLocaleString([], { maximumFractionDigits: 6 })}
+                        </div>
+                    )}
                 </div>
 
                 <div className="donate__button-container">
@@ -119,6 +139,7 @@ export const Donate = () => {
                     <ButtonGradient
                         loading={isDonateLoading}
                         disabled={
+                            !accessNFTs?.length ||
                             !distributionStaticData ||
                             !isEnoughAllowance ||
                             !tokenValue ||
@@ -130,6 +151,9 @@ export const Donate = () => {
                         {isDonateLoading ? "Loading..." : "Contribute"}
                     </ButtonGradient>
                 </div>
+                {accessNFTs && accessNFTs.length === 0 ? (
+                    <div className="donate__subtitle--red">You don't have access NFT for this presale</div>
+                ) : null}
             </div>
         </GradientBorder>
     );

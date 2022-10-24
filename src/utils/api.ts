@@ -91,6 +91,20 @@ export const DistributorFactory = {
                 .send({ from: currentAddress });
         }
     },
+    getRewardAmount: async (donationAmount: BigNumber) => {
+        if (contracts.DistributorContract) {
+            return contracts.DistributorContract.methods
+                .getBondingCurveRewardAmountFromDonation(donationAmount.toString(10))
+                .call();
+        }
+        return undefined;
+    },
+    getAccessNFTs: async () => {
+        if (contracts.DistributorContract) {
+            return contracts.DistributorContract.methods.getAccessNftsForUser(currentAddress).call();
+        }
+        return undefined;
+    },
 };
 
 export const CommonFactory = {
