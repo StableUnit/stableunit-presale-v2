@@ -9,6 +9,7 @@ export const initialState: ReducerState = {
     web3: undefined,
     updateFlag: undefined,
     updatePool: undefined,
+    distributionStaticData: undefined,
 };
 
 export const StateContext = React.createContext(initialState);

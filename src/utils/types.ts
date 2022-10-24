@@ -12,7 +12,6 @@ export type DistributionDataType = {
     maximumDonationUsd: string;
     donationGoalMin: string;
     donationGoalMax: string;
-    totalDonations: string;
     donationToken: string;
     fullVestingSeconds: number;
     cliffSeconds: number;

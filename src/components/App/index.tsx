@@ -7,7 +7,7 @@ import cn from "classnames";
 
 import { Actions } from "reducer";
 import { DispatchContext, StateContext } from "reducer/constants";
-import { initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
+import { DistributorFactory, initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
 import {
     DEFAULT_NETWORK,
     getIdByNetworkName,
@@ -125,6 +125,11 @@ export const App = React.memo(() => {
 
         const newChainId = await newWeb3.eth.getChainId();
         dispatch({ type: Actions.SetChainId, payload: newChainId });
+
+        dispatch({
+            type: Actions.SetDistributionStaticData,
+            payload: await DistributorFactory.getDistributionStaticData(),
+        });
     };
 
     useEffect(() => {

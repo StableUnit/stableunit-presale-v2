@@ -65,9 +65,17 @@ export const BonusFactory = {
 };
 
 export const DistributorFactory = {
-    getDistributionData: async () => {
+    getDistributionStaticData: async () => {
         if (contracts.DistributorContract) {
-            return (await contracts.DistributorContract.methods.getDistributorData().call()) as DistributionDataType;
+            return (await contracts.DistributorContract.methods
+                .getDistributorStaticData()
+                .call()) as DistributionDataType;
+        }
+        return undefined;
+    },
+    getTotalDonation: async () => {
+        if (contracts.DistributorContract) {
+            return new BigNumber(await contracts.DistributorContract.methods.totalDonations().call());
         }
         return undefined;
     },

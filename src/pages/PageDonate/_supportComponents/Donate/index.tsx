@@ -1,19 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import BigNumber from "bignumber.js";
 
-import { ButtonGradient, GradientBorder, ProgressBar, Tooltip } from "ui-kit";
+import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from "ui-kit";
+import { useGlobalUpdate, useTotalDonation } from "hooks";
 import { TokenInput } from "components/TokenInput";
-import { useGlobalUpdate } from "hooks/useGlobalUpdate";
 
 import "./styles.scss";
+import { StateContext } from "reducer/constants";
 
 export const Donate = () => {
+    const { distributionStaticData } = useContext(StateContext);
     const { update } = useGlobalUpdate();
+    const { totalDonationBN } = useTotalDonation();
     const [isApproved, setIsApproved] = useState(false);
     const [tokenValue, setTokenValue] = useState<number>();
 
-    const currentDonation = 150000;
-    const goal = 1000000;
-    const percent = (currentDonation / goal) * 100;
+    const startDate = new Date(distributionStaticData?.startTimestamp ?? 0).toLocaleDateString();
+    const endDate = new Date(distributionStaticData?.deadlineTimestamp ?? 0).toLocaleDateString();
+
+    const goal = new BigNumber(distributionStaticData?.donationGoalMin ?? 0);
+    const percent = distributionStaticData ? totalDonationBN?.multipliedBy(100).div(goal).toNumber() : 0;
 
     const handleTokenValueChange = (newTokenValue?: number) => {
         setTokenValue(newTokenValue);
@@ -21,6 +27,7 @@ export const Donate = () => {
 
     const handleApprove = async () => {
         console.log("Approve");
+        setIsApproved(true);
     };
 
     const handleContribute = async () => {
@@ -28,29 +35,20 @@ export const Donate = () => {
         update();
     };
 
-    // const getContractInfo = async () => {
-    //     if (currentAddress && web3) {
-    //         const tokenAddress = "0xfffffffff615bee8d0c7d329ebe0d444ab46ee5a";
-    //         const contract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
-    //         const balance = await contract.methods.balanceOf(currentAddress).call();
-    //         console.log(balance);
-    //     }
-    // };
-    //
-    // useEffect(() => {
-    //     getContractInfo();
-    // }, [currentAddress, web3]);
-
     return (
         <GradientBorder borderRadius={24} className="donate-container">
             <div className="donate">
                 <div className="donate__section">
                     <div className="donate__section__title">Start</div>
-                    <div className="donate__section__description">26 October 2022</div>
+                    <div className="donate__section__description">
+                        {distributionStaticData ? startDate : <LoaderLine height={26} width={105} />}
+                    </div>
                 </div>
                 <div className="donate__section">
                     <div className="donate__section__title">End</div>
-                    <div className="donate__section__description">07 November 2022</div>
+                    <div className="donate__section__description">
+                        {distributionStaticData ? endDate : <LoaderLine height={26} width={105} />}
+                    </div>
                 </div>
 
                 <div className="donate__section">
@@ -60,7 +58,7 @@ export const Donate = () => {
                             <span>Percent of IDO goal</span>
                         </Tooltip>
                     </div>
-                    <ProgressBar className="donate__progress-bar" percent={percent} />
+                    <ProgressBar className="donate__progress-bar" percent={percent ?? 0} />
                 </div>
 
                 <TokenInput
@@ -71,7 +69,13 @@ export const Donate = () => {
                     value={tokenValue}
                 />
 
-                <div className="donate__subtitle">1000 USDC minimum donation</div>
+                <div className="donate__subtitle">
+                    {distributionStaticData ? (
+                        `${distributionStaticData?.minimumDonationUsd} USDC minimum donation`
+                    ) : (
+                        <span>&nbsp;</span>
+                    )}
+                </div>
 
                 <div className="donate__section">
                     <div className="donate__section__title">Total VeSuDAO reward</div>

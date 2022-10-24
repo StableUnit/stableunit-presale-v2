@@ -1,5 +1,6 @@
 import React from "react";
 import { ComposedChart, Line, XAxis, YAxis, Area, CartesianGrid, Tooltip } from "recharts";
+import { useTotalDonation } from "hooks";
 
 import "./styles.scss";
 
@@ -26,8 +27,6 @@ interface TooltipProps {
     active: boolean;
 }
 
-const currentSupply = 205100;
-
 const CustomTooltip = ({ active, label }: TooltipProps) => {
     if (active) {
         return (
@@ -42,11 +41,11 @@ const CustomTooltip = ({ active, label }: TooltipProps) => {
 };
 
 export const PriceChart = () => {
-    // const totalSupply = 1e6;
-    const currentSupplyPrice = getPrice(currentSupply);
+    const { totalDonation } = useTotalDonation();
+    const currentSupplyPrice = getPrice(totalDonation);
     const data = new Array(201).fill(0).map((_, i) => {
         const dotSupply = i * DOT_STEP;
-        const isBeforeCurrentSupply = dotSupply < currentSupply;
+        const isBeforeCurrentSupply = dotSupply < totalDonation;
         const price = getPrice(dotSupply);
 
         return {
@@ -56,7 +55,7 @@ export const PriceChart = () => {
         };
     });
 
-    data.push({ supply: currentSupply, rewardRatePast: currentSupplyPrice, rewardRateFuture: currentSupplyPrice });
+    data.push({ supply: totalDonation, rewardRatePast: currentSupplyPrice, rewardRateFuture: currentSupplyPrice });
     data.sort((a, b) => a.supply - b.supply);
 
     return (

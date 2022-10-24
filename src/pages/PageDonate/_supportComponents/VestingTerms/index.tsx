@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
+import BigNumber from "bignumber.js";
 
+import { LoaderLine } from "ui-kit";
 import { InfoContainer } from "components/InfoContainer";
+import { StateContext } from "reducer/constants";
+import { toHRNumber } from "utils/bigNumber";
+import { MONTH } from "utils/time";
 
 import "./styles.scss";
 
+const VestingTermsLoading = () => (
+    <InfoContainer title="Vesting terms" className="vesting-terms" classNameContent="vesting-terms__content">
+        <ul className="vesting-terms__list">
+            <li>
+                <LoaderLine />
+            </li>
+            <li>
+                <LoaderLine />
+            </li>
+            <li>
+                <LoaderLine />
+            </li>
+        </ul>
+    </InfoContainer>
+);
+
 export const VestingTerms = () => {
-    const claimable = 5;
-    const idoEndTimestamp = 1685677600000;
-    const lockupMonths = 6;
-    const vestingMonths = 18;
+    const { distributionStaticData } = useContext(StateContext);
+
+    if (!distributionStaticData) {
+        return <VestingTermsLoading />;
+    }
+
+    const claimable = toHRNumber(new BigNumber(distributionStaticData.tgeUnlockRatio1e18).multipliedBy(100), 18);
+    const idoEndTimestamp = distributionStaticData.startTimestamp + distributionStaticData.fullVestingSeconds;
+    const lockupMonths = Math.round(distributionStaticData.cliffSeconds / MONTH);
+    const vestingMonths = Math.round(distributionStaticData.fullVestingSeconds / MONTH);
 
     return (
         <InfoContainer title="Vesting terms" className="vesting-terms" classNameContent="vesting-terms__content">
