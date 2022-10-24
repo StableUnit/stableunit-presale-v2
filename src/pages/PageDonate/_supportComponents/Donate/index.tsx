@@ -2,18 +2,25 @@ import React, { useContext, useState } from "react";
 import BigNumber from "bignumber.js";
 
 import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from "ui-kit";
-import { useGlobalUpdate, useTotalDonation } from "hooks";
+import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation } from "hooks";
 import { TokenInput } from "components/TokenInput";
+import { StateContext } from "reducer/constants";
+import { getAddress } from "utils/currency";
+import { CommonFactory, DistributorFactory } from "utils/api";
+import { addSuccessNotification } from "utils/notification";
+import { fromHRNumber, toHRNumber } from "utils/bigNumber";
 
 import "./styles.scss";
-import { StateContext } from "reducer/constants";
 
 export const Donate = () => {
-    const { distributionStaticData } = useContext(StateContext);
+    const { distributionStaticData, chainId } = useContext(StateContext);
     const { update } = useGlobalUpdate();
     const { totalDonationBN } = useTotalDonation();
-    const [isApproved, setIsApproved] = useState(false);
     const [tokenValue, setTokenValue] = useState<number>();
+    const tokenAddress = getAddress("DAI", chainId) as string;
+    const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(tokenAddress);
+    const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
+    const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
 
     const startDate = new Date(distributionStaticData?.startTimestamp ?? 0).toLocaleDateString();
     const endDate = new Date(distributionStaticData?.deadlineTimestamp ?? 0).toLocaleDateString();
@@ -26,13 +33,24 @@ export const Donate = () => {
     };
 
     const handleApprove = async () => {
-        console.log("Approve");
-        setIsApproved(true);
+        startApproveLoader();
+        await CommonFactory.approve(tokenAddress);
+        setIsEnoughAllowance(true);
+        addSuccessNotification("Approve finished successfully");
+        stopApproveLoader();
     };
 
     const handleContribute = async () => {
-        console.log("Donate");
+        if (!tokenValue) {
+            return;
+        }
+        const amount = fromHRNumber(tokenValue, 18);
+        startDonateLoader();
+        // TODO: nft requirement
+        await DistributorFactory.participate(amount, "");
         update();
+        addSuccessNotification("Donate finished successfully");
+        stopDonateLoader();
     };
 
     return (
@@ -83,10 +101,25 @@ export const Donate = () => {
                 </div>
 
                 <div className="donate__button-container">
-                    <ButtonGradient disabled={isApproved} className="donate__button" onClick={handleApprove}>
+                    <ButtonGradient
+                        loading={isApproveLoading}
+                        disabled={isEnoughAllowance}
+                        className="donate__button"
+                        onClick={handleApprove}
+                    >
                         Approve
                     </ButtonGradient>
-                    <ButtonGradient disabled={!isApproved} className="donate__button" onClick={handleContribute}>
+                    <ButtonGradient
+                        loading={isDonateLoading}
+                        disabled={
+                            !distributionStaticData ||
+                            !isEnoughAllowance ||
+                            !tokenValue ||
+                            tokenValue < toHRNumber(new BigNumber(distributionStaticData.minimumDonationUsd), 18)
+                        }
+                        className="donate__button"
+                        onClick={handleContribute}
+                    >
                         Contribute
                     </ButtonGradient>
                 </div>

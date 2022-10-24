@@ -49,6 +49,11 @@ export const setUtilsWeb3 = (newWeb3: Web3) => {
     web3 = newWeb3;
 };
 
+const tryToRunLocal = async (command: any, options: Record<string, any> = {}) => {
+    await command.estimateGas({ from: currentAddress, ...options });
+    return command;
+};
+
 export const BonusFactory = {
     getAllocation: async (address: string) => {
         if (address && contracts.BonusContract) {
@@ -79,6 +84,13 @@ export const DistributorFactory = {
         }
         return undefined;
     },
+    participate: async (donationAmount: BigNumber, accessNft: string) => {
+        if (contracts.DistributorContract && currentAddress) {
+            return contracts.DistributorContract.methods
+                .participate(donationAmount.toString(10), accessNft)
+                .send({ from: currentAddress });
+        }
+    },
 };
 
 export const CommonFactory = {
@@ -88,6 +100,25 @@ export const CommonFactory = {
             return new newWeb3.eth.Contract(CONTRACT_ERC20 as any, address);
         }
         return undefined;
+    },
+    approve: async (address?: string) => {
+        if (address) {
+            const tokenContract = CommonFactory.createCurrencyContract(address);
+            const command = await tryToRunLocal(
+                tokenContract?.methods.approve(
+                    Distributor.address,
+                    "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+                )
+            );
+            return command.send({ from: currentAddress });
+        }
+    },
+    allowance: async (tokenAddress: string, address = currentAddress) => {
+        if (!address || !tokenAddress) {
+            return new BigNumber(0);
+        }
+        const tokenContract = CommonFactory.createCurrencyContract(tokenAddress);
+        return new BigNumber(await tokenContract?.methods.allowance(address, Distributor.address).call());
     },
     balance: async (tokenAddress?: string) => {
         if (!web3 || !tokenAddress || !currentAddress) {
