@@ -17,7 +17,7 @@ export const DistributionChart = () => {
 
     return (
         <InfoContainer
-            title="Collateral structure"
+            title="Total supply distribution"
             className="collateral-chart"
             classNameContent="collateral-chart__content"
         >

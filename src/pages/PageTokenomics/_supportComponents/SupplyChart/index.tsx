@@ -1,5 +1,5 @@
 import React from "react";
-import { ComposedChart, BarChart, XAxis, YAxis, Area, CartesianGrid, Tooltip, Bar } from "recharts";
+import { ComposedChart, XAxis, YAxis, Area, CartesianGrid, Tooltip } from "recharts";
 
 import "./styles.scss";
 
@@ -8,7 +8,7 @@ interface TooltipProps {
     active: boolean;
 }
 
-const CustomTooltip = ({ active, label, ...props }: TooltipProps) => {
+const CustomTooltip = ({ active, label }: TooltipProps) => {
     if (active) {
         const distribution = getDistribution(label);
         const distributionOld = getDistribution(label - 1);
@@ -18,9 +18,7 @@ const CustomTooltip = ({ active, label, ...props }: TooltipProps) => {
             <div className="supply-chart__custom-tooltip">
                 <p>Month: {label.toLocaleString()}</p>
                 <p>Total supply: {distribution.supply.toLocaleString()}</p>
-                <p>Total supply (prev): {distributionOld.supply.toLocaleString()}</p>
-                <p>Diff: {diff.toLocaleString()}</p>
-                <p>Inflation: {(diff / distribution.supply) * 100 * 12}</p>
+                <p>Month Inflation: {(diff / distribution.supply) * 100}</p>
             </div>
         );
     }
@@ -41,28 +39,19 @@ const getSupply = (x: number) => {
     return res;
 };
 
-// TODO: add real supply
-const getDistribution = (n: number) => {
-    const supply = getSupply(n);
-
-    return {
-        supply,
-        months: n,
-        investors: 0.19 * supply,
-        ecosystem: 0.28 * supply,
-        dev: 0.24 * supply,
-        treasury: 0.29 * supply,
-    };
-};
+const getDistribution = (n: number) => ({
+    supply: getSupply(n),
+    months: n,
+});
 
 export const SupplyChart = () => {
-    const data = new Array(20 * 12).fill(0).map((_, i) => getDistribution(i + 1));
+    const data = new Array(20 * 12).fill(0).map((_, i) => getDistribution(4 * 12 + i + 1));
 
     return (
         <div className="supply-chart">
-            <div className="info-container__title">Supply chart</div>
+            <div className="info-container__title">Supply chart (after 4 years)</div>
             <div className="supply-chart__content">
-                <BarChart
+                <ComposedChart
                     width={1000}
                     height={500}
                     data={data}
@@ -73,16 +62,32 @@ export const SupplyChart = () => {
                         bottom: 5,
                     }}
                 >
+                    <defs>
+                        <linearGradient id="colorUv" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="-12%" stopColor="#DBB0FF" stopOpacity={1} />
+                            <stop offset="24%" stopColor="#C2DCFF" stopOpacity={1} />
+                            <stop offset="63%" stopColor="#B4FFE0" stopOpacity={1} />
+                            <stop offset="82%" stopColor="#FEFBDA" stopOpacity={1} />
+                            <stop offset="110%" stopColor="#FECBFF" stopOpacity={1} />
+                        </linearGradient>
+                    </defs>
                     {/* @ts-ignore */}
                     <Tooltip content={<CustomTooltip />} />
                     <CartesianGrid vertical={false} stroke="#313131" />
                     <XAxis label={{ value: "Months", position: "bottom", offset: 0 }} dataKey="months" />
-                    <YAxis type="number" label={{ value: "Total supply", angle: -90, position: "insideLeft" }} />
-                    <Bar type="monotone" dataKey="investors" stackId="1" fill="#FC7557" />
-                    <Bar type="monotone" dataKey="dev" stackId="1" fill="#82ca9d" />
-                    <Bar type="monotone" dataKey="ecosystem" stackId="1" fill="#ffc658" />
-                    <Bar type="monotone" dataKey="treasury" stackId="1" fill="#8884d8" />
-                </BarChart>
+                    <YAxis
+                        domain={[16000000, 21000000]}
+                        label={{ value: "Total supply", angle: -90, position: "insideLeft" }}
+                    />
+                    <Area
+                        type="monotone"
+                        dataKey="supply"
+                        stroke=""
+                        strokeWidth={2}
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                    />
+                </ComposedChart>
             </div>
         </div>
     );
