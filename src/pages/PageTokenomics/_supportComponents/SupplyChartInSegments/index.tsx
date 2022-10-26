@@ -1,8 +1,6 @@
 import React from "react";
 import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Bar } from "recharts";
 
-import "./styles.scss";
-
 interface TooltipProps {
     label: number;
     active: boolean;

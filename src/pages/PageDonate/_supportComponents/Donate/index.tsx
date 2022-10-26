@@ -26,11 +26,14 @@ export const Donate = () => {
     const [rewards, setRewards] = useState(0);
     const accessNFTs = useAccessNFTs();
 
-    const startDate = new Date(distributionStaticData?.startTimestamp ?? 0).toLocaleDateString();
-    const endDate = new Date(distributionStaticData?.deadlineTimestamp ?? 0).toLocaleDateString();
+    const startDate = new Date((distributionStaticData?.startTimestamp ?? 0) * 1000).toLocaleDateString();
+    const endDate = new Date((distributionStaticData?.deadlineTimestamp ?? 0) * 1000).toLocaleDateString();
 
     const goal = new BigNumber(distributionStaticData?.donationGoalMin ?? 0);
     const percent = distributionStaticData ? totalDonationBN?.multipliedBy(100).div(goal).toNumber() : 0;
+
+    // TODO: fix decimals
+    const minimumDonation = toHRNumber(new BigNumber(distributionStaticData?.minimumDonation ?? 0), 18);
 
     const handleTokenValueChange = (newTokenValue?: number) => {
         setTokenValue(newTokenValue);
@@ -109,11 +112,7 @@ export const Donate = () => {
                 />
 
                 <div className="donate__subtitle">
-                    {distributionStaticData ? (
-                        `${distributionStaticData?.minimumDonationUsd} USDC minimum donation`
-                    ) : (
-                        <span>&nbsp;</span>
-                    )}
+                    {distributionStaticData ? `${minimumDonation} USDC minimum donation` : <span>&nbsp;</span>}
                 </div>
 
                 <div className="donate__section" style={{ height: 42 }}>
@@ -143,7 +142,7 @@ export const Donate = () => {
                             !distributionStaticData ||
                             !isEnoughAllowance ||
                             !tokenValue ||
-                            tokenValue < toHRNumber(new BigNumber(distributionStaticData.minimumDonationUsd), 18)
+                            tokenValue < minimumDonation
                         }
                         className="donate__button"
                         onClick={handleContribute}

@@ -17,6 +17,7 @@ const AppContainer = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <ErrorBoundary>
+            {/* @ts-ignore */}
             <ReactNotification />
             <StateContext.Provider value={state}>
                 <DispatchContext.Provider value={dispatch}>

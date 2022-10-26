@@ -5,9 +5,9 @@ import { Contract } from "web3-eth-contract";
 
 import CONTRACT_ERC20 from "contracts/ERC20.json";
 import Bonus from "contracts/Bonus.json";
-import Distributor from "contracts/TokenDistributor_v4.json";
+import Distributor from "contracts/TokenDistributorV4.json";
 import SuDAO from "contracts/SuDAO.json";
-import VeERC20 from "contracts/veERC20.json";
+import VeERC20 from "contracts/VeERC20.json";
 import { DistributionDataType } from "./types";
 
 type ContractsType = "BonusContract" | "DistributorContract" | "SuDAOContract" | "VeERC20Contract";

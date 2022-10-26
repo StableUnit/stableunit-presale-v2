@@ -8,8 +8,8 @@ export type LinkType = {
 export type DistributionDataType = {
     startTimestamp: number;
     deadlineTimestamp: number;
-    minimumDonationUsd: string;
-    maximumDonationUsd: string;
+    minimumDonation: string;
+    maximumDonation: string;
     donationGoalMin: string;
     donationGoalMax: string;
     donationToken: string;
