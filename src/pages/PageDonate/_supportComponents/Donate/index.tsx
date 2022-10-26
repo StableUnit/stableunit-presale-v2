@@ -117,8 +117,14 @@ export const Donate = () => {
                 )}
 
                 <div className="donate__subtitle">
-                    <div>{distributionStaticData ? minimumDonation : <LoaderLine width={50} />}</div>
-                    <div>&nbsp;USDC minimum donation</div>
+                    <div>
+                        {distributionStaticData ? (
+                            `${minimumDonation} ${distributionStaticData.symbol}`
+                        ) : (
+                            <LoaderLine width={100} />
+                        )}
+                    </div>
+                    <div>&nbsp; minimum donation</div>
                 </div>
 
                 <div className="donate__section" style={{ height: 42 }}>
