@@ -7,7 +7,7 @@ import cn from "classnames";
 
 import { Actions } from "reducer";
 import { DispatchContext, StateContext } from "reducer/constants";
-import { DistributorFactory, initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
+import { CommonFactory, DistributorFactory, initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
 import {
     DEFAULT_NETWORK,
     getIdByNetworkName,
@@ -109,6 +109,19 @@ export const App = React.memo(() => {
             dispatch({ type: Actions.SetChainId, payload: newChainId });
         });
     };
+
+    const updateDistributionData = async () => {
+        const data = await DistributorFactory.getDistributionStaticData();
+        if (data) {
+            const decimals = (await CommonFactory.decimals(data.donationToken)) ?? 18;
+            const symbol = await CommonFactory.symbol(data.donationToken);
+            dispatch({
+                type: Actions.SetDistributionStaticData,
+                payload: { ...data, decimals, symbol },
+            });
+        }
+    };
+
     const onConnect = async () => {
         const provider = await web3Modal.connect();
         await subscribeProvider(provider);
@@ -126,10 +139,7 @@ export const App = React.memo(() => {
         const newChainId = await newWeb3.eth.getChainId();
         dispatch({ type: Actions.SetChainId, payload: newChainId });
 
-        dispatch({
-            type: Actions.SetDistributionStaticData,
-            payload: await DistributorFactory.getDistributionStaticData(),
-        });
+        await updateDistributionData();
     };
 
     useEffect(() => {

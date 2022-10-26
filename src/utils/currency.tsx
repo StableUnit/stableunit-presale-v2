@@ -1,10 +1,10 @@
 import React from "react";
 
 import tokenList from "submodule-contract-artifacts/stableunit.tokenlist.json";
-import { UsdProIcon, DAIIcon } from "ui-kit/images/currency";
+import { UsdProIcon, DAIIcon, UsdtIcon } from "ui-kit/images/currency";
 import { TokenMetadata } from "./types";
 
-export type SupportedTokensType = "DAI" | "USDPro";
+export type SupportedTokensType = "DAI" | "USDPro" | "tUSDT" | "USDT";
 
 export const BORROW_CURRENCY = "USDPro" as SupportedTokensType;
 export const BORROW_CURRENCY_NAME = "USD Pro" as SupportedTokensType;
@@ -34,6 +34,9 @@ export const getTokenIcon = (tokenName: SupportedTokensType) => {
     switch (tokenName) {
         case "DAI":
             return <DAIIcon />;
+        case "USDT":
+        case "tUSDT":
+            return <UsdtIcon />;
         case "USDPro":
             return <UsdProIcon />;
         default:

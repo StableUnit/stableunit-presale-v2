@@ -9,6 +9,7 @@ import Distributor from "contracts/TokenDistributorV4.json";
 import SuDAO from "contracts/SuDAO.json";
 import VeERC20 from "contracts/VeERC20.json";
 import { DistributionDataType } from "./types";
+import { SupportedTokensType } from "./currency";
 
 type ContractsType = "BonusContract" | "DistributorContract" | "SuDAOContract" | "VeERC20Contract";
 
@@ -141,6 +142,22 @@ export const CommonFactory = {
 
         const tokenContract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
         return new BigNumber(await tokenContract.methods.balanceOf(currentAddress).call());
+    },
+    decimals: async (tokenAddress?: string) => {
+        if (!web3 || !tokenAddress) {
+            return 0;
+        }
+
+        const tokenContract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
+        return +(await tokenContract.methods.decimals().call());
+    },
+    symbol: async (tokenAddress?: string) => {
+        if (!web3 || !tokenAddress) {
+            return 0;
+        }
+
+        const tokenContract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);
+        return (await tokenContract.methods.symbol().call()) as SupportedTokensType;
     },
 };
 

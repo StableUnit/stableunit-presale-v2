@@ -1,6 +1,6 @@
 import Web3 from "web3";
 
-import { DistributionDataType } from "utils/types";
+import { DistributionDataType, DistributionDataTypeExpanded } from "utils/types";
 
 // eslint-disable-next-line no-shadow
 export enum Actions {
@@ -41,7 +41,7 @@ export type ActionType =
       }
     | {
           type: Actions.SetDistributionStaticData;
-          payload: DistributionDataType | undefined;
+          payload: DistributionDataTypeExpanded | undefined;
       }
     | {
           type: Actions.SetChainId;
@@ -55,7 +55,7 @@ export interface ReducerState {
     web3?: Web3;
     updateFlag?: boolean;
     updatePool?: string[];
-    distributionStaticData?: DistributionDataType;
+    distributionStaticData?: DistributionDataTypeExpanded;
 }
 
 const reducer: (state: ReducerState, action: ActionType) => ReducerState = (state, action) => {

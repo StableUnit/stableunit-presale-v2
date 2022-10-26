@@ -1,3 +1,5 @@
+import { SupportedTokensType } from "./currency";
+
 export type LinkType = {
     href: string;
     text: string;
@@ -17,6 +19,11 @@ export type DistributionDataType = {
     cliffSeconds: number;
     tgeUnlockRatio1e18: string;
     vestingFrequencySeconds: number;
+};
+
+export type DistributionDataTypeExpanded = DistributionDataType & {
+    decimals: number;
+    symbol: SupportedTokensType;
 };
 
 export type TokenMetadata = {

@@ -14,12 +14,11 @@ import { fromHRNumber, toHRNumber } from "utils/bigNumber";
 import "./styles.scss";
 
 export const Donate = () => {
-    const { distributionStaticData, chainId } = useContext(StateContext);
+    const { distributionStaticData } = useContext(StateContext);
     const { update } = useGlobalUpdate();
     const { totalDonationBN } = useTotalDonation();
     const [tokenValue, setTokenValue] = useState<number>();
-    const tokenAddress = getAddress("DAI", chainId) as string;
-    const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(tokenAddress);
+    const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(distributionStaticData?.donationToken);
     const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
     const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
     const { isLoading: isRewardsLoading, start: startRewardsLoader, stop: stopRewardsLoader } = useLoader();
@@ -32,8 +31,10 @@ export const Donate = () => {
     const goal = new BigNumber(distributionStaticData?.donationGoalMin ?? 0);
     const percent = distributionStaticData ? totalDonationBN?.multipliedBy(100).div(goal).toNumber() : 0;
 
-    // TODO: fix decimals
-    const minimumDonation = toHRNumber(new BigNumber(distributionStaticData?.minimumDonation ?? 0), 18);
+    const minimumDonation = toHRNumber(
+        new BigNumber(distributionStaticData?.minimumDonation ?? 0),
+        distributionStaticData?.decimals ?? 18
+    );
 
     const handleTokenValueChange = (newTokenValue?: number) => {
         setTokenValue(newTokenValue);
@@ -41,7 +42,7 @@ export const Donate = () => {
 
     const handleApprove = async () => {
         startApproveLoader();
-        await CommonFactory.approve(tokenAddress);
+        await CommonFactory.approve(distributionStaticData?.donationToken);
         setIsEnoughAllowance(true);
         addSuccessNotification("Approve finished successfully");
         stopApproveLoader();
@@ -103,16 +104,21 @@ export const Donate = () => {
                     <ProgressBar className="donate__progress-bar" percent={percent ?? 0} />
                 </div>
 
-                <TokenInput
-                    className="donate__token-input"
-                    isTokenFixed
-                    tokenName="DAI"
-                    onValueChange={handleTokenValueChange}
-                    value={tokenValue}
-                />
+                {distributionStaticData?.symbol ? (
+                    <TokenInput
+                        className="donate__token-input"
+                        isTokenFixed
+                        tokenName={distributionStaticData.symbol}
+                        onValueChange={handleTokenValueChange}
+                        value={tokenValue}
+                    />
+                ) : (
+                    <LoaderLine height={93} width={434} className="donate__token-input" />
+                )}
 
                 <div className="donate__subtitle">
-                    {distributionStaticData ? `${minimumDonation} USDC minimum donation` : <span>&nbsp;</span>}
+                    <div>{distributionStaticData ? minimumDonation : <LoaderLine width={50} />}</div>
+                    <div>&nbsp;USDC minimum donation</div>
                 </div>
 
                 <div className="donate__section" style={{ height: 42 }}>

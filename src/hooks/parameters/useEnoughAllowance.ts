@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { StateContext } from "reducer/constants";
 import { CommonFactory } from "utils/api";
 
-export const useEnoughAllowance = (tokenAddress: string, address?: string) => {
+export const useEnoughAllowance = (tokenAddress?: string, address?: string) => {
     const { currentAddress, chainId } = useContext(StateContext);
     const [isEnoughAllowance, setIsEnoughAllowance] = useState(false);
 
