@@ -106,9 +106,11 @@ export const DistributorFactory = {
     },
     getRewardAmount: async (donationAmount: BigNumber) => {
         if (contracts.DistributorContract) {
-            return contracts.DistributorContract.methods
-                .getBondingCurveRewardAmountFromDonation(donationAmount.toString(10))
-                .call();
+            return new BigNumber(
+                await contracts.DistributorContract.methods
+                    .getBondingCurveRewardAmountFromDonationUSD(donationAmount.toString(10))
+                    .call()
+            );
         }
         return undefined;
     },

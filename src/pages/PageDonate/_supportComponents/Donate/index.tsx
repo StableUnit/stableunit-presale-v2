@@ -6,7 +6,6 @@ import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from
 import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation, useAccessNFTs } from "hooks";
 import { TokenInput } from "components/TokenInput";
 import { StateContext } from "reducer/constants";
-import { getAddress } from "utils/currency";
 import { CommonFactory, DistributorFactory } from "utils/api";
 import { addSuccessNotification } from "utils/notification";
 import { fromHRNumber, toHRNumber } from "utils/bigNumber";
@@ -49,7 +48,7 @@ export const Donate = () => {
     };
 
     const handleContribute = async () => {
-        if (!tokenValue || !accessNFTs?.length) {
+        if (!tokenValue || !accessNFTs?.length || !distributionStaticData) {
             return;
         }
         const amount = fromHRNumber(tokenValue, 18);
@@ -65,7 +64,7 @@ export const Donate = () => {
             debounce((value: number) => {
                 startRewardsLoader();
                 DistributorFactory.getRewardAmount(fromHRNumber(value, 18)).then((newRewards) => {
-                    setRewards(newRewards);
+                    setRewards(newRewards ? toHRNumber(newRewards, 18) : 0);
                     stopRewardsLoader();
                 });
             }, 500),
