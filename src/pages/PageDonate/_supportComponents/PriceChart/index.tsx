@@ -9,7 +9,7 @@ const getPrice = (x: number) => {
         return 1 / (0.9 + x * (0.15 * 1e-6) + x * x * (0.15 * 1e-12));
     }
     // return 750000000000000 / x ** 2.5;
-    return 500000000000 / x ** 2;
+    return 830000000000000000 / x ** 3;
     // return 25000000000 / x ** 1.8;
     // return 250000000 / x ** 1.5;
 };
@@ -68,7 +68,7 @@ export const PriceChart = () => {
     const { totalDonation } = useTotalDonation();
     const currentSupplyPrice = getPrice(totalDonation);
     const data2 = [{ price: 0, sum: 0 }];
-    const data = new Array(301).fill(0).map((_, i) => {
+    const data = new Array(401).fill(0).map((_, i) => {
         const dotSupply = i * DOT_STEP;
         const isBeforeCurrentSupply = dotSupply < totalDonation;
         const price = getPrice(dotSupply);
