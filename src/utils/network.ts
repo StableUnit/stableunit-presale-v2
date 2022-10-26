@@ -200,3 +200,5 @@ export const changeNetworkAtMetamask = async (chainId?: number) => {
 export const getShortAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(address.length - 3)}`;
 
 export const getEtherscanAddress = (address: string) => `https://goerli.etherscan.io/address/${address}`;
+
+export const NULL_ADDRESS = "0x0000000000000000000000000000000000000000";

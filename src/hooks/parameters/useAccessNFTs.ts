@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { StateContext } from "reducer/constants";
 import { DistributorFactory } from "utils/api";
+import { NULL_ADDRESS } from "utils/network";
 
 export const useAccessNFTs = () => {
     const { currentAddress } = useContext(StateContext);
@@ -17,5 +18,5 @@ export const useAccessNFTs = () => {
         updateData();
     }, [currentAddress]);
 
-    return accessNFTs;
+    return accessNFTs?.filter((v) => v !== NULL_ADDRESS);
 };

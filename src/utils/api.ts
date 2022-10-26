@@ -68,6 +68,18 @@ export const BonusFactory = {
         }
         return undefined;
     },
+    getNftAllocation: async (address: string) => {
+        if (address && contracts.BonusContract) {
+            return new BigNumber(await contracts.BonusContract.methods.getNftAllocation(address).call());
+        }
+        return undefined;
+    },
+    getNftDiscount: async (address: string) => {
+        if (address && contracts.BonusContract) {
+            return new BigNumber(await contracts.BonusContract.methods.getNftDiscount(address).call());
+        }
+        return undefined;
+    },
 };
 
 export const DistributorFactory = {
@@ -153,7 +165,7 @@ export const CommonFactory = {
     },
     symbol: async (tokenAddress?: string) => {
         if (!web3 || !tokenAddress) {
-            return 0;
+            return undefined;
         }
 
         const tokenContract = new web3.eth.Contract(CONTRACT_ERC20 as any, tokenAddress);

@@ -23,7 +23,7 @@ export type DistributionDataType = {
 
 export type DistributionDataTypeExpanded = DistributionDataType & {
     decimals: number;
-    symbol: SupportedTokensType;
+    symbol: SupportedTokensType | undefined;
 };
 
 export type TokenMetadata = {
