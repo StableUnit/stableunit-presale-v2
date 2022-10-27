@@ -59,6 +59,10 @@ export const Donate = () => {
         stopDonateLoader();
     };
 
+    const handleContact = () => {
+        window.open("https://t.me/stableunit", "_blank");
+    };
+
     const updateRewards = useMemo(
         () =>
             debounce((value: number) => {
@@ -76,6 +80,8 @@ export const Donate = () => {
             updateRewards(tokenValue);
         }
     }, [tokenValue, updateRewards]);
+
+    const hasAccessNFT = accessNFTs && accessNFTs.length > 0;
 
     return (
         <GradientBorder borderRadius={24} className="donate-container">
@@ -105,6 +111,7 @@ export const Donate = () => {
 
                 {distributionStaticData?.symbol ? (
                     <TokenInput
+                        disabled={!hasAccessNFT}
                         className="donate__token-input"
                         isTokenFixed
                         tokenName={distributionStaticData.symbol}
@@ -138,31 +145,42 @@ export const Donate = () => {
                 </div>
 
                 <div className="donate__button-container">
-                    <ButtonGradient
-                        loading={isApproveLoading}
-                        disabled={isEnoughAllowance}
-                        className="donate__button"
-                        onClick={handleApprove}
-                    >
-                        {isApproveLoading ? "Loading..." : "Approve"}
-                    </ButtonGradient>
-                    <ButtonGradient
-                        loading={isDonateLoading}
-                        disabled={
-                            !accessNFTs?.length ||
-                            !distributionStaticData ||
-                            !isEnoughAllowance ||
-                            !tokenValue ||
-                            tokenValue < minimumDonation
-                        }
-                        className="donate__button"
-                        onClick={handleContribute}
-                    >
-                        {isDonateLoading ? "Loading..." : "Contribute"}
-                    </ButtonGradient>
+                    {hasAccessNFT ? (
+                        <>
+                            <ButtonGradient
+                                loading={isApproveLoading}
+                                disabled={isEnoughAllowance}
+                                className="donate__button"
+                                onClick={handleApprove}
+                            >
+                                {isApproveLoading ? "Loading..." : "Approve"}
+                            </ButtonGradient>
+                            <ButtonGradient
+                                loading={isDonateLoading}
+                                disabled={
+                                    !distributionStaticData ||
+                                    !isEnoughAllowance ||
+                                    !tokenValue ||
+                                    tokenValue < minimumDonation
+                                }
+                                className="donate__button"
+                                onClick={handleContribute}
+                            >
+                                {isDonateLoading ? "Loading..." : "Contribute"}
+                            </ButtonGradient>
+                        </>
+                    ) : (
+                        <ButtonGradient className="donate__button" onClick={handleContact}>
+                            Contact administrators
+                        </ButtonGradient>
+                    )}
                 </div>
-                {accessNFTs && accessNFTs.length === 0 ? (
-                    <div className="donate__subtitle--red">You don't have access NFT for this presale</div>
+                {!hasAccessNFT ? (
+                    <div className="donate__subtitle--red">
+                        You don't have access NFT for this presale.
+                        <br />
+                        Contact administrators to receive it.
+                    </div>
                 ) : null}
             </div>
         </GradientBorder>

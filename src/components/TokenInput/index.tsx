@@ -19,6 +19,7 @@ interface TokenInputProps {
     onValueChange: (v?: number) => void;
     onBalanceChange?: (v: number) => void;
     isTokenFixed?: boolean;
+    disabled?: boolean;
     showBalance?: boolean;
     value?: number;
     headerContent?: React.ReactNode; // TODO: use only data for render HeaderContent
@@ -30,6 +31,7 @@ export const TokenInput = ({
     onTokenChange = () => null,
     onValueChange,
     className,
+    disabled,
     isTokenFixed,
     showBalance = true,
     headerContent,
@@ -71,7 +73,7 @@ export const TokenInput = ({
     };
 
     return (
-        <div className={cn("token-input", className)} id={id}>
+        <div className={cn("token-input", className, { "token-input--disabled": disabled })} id={id}>
             {headerContent}
             {showBalance && balance !== undefined && (
                 <div className="token-input__balance">
@@ -92,6 +94,7 @@ export const TokenInput = ({
                     />
                 )}
                 <input
+                    disabled={disabled}
                     id={`${id}-input`}
                     value={userDefinedValue}
                     className="token-input__data__input"

@@ -8,6 +8,17 @@
     height: fit-content;
     box-sizing: border-box;
 
+    &--disabled {
+        user-select: none;
+        opacity: 0.6;
+        cursor: not-allowed;
+
+        .max-button {
+            user-select: none;
+            cursor: not-allowed;
+        }
+    }
+
     &__balance {
         display: flex;
         align-items: center;
