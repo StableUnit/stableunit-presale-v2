@@ -1,13 +1,13 @@
 @import "src/ui-kit/styles/vars";
 
 .donate-container {
-    margin: 0 50px;
-    width: 500px;
+    margin: 20px 50px;
+    width: 480px;
 }
 
 .donate {
     text-align: center;
-    padding: 32px;
+    padding: 24px 30px;
     box-sizing: border-box;
     background: $black;
     border-radius: 24px;
@@ -78,7 +78,7 @@
     }
 
     &__token-input {
-        margin: 40px 0 4px 0;
+        margin: 35px 0 4px 0;
     }
 
     &__button {
@@ -86,7 +86,7 @@
 
         &-container {
             width: calc(100% - 16px);
-            margin: 20px 8px 0 8px;
+            margin: 15px 8px 0 8px;
 
             display: flex;
             align-items: center;

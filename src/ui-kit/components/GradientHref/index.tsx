@@ -29,6 +29,7 @@ export const GradientHref = ({ id, children, className, target, disabled, href, 
         </NavLink>
     ) : (
         <div
+            onClick={onClick}
             id={id}
             className={cn("gradient-href gradient-href-text", className, { "gradient-href--disabled": disabled })}
         >
