@@ -7,10 +7,8 @@ import { GradientHref } from "ui-kit";
 import "./styles.scss";
 
 const getPrice = (x: number) => {
-    return 2025000000000 / ((-1500000 + x) * (-1500000 + x));
-    // if (x < 1e6 * 1.1) {
-    //     return 1.1 - x * 1e-7 * 3;
-    // }
+    // return 2025000000000 / ((-1500000 + x) * (-1500000 + x));
+    return 1.1 - x * 1e-7 * 3;
     // return 1000000000000000000 / x ** 3;
     // return 25000000000 / x ** 1.8;
     // return 250000000 / x ** 1.5;
@@ -142,7 +140,7 @@ export const PriceChart = () => {
                             dataKey="supply"
                         />
                         <YAxis
-                            domain={[0, 100]}
+                            domain={[0, 1.2]}
                             allowDataOverflow
                             type="number"
                             label={{ value: "Reward rate", angle: -90, position: "insideLeft" }}
@@ -179,7 +177,7 @@ export const PriceChart = () => {
                         <Tooltip content={<CustomTooltipPrice />} />
                         <CartesianGrid vertical={false} stroke="#313131" />
                         <XAxis
-                            domain={[0, 2000000]}
+                            domain={[0, 1600000]}
                             allowDataOverflow
                             type="number"
                             label={{ value: "Sum", position: "bottom", offset: 0 }}
