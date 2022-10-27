@@ -7,10 +7,11 @@ import { GradientHref } from "ui-kit";
 import "./styles.scss";
 
 const getPrice = (x: number) => {
-    if (x < 1e6 * 1.1) {
-        return 1.1 - x * 1e-7 * 3;
-    }
-    return 1000000000000000000 / x ** 3;
+    return 2025000000000 / ((-1500000 + x) * (-1500000 + x));
+    // if (x < 1e6 * 1.1) {
+    //     return 1.1 - x * 1e-7 * 3;
+    // }
+    // return 1000000000000000000 / x ** 3;
     // return 25000000000 / x ** 1.8;
     // return 250000000 / x ** 1.5;
 };
@@ -140,7 +141,12 @@ export const PriceChart = () => {
                             label={{ value: "Donations", position: "bottom", offset: 0 }}
                             dataKey="supply"
                         />
-                        <YAxis type="number" label={{ value: "Reward rate", angle: -90, position: "insideLeft" }} />
+                        <YAxis
+                            domain={[0, 100]}
+                            allowDataOverflow
+                            type="number"
+                            label={{ value: "Reward rate", angle: -90, position: "insideLeft" }}
+                        />
                         <Line type="monotone" dataKey="rewardRatePast" stroke="#7A7A7A" strokeWidth={2} dot={false} />
                         <Line type="monotone" dataKey="rewardRateFuture" stroke="#7A7A7A" strokeWidth={2} dot={false} />
                         <Area
@@ -172,7 +178,13 @@ export const PriceChart = () => {
                     >
                         <Tooltip content={<CustomTooltipPrice />} />
                         <CartesianGrid vertical={false} stroke="#313131" />
-                        <XAxis type="number" label={{ value: "Sum", position: "bottom", offset: 0 }} dataKey="sum" />
+                        <XAxis
+                            domain={[0, 2000000]}
+                            allowDataOverflow
+                            type="number"
+                            label={{ value: "Sum", position: "bottom", offset: 0 }}
+                            dataKey="sum"
+                        />
                         <YAxis type="number" label={{ value: "Price", angle: -90, position: "insideLeft" }} />
                         <Line type="monotone" dataKey="price" stroke="#7A7A7A" strokeWidth={2} dot={false} />
                     </ComposedChart>
