@@ -66,7 +66,7 @@ export const PriceChart = () => {
     const { totalDonation } = useTotalDonation();
     const currentSupplyPrice = getPrice(totalDonation);
     const dataPrice = [] as { sum: number; price: number }[];
-    const data = new Array(201).fill(0).map((_, i) => {
+    const data = new Array(181).fill(0).map((_, i) => {
         const dotSupply = i * DOT_STEP;
         const isBeforeCurrentSupply = dotSupply < totalDonation;
         const price = getPrice(dotSupply);
@@ -135,6 +135,7 @@ export const PriceChart = () => {
                         <Tooltip content={<CustomTooltip />} />
                         <CartesianGrid vertical={false} stroke="#313131" />
                         <XAxis
+                            domain={[0, 1500000]}
                             type="number"
                             label={{ value: "Donations", position: "bottom", offset: 0 }}
                             dataKey="supply"
@@ -177,7 +178,8 @@ export const PriceChart = () => {
                         <Tooltip content={<CustomTooltipPrice />} />
                         <CartesianGrid vertical={false} stroke="#313131" />
                         <XAxis
-                            domain={[0, 1600000]}
+                            ticks={[300000, 600000, 900000, 1200000, 1500000]}
+                            domain={[0, 1500000]}
                             allowDataOverflow
                             type="number"
                             label={{ value: "Sum", position: "bottom", offset: 0 }}
