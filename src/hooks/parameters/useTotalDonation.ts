@@ -7,7 +7,7 @@ import { useParameter } from "./useParameter";
 
 export const useTotalDonation = () => {
     const { distributionStaticData } = useContext(StateContext);
-    const totalDonationBN = useParameter("totalDistribution", () => DistributorFactory.getTotalDonation());
+    const totalDonationBN = useParameter("totalDonation", DistributorFactory.getTotalDonation);
 
     return {
         totalDonationBN,

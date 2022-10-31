@@ -14,7 +14,7 @@ export const useMaxDonation = () => {
     const maxDonationBN = useParameter(
         `maxDonation ${currentAddress}`,
         () => DistributorFactory.getMaximumDonationAmount(accessNFTs),
-        accessNFTs
+        accessNFTs ? accessNFTs[0] : ""
     );
 
     return {
