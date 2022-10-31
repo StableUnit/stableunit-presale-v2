@@ -4,11 +4,15 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { PageDonate } from "pages/PageDonate";
 import { PageTokenomics } from "pages/PageTokenomics";
 
-export const Routes = () => (
+interface Props {
+    onConnect: () => void;
+}
+
+export const Routes = ({ onConnect }: Props) => (
     <Switch>
         {/* @ts-ignore */}
         <Route exact path="/donate">
-            <PageDonate />
+            <PageDonate onConnect={onConnect} />
         </Route>
 
         {/* @ts-ignore */}

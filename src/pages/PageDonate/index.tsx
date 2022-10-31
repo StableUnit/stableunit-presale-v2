@@ -6,12 +6,16 @@ import { VestingTerms } from "./_supportComponents/VestingTerms";
 
 import "./styles.scss";
 
-export const PageDonate = () => {
+interface Props {
+    onConnect: () => void;
+}
+
+export const PageDonate = ({ onConnect }: Props) => {
     return (
         <div className="profile-donate">
             <div className="profile-donate__content">
                 <PriceChart />
-                <Donate />
+                <Donate onConnect={onConnect} />
             </div>
             <VestingTerms />
         </div>

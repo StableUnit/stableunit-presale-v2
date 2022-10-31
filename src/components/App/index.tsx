@@ -154,7 +154,7 @@ export const App = React.memo(() => {
             <Header onConnect={onConnect} onDisconnect={onDisconnect} />
             <div className="App__content">
                 <div className={cn("App__scroller", { "App__scroller--disabled": isNotSupportedChain })}>
-                    <Routes />
+                    <Routes onConnect={onConnect} />
                 </div>
             </div>
             <NetworkModal />

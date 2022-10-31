@@ -12,8 +12,12 @@ import { fromHRNumber, toHRNumber } from "utils/bigNumber";
 
 import "./styles.scss";
 
-export const Donate = () => {
-    const { distributionStaticData } = useContext(StateContext);
+interface Props {
+    onConnect: () => void;
+}
+
+export const Donate = ({ onConnect }: Props) => {
+    const { distributionStaticData, currentAddress } = useContext(StateContext);
     const { update } = useGlobalUpdate();
     const { totalDonationBN } = useTotalDonation();
     const [tokenValue, setTokenValue] = useState<number>();
@@ -83,6 +87,45 @@ export const Donate = () => {
 
     const hasAccessNFT = accessNFTs && accessNFTs.length > 0;
 
+    const renderButtons = () => {
+        if (!currentAddress) {
+            return (
+                <ButtonGradient className="donate__button" onClick={onConnect}>
+                    Connect wallet
+                </ButtonGradient>
+            );
+        }
+        if (!hasAccessNFT) {
+            return (
+                <ButtonGradient className="donate__button" onClick={handleContact}>
+                    Contact administrators
+                </ButtonGradient>
+            );
+        }
+        return (
+            <>
+                <ButtonGradient
+                    loading={isApproveLoading}
+                    disabled={isEnoughAllowance}
+                    className="donate__button"
+                    onClick={handleApprove}
+                >
+                    {isApproveLoading ? "Loading..." : "Approve"}
+                </ButtonGradient>
+                <ButtonGradient
+                    loading={isDonateLoading}
+                    disabled={
+                        !distributionStaticData || !isEnoughAllowance || !tokenValue || tokenValue < minimumDonation
+                    }
+                    className="donate__button"
+                    onClick={handleContribute}
+                >
+                    {isDonateLoading ? "Loading..." : "Contribute"}
+                </ButtonGradient>
+            </>
+        );
+    };
+
     return (
         <GradientBorder borderRadius={24} className="donate-container">
             <div className="donate">
@@ -144,38 +187,9 @@ export const Donate = () => {
                     )}
                 </div>
 
-                <div className="donate__button-container">
-                    {hasAccessNFT ? (
-                        <>
-                            <ButtonGradient
-                                loading={isApproveLoading}
-                                disabled={isEnoughAllowance}
-                                className="donate__button"
-                                onClick={handleApprove}
-                            >
-                                {isApproveLoading ? "Loading..." : "Approve"}
-                            </ButtonGradient>
-                            <ButtonGradient
-                                loading={isDonateLoading}
-                                disabled={
-                                    !distributionStaticData ||
-                                    !isEnoughAllowance ||
-                                    !tokenValue ||
-                                    tokenValue < minimumDonation
-                                }
-                                className="donate__button"
-                                onClick={handleContribute}
-                            >
-                                {isDonateLoading ? "Loading..." : "Contribute"}
-                            </ButtonGradient>
-                        </>
-                    ) : (
-                        <ButtonGradient className="donate__button" onClick={handleContact}>
-                            Contact administrators
-                        </ButtonGradient>
-                    )}
-                </div>
-                {!hasAccessNFT ? (
+                <div className="donate__button-container">{renderButtons()}</div>
+
+                {!hasAccessNFT && currentAddress ? (
                     <div className="donate__subtitle--red">
                         You don't have access NFT for this presale.
                         <br />
