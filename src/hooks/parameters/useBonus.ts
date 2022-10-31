@@ -7,19 +7,18 @@ import { BonusFactory } from "utils/api";
 import { useAccessNFTs } from "./useAccessNFTs";
 
 export const useBonus = () => {
-    const { distributionStaticData } = useContext(StateContext);
+    const { distributionStaticData, currentAddress } = useContext(StateContext);
     const accessNFTs = useAccessNFTs();
     const [allocationNFTBN, setAllocationNFTBN] = useState<BigNumber>();
     const [discountNFTBN, setDiscountNFTBN] = useState<BigNumber>();
-    // const [allocationUserBN, setAllocationUserBN] = useState<BigNumber>();
-    // const [discountUserBN, setDiscountUserBN] = useState<BigNumber>();
+    const [allocationUserBN, setAllocationUserBN] = useState<BigNumber>();
+    const [discountUserBN, setDiscountUserBN] = useState<BigNumber>();
 
     const updateData = async () => {
-        if (accessNFTs && accessNFTs.length > 0) {
+        if (accessNFTs && accessNFTs.length > 0 && currentAddress) {
             if (!allocationNFTBN && !discountNFTBN) {
-                console.log(accessNFTs[0]);
-                // setAllocationUserBN(await BonusFactory.getAllocation(currentAddress));
-                // setDiscountUserBN(await BonusFactory.getDiscount(currentAddress));
+                setAllocationUserBN(await BonusFactory.getAllocation(currentAddress));
+                setDiscountUserBN(await BonusFactory.getDiscount(currentAddress));
                 setAllocationNFTBN(await BonusFactory.getNftAllocation(accessNFTs[0]));
                 setDiscountNFTBN(await BonusFactory.getNftDiscount(accessNFTs[0]));
             }
@@ -31,7 +30,7 @@ export const useBonus = () => {
 
     useEffect(() => {
         updateData();
-    }, [accessNFTs]);
+    }, [accessNFTs, currentAddress]);
 
     return {
         allocationNFT:
@@ -39,7 +38,7 @@ export const useBonus = () => {
                 ? toHRNumber(allocationNFTBN, distributionStaticData.decimals)
                 : undefined,
         discountNFT: discountNFTBN ? toHRNumber(discountNFTBN.multipliedBy(100), 18) : undefined,
-        // allocationUser: allocationBN ? toHRNumber(allocationBN, 18) : undefined,
-        // discountUser: discountBN ? toHRNumber(discountBN.multipliedBy(100), 18) : undefined,
+        allocationUser: allocationUserBN ? toHRNumber(allocationUserBN, 18) : undefined,
+        discountUser: discountUserBN ? toHRNumber(discountUserBN.multipliedBy(100), 18) : undefined,
     };
 };

@@ -64,7 +64,7 @@ export const BonusFactory = {
     },
     getDiscount: async (address: string) => {
         if (address && contracts.BonusContract) {
-            return new BigNumber(await contracts.BonusContract.methods.getDiscount(address).call());
+            return new BigNumber(await contracts.BonusContract.methods.getBonus(address).call());
         }
         return undefined;
     },
@@ -76,7 +76,7 @@ export const BonusFactory = {
     },
     getNftDiscount: async (address: string) => {
         if (address && contracts.BonusContract) {
-            return new BigNumber(await contracts.BonusContract.methods.getNftDiscount(address).call());
+            return new BigNumber(await contracts.BonusContract.methods.getNftBonus(address).call());
         }
         return undefined;
     },
