@@ -102,8 +102,6 @@ export const PriceChart = () => {
     // @ts-ignore
     data.sort((a, b) => a.supply - b.supply);
 
-    console.log(data);
-
     return (
         <div className="price-chart">
             <div className="price-chart__navbar">
