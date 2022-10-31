@@ -120,6 +120,16 @@ export const DistributorFactory = {
         }
         return undefined;
     },
+    getMaximumDonationAmount: async (accessNfts?: string[]) => {
+        if (contracts.DistributorContract && accessNfts?.length) {
+            return new BigNumber(
+                await contracts.DistributorContract.methods
+                    .getMaximumDonationAmount(currentAddress, accessNfts[0])
+                    .call()
+            );
+        }
+        return new BigNumber(0);
+    },
 };
 
 export const CommonFactory = {

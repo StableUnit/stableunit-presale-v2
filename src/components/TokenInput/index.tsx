@@ -18,6 +18,7 @@ interface TokenInputProps {
     onTokenChange?: (newTokenName: SupportedTokensType) => void;
     onValueChange: (v?: number) => void;
     onBalanceChange?: (v: number) => void;
+    maxValue?: number;
     isTokenFixed?: boolean;
     disabled?: boolean;
     showBalance?: boolean;
@@ -36,6 +37,7 @@ export const TokenInput = ({
     showBalance = true,
     headerContent,
     onBalanceChange,
+    maxValue,
     value,
 }: TokenInputProps) => {
     const { chainId } = useContext(StateContext);
@@ -49,7 +51,9 @@ export const TokenInput = ({
     }, [balance]);
 
     const handleMaxClick = () => {
-        if (balance) {
+        if (maxValue) {
+            onValueChange(maxValue);
+        } else if (balance) {
             onValueChange(balance);
         }
     };

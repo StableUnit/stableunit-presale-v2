@@ -82,6 +82,7 @@ module.exports = {
         "consistent-return": "warn",
         "import/prefer-default-export": "off",
         "no-unused-vars": "off",
+        "no-underscore-dangle": "off",
         "import/order": [
             2,
             {

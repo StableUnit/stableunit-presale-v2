@@ -17,6 +17,7 @@ import {
     NetworkType,
     supportedNetworks,
 } from "utils/network";
+import { mapDistributionData } from "utils/types";
 
 import { Routes } from "../Routes";
 import { Header } from "../Header";
@@ -113,11 +114,11 @@ export const App = React.memo(() => {
     const updateDistributionData = async () => {
         const data = await DistributorFactory.getDistributionStaticData();
         if (data) {
-            const decimals = (await CommonFactory.decimals(data.donationToken)) ?? 18;
-            const symbol = await CommonFactory.symbol(data.donationToken);
+            const decimals = (await CommonFactory.decimals(data.donationToken_)) ?? 18;
+            const symbol = await CommonFactory.symbol(data.donationToken_);
             dispatch({
                 type: Actions.SetDistributionStaticData,
-                payload: { ...data, decimals, symbol },
+                payload: { ...mapDistributionData(data), decimals, symbol },
             });
         }
     };

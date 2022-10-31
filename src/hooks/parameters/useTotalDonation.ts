@@ -1,13 +1,19 @@
+import { useContext } from "react";
+import { StateContext } from "reducer/constants";
 import { DistributorFactory } from "utils/api";
 import { toHRNumber } from "utils/bigNumber";
 
 import { useParameter } from "./useParameter";
 
 export const useTotalDonation = () => {
+    const { distributionStaticData } = useContext(StateContext);
     const totalDonationBN = useParameter("totalDistribution", () => DistributorFactory.getTotalDonation());
 
     return {
         totalDonationBN,
-        totalDonation: totalDonationBN ? toHRNumber(totalDonationBN, 18) : 0,
+        totalDonation:
+            totalDonationBN && distributionStaticData
+                ? toHRNumber(totalDonationBN, distributionStaticData.decimals)
+                : 0,
     };
 };

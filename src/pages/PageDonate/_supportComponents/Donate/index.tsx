@@ -3,11 +3,11 @@ import BigNumber from "bignumber.js";
 import debounce from "lodash.debounce";
 
 import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from "ui-kit";
-import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation, useAccessNFTs } from "hooks";
+import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation, useAccessNFTs, useMaxDonation } from "hooks";
 import { TokenInput } from "components/TokenInput";
 import { StateContext } from "reducer/constants";
 import { CommonFactory, DistributorFactory } from "utils/api";
-import { addSuccessNotification } from "utils/notification";
+import { addErrorNotification, addSuccessNotification } from "utils/notification";
 import { fromHRNumber, toHRNumber } from "utils/bigNumber";
 
 import "./styles.scss";
@@ -20,12 +20,14 @@ export const Donate = ({ onConnect }: Props) => {
     const { distributionStaticData, currentAddress } = useContext(StateContext);
     const { update } = useGlobalUpdate();
     const { totalDonationBN } = useTotalDonation();
+    const { maxDonation } = useMaxDonation();
     const [tokenValue, setTokenValue] = useState<number>();
     const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(distributionStaticData?.donationToken);
     const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
     const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
     const { isLoading: isRewardsLoading, start: startRewardsLoader, stop: stopRewardsLoader } = useLoader();
     const [rewards, setRewards] = useState(0);
+    const [usdBalance, setUSDBalance] = useState(0);
     const accessNFTs = useAccessNFTs();
 
     const startDate = new Date((distributionStaticData?.startTimestamp ?? 0) * 1000).toLocaleDateString();
@@ -44,23 +46,33 @@ export const Donate = ({ onConnect }: Props) => {
     };
 
     const handleApprove = async () => {
-        startApproveLoader();
-        await CommonFactory.approve(distributionStaticData?.donationToken);
-        setIsEnoughAllowance(true);
-        addSuccessNotification("Approve finished successfully");
-        stopApproveLoader();
+        try {
+            startApproveLoader();
+            await CommonFactory.approve(distributionStaticData?.donationToken);
+            setIsEnoughAllowance(true);
+            addSuccessNotification("Approve finished successfully");
+            stopApproveLoader();
+        } catch (e) {
+            addErrorNotification("Approve error", e.message);
+            stopApproveLoader();
+        }
     };
 
     const handleContribute = async () => {
         if (!tokenValue || !accessNFTs?.length || !distributionStaticData) {
             return;
         }
-        const amount = fromHRNumber(tokenValue, 18);
-        startDonateLoader();
-        await DistributorFactory.participate(amount, accessNFTs[0]);
-        update();
-        addSuccessNotification("Donate finished successfully");
-        stopDonateLoader();
+        try {
+            const amount = fromHRNumber(tokenValue, distributionStaticData.decimals);
+            startDonateLoader();
+            await DistributorFactory.participate(amount, accessNFTs[0]);
+            update();
+            addSuccessNotification("Donate finished successfully");
+            stopDonateLoader();
+        } catch (e) {
+            addErrorNotification("Donate error", e.message);
+            stopDonateLoader();
+        }
     };
 
     const handleContact = () => {
@@ -115,7 +127,12 @@ export const Donate = ({ onConnect }: Props) => {
                 <ButtonGradient
                     loading={isDonateLoading}
                     disabled={
-                        !distributionStaticData || !isEnoughAllowance || !tokenValue || tokenValue < minimumDonation
+                        !distributionStaticData ||
+                        !isEnoughAllowance ||
+                        !tokenValue ||
+                        tokenValue < minimumDonation ||
+                        tokenValue > maxDonation ||
+                        tokenValue > usdBalance
                     }
                     className="donate__button"
                     onClick={handleContribute}
@@ -154,6 +171,8 @@ export const Donate = ({ onConnect }: Props) => {
 
                 {distributionStaticData?.symbol ? (
                     <TokenInput
+                        onBalanceChange={(balance) => setUSDBalance(balance)}
+                        maxValue={maxDonation}
                         disabled={!hasAccessNFT}
                         className="donate__token-input"
                         isTokenFixed
@@ -188,6 +207,12 @@ export const Donate = ({ onConnect }: Props) => {
                 </div>
 
                 <div className="donate__button-container">{renderButtons()}</div>
+
+                {tokenValue && distributionStaticData && tokenValue > maxDonation && (
+                    <div className="donate__subtitle--red">
+                        Your max donation is {maxDonation.toLocaleString()} {distributionStaticData?.symbol ?? ""}
+                    </div>
+                )}
 
                 {!hasAccessNFT && currentAddress ? (
                     <div className="donate__subtitle--red">

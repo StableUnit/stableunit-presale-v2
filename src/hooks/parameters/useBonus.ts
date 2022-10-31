@@ -38,7 +38,10 @@ export const useBonus = () => {
                 ? toHRNumber(allocationNFTBN, distributionStaticData.decimals)
                 : undefined,
         discountNFT: discountNFTBN ? toHRNumber(discountNFTBN.multipliedBy(100), 18) : undefined,
-        allocationUser: allocationUserBN ? toHRNumber(allocationUserBN, 18) : undefined,
+        allocationUser:
+            allocationUserBN && distributionStaticData
+                ? toHRNumber(allocationUserBN, distributionStaticData.decimals)
+                : undefined,
         discountUser: discountUserBN ? toHRNumber(discountUserBN.multipliedBy(100), 18) : undefined,
     };
 };

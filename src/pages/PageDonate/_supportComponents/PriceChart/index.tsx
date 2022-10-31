@@ -14,7 +14,7 @@ const getPrice = (x: number) => {
     // return 250000000 / x ** 1.5;
 };
 
-const DOT_STEP = 10000;
+const DOT_STEP = 5000;
 
 type DataType = {
     supply: number;
@@ -50,10 +50,11 @@ const CustomTooltip = ({ active, label }: TooltipProps) => {
 
 const CustomTooltipPrice = ({ active, payload }: any) => {
     if (active) {
+        const price = payload[0].payload.priceBefore ?? payload[0].payload.priceAfter;
         return (
             <div className="custom-tooltip">
                 <p className="donation">Total SuDAO tokens: {(+payload[0].payload.sum.toFixed(2)).toLocaleString()}</p>
-                <p className="rewards">SuDAO per USD: {payload[0].payload.price.toFixed(3).toLocaleString()}</p>
+                <p className="rewards">SuDAO per USD: {price.toFixed(3).toLocaleString()}</p>
             </div>
         );
     }
@@ -65,14 +66,28 @@ export const PriceChart = () => {
     const [selectedTab, setSelectedTab] = useState<"rewards" | "price">("rewards");
     const { totalDonation } = useTotalDonation();
     const currentSupplyPrice = getPrice(totalDonation);
-    const dataPrice = [] as { sum: number; price: number }[];
-    const data = new Array(181).fill(0).map((_, i) => {
+    const dataPrice = [] as { priceBefore: number | null; priceAfter: number | null; sum: number }[];
+    let data = new Array(361).fill(0).map((_, i) => {
         const dotSupply = i * DOT_STEP;
         const isBeforeCurrentSupply = dotSupply < totalDonation;
         const price = getPrice(dotSupply);
+
+        const newSum = (dataPrice.length ? dataPrice[dataPrice.length - 1].sum : 0) + price * DOT_STEP;
+
+        if (dotSupply === totalDonation) {
+            dataPrice.push({
+                priceBefore: 1 / price,
+                priceAfter: 1 / price,
+                sum: newSum,
+            });
+
+            return undefined;
+        }
+
         dataPrice.push({
-            price: 1 / price,
-            sum: (dataPrice.length ? dataPrice[dataPrice.length - 1].sum : 0) + price * DOT_STEP,
+            priceBefore: isBeforeCurrentSupply ? 1 / price : null,
+            priceAfter: isBeforeCurrentSupply ? null : 1 / price,
+            sum: newSum,
         });
 
         return {
@@ -82,8 +97,12 @@ export const PriceChart = () => {
         };
     });
 
+    data = data.filter((v) => v);
     data.push({ supply: totalDonation, rewardRatePast: currentSupplyPrice, rewardRateFuture: currentSupplyPrice });
+    // @ts-ignore
     data.sort((a, b) => a.supply - b.supply);
+
+    console.log(data);
 
     return (
         <div className="price-chart">
@@ -148,14 +167,7 @@ export const PriceChart = () => {
                         />
                         <Line type="monotone" dataKey="rewardRatePast" stroke="#7A7A7A" strokeWidth={2} dot={false} />
                         <Line type="monotone" dataKey="rewardRateFuture" stroke="#7A7A7A" strokeWidth={2} dot={false} />
-                        <Area
-                            type="monotone"
-                            dataKey="rewardRatePast"
-                            stroke=""
-                            strokeWidth={2}
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                        />
+                        <Area type="monotone" dataKey="rewardRatePast" stroke="" fillOpacity={1} fill="url(#colorUv)" />
                     </ComposedChart>
                 </div>
 
@@ -175,6 +187,15 @@ export const PriceChart = () => {
                             bottom: 5,
                         }}
                     >
+                        <defs>
+                            <linearGradient id="colorUv2" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="-12%" stopColor="#DBB0FF" stopOpacity={1} />
+                                <stop offset="24%" stopColor="#C2DCFF" stopOpacity={1} />
+                                <stop offset="63%" stopColor="#B4FFE0" stopOpacity={1} />
+                                <stop offset="82%" stopColor="#FEFBDA" stopOpacity={1} />
+                                <stop offset="110%" stopColor="#FECBFF" stopOpacity={1} />
+                            </linearGradient>
+                        </defs>
                         <Tooltip content={<CustomTooltipPrice />} />
                         <CartesianGrid vertical={false} stroke="#313131" />
                         <XAxis
@@ -186,7 +207,9 @@ export const PriceChart = () => {
                             dataKey="sum"
                         />
                         <YAxis type="number" label={{ value: "Price", angle: -90, position: "insideLeft" }} />
-                        <Line type="monotone" dataKey="price" stroke="#7A7A7A" strokeWidth={2} dot={false} />
+                        <Line type="monotone" dataKey="priceAfter" stroke="#7A7A7A" strokeWidth={2} dot={false} />
+                        <Line type="monotone" dataKey="priceBefore" stroke="#7A7A7A" strokeWidth={2} dot={false} />
+                        <Area type="monotone" dataKey="priceBefore" stroke="" fillOpacity={1} fill="url(#colorUv2)" />
                     </ComposedChart>
                 </div>
             </div>
