@@ -8,7 +8,7 @@ import { DistributionChart } from "./_supportComponents/DistributionChart";
 export const PageTokenomics = () => {
     return (
         <div className="profile-tokenomics">
-            <div className="profile-tokenomics__title">Tokenimics</div>
+            <div className="profile-tokenomics__title">Tokenomics</div>
             <SupplyChartInSegments />
             <SupplyChart />
             <DistributionChart />

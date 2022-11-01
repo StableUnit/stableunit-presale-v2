@@ -54,7 +54,7 @@ const CustomTooltipPrice = ({ active, payload }: any) => {
         return (
             <div className="custom-tooltip">
                 <p className="donation">Total SuDAO tokens: {(+payload[0].payload.sum.toFixed(2)).toLocaleString()}</p>
-                <p className="rewards">SuDAO per USD: {price.toFixed(3).toLocaleString()}</p>
+                <p className="rewards">USD per SuDAO: {price.toFixed(3).toLocaleString()}</p>
             </div>
         );
     }
@@ -62,8 +62,9 @@ const CustomTooltipPrice = ({ active, payload }: any) => {
     return null;
 };
 
+// TODO: rename
 export const PriceChart = () => {
-    const [selectedTab, setSelectedTab] = useState<"rewards" | "price">("rewards");
+    const [selectedTab, setSelectedTab] = useState<"rewards" | "price">("price");
     const { totalDonation } = useTotalDonation();
     const currentSupplyPrice = getPrice(totalDonation);
     const dataPrice = [] as { priceBefore: number | null; priceAfter: number | null; sum: number }[];
@@ -107,19 +108,19 @@ export const PriceChart = () => {
             <div className="price-chart__navbar">
                 <GradientHref
                     className={cn("price-chart__navbar__title", {
+                        "price-chart__navbar__title--selected": selectedTab === "price",
+                    })}
+                    onClick={() => setSelectedTab("price")}
+                >
+                    Donation amount per reward
+                </GradientHref>
+                <GradientHref
+                    className={cn("price-chart__navbar__title", {
                         "price-chart__navbar__title--selected": selectedTab === "rewards",
                     })}
                     onClick={() => setSelectedTab("rewards")}
                 >
                     Rewards per donation
-                </GradientHref>
-                <GradientHref
-                    className={cn("price-chart__navbar__title", {
-                        "price-chart__navbar__title--selected": selectedTab === "price",
-                    })}
-                    onClick={() => setSelectedTab("price")}
-                >
-                    Estimated Price
                 </GradientHref>
             </div>
             <div className="price-chart__content">
