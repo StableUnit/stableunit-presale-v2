@@ -57,7 +57,7 @@ const providerOptions = {
     coinbasewallet: {
         package: CoinbaseWalletSDK, // Required
         options: {
-            appName: "StableUnit Presale",
+            appName: "StableUnit Distribution",
             infuraId: "20518e992a3143bd86f2367198e7856a",
             rpc: getRPC(),
             chainId: [getIdByNetworkName(DEFAULT_NETWORK)],

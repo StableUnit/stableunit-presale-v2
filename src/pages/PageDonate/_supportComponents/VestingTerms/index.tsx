@@ -33,7 +33,7 @@ export const VestingTerms = () => {
     }
 
     const claimable = toHRNumber(new BigNumber(distributionStaticData.tgeUnlockRatio1e18).multipliedBy(100), 18);
-    const idoEndTimestamp =
+    const endTimestamp =
         Number(distributionStaticData.startTimestamp) + Number(distributionStaticData.fullVestingSeconds);
     const lockupMonths = Math.round(distributionStaticData.cliffSeconds / MONTH);
     const vestingMonths = Math.round(distributionStaticData.fullVestingSeconds / MONTH);
@@ -42,8 +42,8 @@ export const VestingTerms = () => {
         <InfoContainer title="Vesting terms" className="vesting-terms" classNameContent="vesting-terms__content">
             <ul className="vesting-terms__list">
                 <li>
-                    {claimable}% Claimable at the IDO (No later than the{" "}
-                    {new Date(idoEndTimestamp * 1000).toLocaleDateString()})
+                    {claimable}% Claimable at the donation campaign (No later than the{" "}
+                    {new Date(endTimestamp * 1000).toLocaleDateString()})
                 </li>
                 <li>{lockupMonths} months lock up</li>
                 <li>{vestingMonths} Months</li>

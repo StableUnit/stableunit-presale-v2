@@ -163,7 +163,7 @@ export const Donate = ({ onConnect }: Props) => {
                     <div className="donate__section__title">
                         Goal&nbsp;
                         <Tooltip id="goal">
-                            <span>Percent of IDO goal</span>
+                            <span>Percent of donation campaign goal</span>
                         </Tooltip>
                     </div>
                     <ProgressBar className="donate__progress-bar" percent={percent ?? 0} />
@@ -216,7 +216,7 @@ export const Donate = ({ onConnect }: Props) => {
 
                 {!hasAccessNFT && currentAddress ? (
                     <div className="donate__subtitle--red">
-                        You don't have access NFT for this presale.
+                        You don't have access NFT for this distribution.
                         <br />
                         Contact administrators to receive it.
                     </div>
