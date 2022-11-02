@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cn from "classnames";
 import { ComposedChart, Line, XAxis, YAxis, Area, CartesianGrid, Tooltip } from "recharts";
-import { useTotalDonation } from "hooks";
+import { useTotalDonation, useBonusRewarded } from "hooks";
 import { GradientHref } from "ui-kit";
 
 import "./styles.scss";
@@ -14,7 +14,7 @@ const getPrice = (x: number) => {
     // return 250000000 / x ** 1.5;
 };
 
-const DOT_STEP = 5000;
+const DOT_STEP = 2000;
 
 type DataType = {
     supply: number;
@@ -50,11 +50,13 @@ const CustomTooltip = ({ active, label }: TooltipProps) => {
 
 const CustomTooltipPrice = ({ active, payload }: any) => {
     if (active) {
+        const isLocked = payload[0].payload.bonusRewarded > 0;
         const price = payload[0].payload.priceBefore ?? payload[0].payload.priceAfter;
         return (
             <div className="custom-tooltip">
                 <p className="donation">Total SuDAO tokens: {(+payload[0].payload.sum.toFixed(2)).toLocaleString()}</p>
                 <p className="rewards">USD per SuDAO: {price.toFixed(3).toLocaleString()}</p>
+                {isLocked && <p className="rewards">This tokens are reserved</p>}
             </div>
         );
     }
@@ -62,12 +64,23 @@ const CustomTooltipPrice = ({ active, payload }: any) => {
     return null;
 };
 
+type DataPriceType = {
+    priceBefore: number | null;
+    priceAfter: number | null;
+    bonusRewarded: number | null;
+    sum: number;
+};
+
 export const RewardChart = () => {
     const [selectedTab, setSelectedTab] = useState<"rewards" | "price">("price");
     const { totalDonation } = useTotalDonation();
     const currentSupplyPrice = getPrice(totalDonation);
-    const dataPrice = [] as { priceBefore: number | null; priceAfter: number | null; sum: number }[];
-    let data = new Array(361).fill(0).map((_, i) => {
+    const { bonusRewarded } = useBonusRewarded();
+    const bonusRewardedStart = 1_500_000 - bonusRewarded;
+    const [isBonusRewardedDotAdded, setIsBonusRewardedDotAdded] = useState(false);
+
+    const dataPrice = [] as DataPriceType[];
+    let data = new Array(905).fill(0).map((_, i) => {
         const dotSupply = i * DOT_STEP;
         const isBeforeCurrentSupply = dotSupply < totalDonation;
         const price = getPrice(dotSupply);
@@ -78,15 +91,23 @@ export const RewardChart = () => {
             dataPrice.push({
                 priceBefore: 1 / price,
                 priceAfter: 1 / price,
+                bonusRewarded: null,
                 sum: newSum,
             });
 
             return undefined;
         }
 
+        if (newSum > bonusRewardedStart && !isBonusRewardedDotAdded) {
+            const lastData = dataPrice[dataPrice.length - 1];
+            dataPrice[dataPrice.length - 1].bonusRewarded = lastData.priceBefore ?? lastData.priceAfter;
+            setIsBonusRewardedDotAdded(true);
+        }
+
         dataPrice.push({
             priceBefore: isBeforeCurrentSupply ? 1 / price : null,
             priceAfter: isBeforeCurrentSupply ? null : 1 / price,
+            bonusRewarded: newSum >= bonusRewardedStart ? 1 / price : null,
             sum: newSum,
         });
 
@@ -208,6 +229,7 @@ export const RewardChart = () => {
                         <Line type="monotone" dataKey="priceAfter" stroke="#7A7A7A" strokeWidth={2} dot={false} />
                         <Line type="monotone" dataKey="priceBefore" stroke="#7A7A7A" strokeWidth={2} dot={false} />
                         <Area type="monotone" dataKey="priceBefore" stroke="" fillOpacity={1} fill="url(#colorUv2)" />
+                        <Area type="monotone" dataKey="bonusRewarded" stroke="" fillOpacity={1} fill="#7A7A7A" />
                     </ComposedChart>
                 </div>
             </div>

@@ -130,6 +130,12 @@ export const DistributorFactory = {
         }
         return new BigNumber(0);
     },
+    getBonusRewarded: async () => {
+        if (contracts.DistributorContract) {
+            return new BigNumber(await contracts.DistributorContract.methods.bonusStats().call());
+        }
+        return undefined;
+    },
 };
 
 export const CommonFactory = {
