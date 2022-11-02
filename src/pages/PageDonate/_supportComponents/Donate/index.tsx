@@ -32,6 +32,7 @@ export const Donate = ({ onConnect }: Props) => {
 
     const startDate = new Date((distributionStaticData?.startTimestamp ?? 0) * 1000).toLocaleDateString();
     const endDate = new Date((distributionStaticData?.deadlineTimestamp ?? 0) * 1000).toLocaleDateString();
+    const isDistributionOver = distributionStaticData && distributionStaticData.deadlineTimestamp * 1000 <= Date.now();
 
     const goal = new BigNumber(distributionStaticData?.donationGoalMin ?? 0);
     const percent = distributionStaticData ? totalDonationBN?.multipliedBy(100).div(goal).toNumber() : 0;
@@ -127,6 +128,7 @@ export const Donate = ({ onConnect }: Props) => {
                 <ButtonGradient
                     loading={isDonateLoading}
                     disabled={
+                        isDistributionOver ||
                         !distributionStaticData ||
                         !isEnoughAllowance ||
                         !tokenValue ||
@@ -207,6 +209,8 @@ export const Donate = ({ onConnect }: Props) => {
                 </div>
 
                 <div className="donate__button-container">{renderButtons()}</div>
+
+                {isDistributionOver && <div className="donate__subtitle--red">Distribution is over</div>}
 
                 {tokenValue && distributionStaticData && tokenValue > maxDonation && (
                     <div className="donate__subtitle--red">
