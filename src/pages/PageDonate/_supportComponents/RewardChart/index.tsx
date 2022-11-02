@@ -62,8 +62,7 @@ const CustomTooltipPrice = ({ active, payload }: any) => {
     return null;
 };
 
-// TODO: rename
-export const PriceChart = () => {
+export const RewardChart = () => {
     const [selectedTab, setSelectedTab] = useState<"rewards" | "price">("price");
     const { totalDonation } = useTotalDonation();
     const currentSupplyPrice = getPrice(totalDonation);
@@ -104,29 +103,29 @@ export const PriceChart = () => {
     data.sort((a, b) => a.supply - b.supply);
 
     return (
-        <div className="price-chart">
-            <div className="price-chart__navbar">
+        <div className="reward-chart">
+            <div className="reward-chart__navbar">
                 <GradientHref
-                    className={cn("price-chart__navbar__title", {
-                        "price-chart__navbar__title--selected": selectedTab === "price",
+                    className={cn("reward-chart__navbar__title", {
+                        "reward-chart__navbar__title--selected": selectedTab === "price",
                     })}
                     onClick={() => setSelectedTab("price")}
                 >
                     Donation amount per reward
                 </GradientHref>
                 <GradientHref
-                    className={cn("price-chart__navbar__title", {
-                        "price-chart__navbar__title--selected": selectedTab === "rewards",
+                    className={cn("reward-chart__navbar__title", {
+                        "reward-chart__navbar__title--selected": selectedTab === "rewards",
                     })}
                     onClick={() => setSelectedTab("rewards")}
                 >
                     Rewards per donation
                 </GradientHref>
             </div>
-            <div className="price-chart__content">
+            <div className="reward-chart__content">
                 <div
-                    className={cn("price-chart__content__chart", {
-                        "price-chart__content__chart--visible": selectedTab === "rewards",
+                    className={cn("reward-chart__content__chart", {
+                        "reward-chart__content__chart--visible": selectedTab === "rewards",
                     })}
                 >
                     <ComposedChart
@@ -171,8 +170,8 @@ export const PriceChart = () => {
                 </div>
 
                 <div
-                    className={cn("price-chart__content__chart", {
-                        "price-chart__content__chart--visible": selectedTab === "price",
+                    className={cn("reward-chart__content__chart", {
+                        "reward-chart__content__chart--visible": selectedTab === "price",
                     })}
                 >
                     <ComposedChart

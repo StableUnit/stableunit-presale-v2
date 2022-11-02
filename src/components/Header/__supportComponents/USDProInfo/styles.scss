@@ -13,6 +13,31 @@
     font-size: 20px;
     line-height: 26px;
 
+    &:last-child {
+      padding-left: 20px;
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+
+      cursor: pointer;
+    }
+
+    &__description {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+      font-family: "Monaco", monospace;
+
+      @media (max-width: $mobile-width) {
+        font-size: 16px;
+      }
+    }
+
     &__details {
       padding-left: 9px;
       color: $green;

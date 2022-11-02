@@ -4,7 +4,7 @@ import tokenList from "submodule-contract-artifacts/stableunit.tokenlist.json";
 import { UsdProIcon, DAIIcon, UsdtIcon } from "ui-kit/images/currency";
 import { TokenMetadata } from "./types";
 
-export type SupportedTokensType = "DAI" | "USDPro" | "tUSDT" | "USDT";
+export type SupportedTokensType = "DAI" | "USDPro" | "tUSDT" | "USDT" | "veSuDAO";
 
 export const BORROW_CURRENCY = "USDPro" as SupportedTokensType;
 export const BORROW_CURRENCY_NAME = "USD Pro" as SupportedTokensType;
