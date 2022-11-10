@@ -6,7 +6,9 @@ import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import cn from "classnames";
 
 import { Actions } from "reducer";
+import { useUpdateListener } from "hooks";
 import { DispatchContext, StateContext } from "reducer/constants";
+import { BugIcon } from "ui-kit/images/icons";
 import { CommonFactory, DistributorFactory, initAllContracts, setUtilsCurrentAddress, setUtilsWeb3 } from "utils/api";
 import {
     DEFAULT_NETWORK,
@@ -82,6 +84,7 @@ export const App = React.memo(() => {
     const [web3, setWeb3] = useState(new Web3(Web3.givenProvider));
     const { chainId } = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
+    useUpdateListener();
 
     const onDisconnect = async () => {
         // @ts-ignore
@@ -143,6 +146,13 @@ export const App = React.memo(() => {
         await updateDistributionData();
     };
 
+    const onBugClick = () => {
+        window.open(
+            "https://docs.google.com/forms/d/e/1FAIpQLSf1Tqq8TwjOtgK8_tFndM3QDJW2XTy8oCs6zoPLUWey1nBvwA/viewform",
+            "_blank"
+        );
+    };
+
     useEffect(() => {
         initAllContracts(new Web3(Web3.givenProvider));
         onConnect();
@@ -157,6 +167,7 @@ export const App = React.memo(() => {
                 <div className={cn("App__scroller", { "App__scroller--disabled": isNotSupportedChain })}>
                     <Routes onConnect={onConnect} />
                 </div>
+                <BugIcon className="bug-icon" onClick={onBugClick} />
             </div>
             <NetworkModal />
         </div>

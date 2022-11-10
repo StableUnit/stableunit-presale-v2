@@ -8,3 +8,4 @@ export { useEnoughAllowance } from "./parameters/useEnoughAllowance";
 export { useAccessNFTs } from "./parameters/useAccessNFTs";
 export { useMaxDonation } from "./parameters/useMaxDonation";
 export { useBonusRewarded } from "./parameters/useBonusRewarded";
+export { useUpdateListener } from "./useUpdateListener";
