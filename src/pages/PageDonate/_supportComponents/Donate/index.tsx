@@ -45,6 +45,7 @@ export const Donate = ({ onConnect }: Props) => {
             startDonateLoader();
             await DistributorFactory.participate(fromHRNumber(usdBalance, 18));
             update();
+            setUSDBalance(0);
             addSuccessNotification("Donate finished successfully");
             stopDonateLoader();
         } catch (e) {
@@ -80,7 +81,7 @@ export const Donate = ({ onConnect }: Props) => {
                 </ButtonGradient>
                 <ButtonGradient
                     loading={isDonateLoading}
-                    disabled={!isEnoughAllowance}
+                    disabled={!isEnoughAllowance || !usdBalance}
                     className="donate__button"
                     onClick={handleContribute}
                 >
