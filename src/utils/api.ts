@@ -3,9 +3,9 @@ import BigNumber from "bignumber.js";
 import { Contract } from "web3-eth-contract";
 
 import CONTRACT_ERC20 from "contracts/ERC20.json";
-import Distributor from "contracts/TokenDistributorV4.json";
+import Distributor from "contracts/SuDAOUpgrader.json";
 import SuDAO from "contracts/SuDAO.json";
-import VeERC20 from "contracts/VeERC20.json";
+import VeERC20 from "contracts/VeERC20v2.json";
 import { SupportedTokensType } from "./currency";
 
 type ContractsType = "DistributorContract" | "SuDAOContract" | "VeERC20Contract";

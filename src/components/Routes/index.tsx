@@ -10,13 +10,13 @@ interface Props {
 export const Routes = ({ onConnect }: Props) => (
     <Switch>
         {/* @ts-ignore */}
-        <Route exact path="/donate">
+        <Route exact path="/upgrade">
             <PageDonate onConnect={onConnect} />
         </Route>
 
         {/* @ts-ignore */}
         <Route exact path="/">
-            <Redirect to="/donate" />
+            <Redirect to="/upgrade" />
         </Route>
     </Switch>
 );

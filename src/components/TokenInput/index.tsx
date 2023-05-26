@@ -41,7 +41,7 @@ export const TokenInput = ({
     value,
 }: TokenInputProps) => {
     const { chainId } = useContext(StateContext);
-    const { balance } = useBalance(tokenName, showBalance);
+    const { balance } = useBalance(tokenName, true);
     const [userDefinedValue, setUserDefinedValue] = useState<string>();
 
     useEffect(() => {

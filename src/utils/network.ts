@@ -81,8 +81,8 @@ export const getIdByNetworkName: (name: NetworkType) => number = (name) => {
     }
 };
 
-export const supportedNetworks = [NETWORK.polygon];
-export const DEFAULT_NETWORK = NETWORK.polygon;
+export const supportedNetworks = [NETWORK.goerli];
+export const DEFAULT_NETWORK = NETWORK.goerli;
 export const DEFAULT_NETWORK_ID = getIdByNetworkName(DEFAULT_NETWORK);
 
 export const networkInfo = {

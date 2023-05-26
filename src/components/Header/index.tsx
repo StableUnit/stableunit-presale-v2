@@ -22,15 +22,6 @@ interface HeaderProps {
     onDisconnect: () => void;
 }
 
-const LINKS: LinkType[] = [
-    {
-        href: "/donate",
-        text: "Donate",
-        isDesktop: true,
-        isMobile: true,
-    },
-];
-
 export const Header = ({ onConnect, onDisconnect }: HeaderProps) => {
     const { isMobile } = useDevice();
     const { currentAddress, chainId, isNetworkModalVisible } = useContext(StateContext);
@@ -38,7 +29,6 @@ export const Header = ({ onConnect, onDisconnect }: HeaderProps) => {
     const [oldChainId, setOldChainId] = useState<number>();
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [isMenuModalVisible, setIsMenuModalVisible] = useState(false);
-    const location = useLocation();
 
     const openDropdown = () => {
         setIsDropdownVisible(true);
@@ -71,30 +61,7 @@ export const Header = ({ onConnect, onDisconnect }: HeaderProps) => {
             <USDProInfo />
 
             <div className="header__section">
-                {!isMobile && (
-                    <>
-                        <div className="header__links">
-                            {LINKS.filter((v) => v.isDesktop).map(({ href, text }) => {
-                                if (!chainId) {
-                                    return null;
-                                }
-                                const isSelected = location.pathname.includes(href);
-                                return (
-                                    <GradientHref
-                                        id={`links-${text.toLowerCase()}`}
-                                        className={cn("header__link", { "header__link--selected": isSelected })}
-                                        key={text}
-                                        href={href}
-                                        disabled={isSelected}
-                                    >
-                                        {text}
-                                    </GradientHref>
-                                );
-                            })}
-                        </div>
-                        <NetworkChanger onClick={openNetworkModal} />
-                    </>
-                )}
+                {!isMobile && <NetworkChanger onClick={openNetworkModal} />}
 
                 {currentAddress ? (
                     <div>
@@ -122,7 +89,7 @@ export const Header = ({ onConnect, onDisconnect }: HeaderProps) => {
             <MenuModal
                 visible={isMenuModalVisible}
                 onClose={closeMenuModal}
-                links={LINKS.filter((v) => v.isMobile)}
+                links={[]}
                 openNetworkModal={openNetworkModal}
                 onDisconnect={onDisconnect}
                 onConnect={onConnect}

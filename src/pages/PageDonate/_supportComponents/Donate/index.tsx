@@ -18,16 +18,13 @@ interface Props {
 export const Donate = ({ onConnect }: Props) => {
     const { currentAddress } = useContext(StateContext);
     const { update } = useGlobalUpdate();
-    const [tokenValue, setTokenValue] = useState<number>();
     const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(SuDAO.address);
     const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
     const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
     const [rewards, setRewards] = useState(0);
     const [usdBalance, setUSDBalance] = useState(0);
 
-    const handleTokenValueChange = (newTokenValue?: number) => {
-        setTokenValue(newTokenValue);
-    };
+    const handleTokenValueChange = () => {};
 
     const handleApprove = async () => {
         try {
@@ -35,6 +32,7 @@ export const Donate = ({ onConnect }: Props) => {
             await CommonFactory.approve(SuDAO.address);
             setIsEnoughAllowance(true);
             addSuccessNotification("Approve finished successfully");
+            update();
             stopApproveLoader();
         } catch (e) {
             addErrorNotification("Approve error", e.message);
@@ -43,10 +41,9 @@ export const Donate = ({ onConnect }: Props) => {
     };
 
     const handleContribute = async () => {
-        if (!tokenValue) return;
         try {
             startDonateLoader();
-            await DistributorFactory.participate(fromHRNumber(tokenValue, 18));
+            await DistributorFactory.participate(fromHRNumber(usdBalance, 18));
             update();
             addSuccessNotification("Donate finished successfully");
             stopDonateLoader();
@@ -57,10 +54,10 @@ export const Donate = ({ onConnect }: Props) => {
     };
 
     useEffect(() => {
-        if (tokenValue !== undefined) {
-            setRewards((tokenValue * 100 * 16) / 21);
+        if (usdBalance !== undefined) {
+            setRewards((usdBalance * 100 * 16) / 21);
         }
-    }, [tokenValue]);
+    }, [usdBalance]);
 
     const renderButtons = () => {
         if (!currentAddress) {
@@ -83,11 +80,11 @@ export const Donate = ({ onConnect }: Props) => {
                 </ButtonGradient>
                 <ButtonGradient
                     loading={isDonateLoading}
-                    disabled={!isEnoughAllowance || !tokenValue || tokenValue > usdBalance}
+                    disabled={!isEnoughAllowance}
                     className="donate__button"
                     onClick={handleContribute}
                 >
-                    {isDonateLoading ? "Loading..." : "Contribute"}
+                    {isDonateLoading ? "Loading..." : "Upgrade"}
                 </ButtonGradient>
             </>
         );
@@ -100,9 +97,11 @@ export const Donate = ({ onConnect }: Props) => {
                     onBalanceChange={(balance) => setUSDBalance(balance)}
                     className="donate__token-input"
                     isTokenFixed
+                    showBalance={false}
                     tokenName="SuDAO"
                     onValueChange={handleTokenValueChange}
-                    value={tokenValue}
+                    value={usdBalance}
+                    disabled
                 />
 
                 <div className="donate__section" style={{ height: 42 }}>
