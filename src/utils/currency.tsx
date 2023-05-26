@@ -4,7 +4,7 @@ import tokenList from "submodule-contract-artifacts/stableunit.tokenlist.json";
 import { UsdProIcon, DAIIcon, UsdtIcon } from "ui-kit/images/currency";
 import { TokenMetadata } from "./types";
 
-export type SupportedTokensType = "DAI" | "USDPro" | "tUSDT" | "USDT" | "veSuDAO";
+export type SupportedTokensType = "SuDAO" | "veSuDAO" | "veSuDAOv2";
 
 export const BORROW_CURRENCY = "USDPro" as SupportedTokensType;
 export const BORROW_CURRENCY_NAME = "USD Pro" as SupportedTokensType;
@@ -32,12 +32,9 @@ export const getDecimals = (name: SupportedTokensType, chainId: number | undefin
 
 export const getTokenIcon = (tokenName: SupportedTokensType) => {
     switch (tokenName) {
-        case "DAI":
-            return <DAIIcon />;
-        case "USDT":
-        case "tUSDT":
-            return <UsdtIcon />;
-        case "USDPro":
+        case "veSuDAO":
+        case "veSuDAOv2":
+        case "SuDAO":
             return <UsdProIcon />;
         default:
             return null;

@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import BigNumber from "bignumber.js";
-import debounce from "lodash.debounce";
+import React, { useContext, useEffect, useState } from "react";
 
-import { ButtonGradient, GradientBorder, LoaderLine, ProgressBar, Tooltip } from "ui-kit";
-import { useEnoughAllowance, useGlobalUpdate, useLoader, useTotalDonation, useAccessNFTs, useMaxDonation } from "hooks";
+import { ButtonGradient, GradientBorder } from "ui-kit";
+import { useEnoughAllowance, useGlobalUpdate, useLoader } from "hooks";
 import { TokenInput } from "components/TokenInput";
+import SuDAO from "contracts/SuDAO.json";
 import { StateContext } from "reducer/constants";
 import { CommonFactory, DistributorFactory } from "utils/api";
 import { addErrorNotification, addSuccessNotification } from "utils/notification";
-import { fromHRNumber, toHRNumber } from "utils/bigNumber";
+import { fromHRNumber } from "utils/bigNumber";
 
 import "./styles.scss";
 
@@ -17,30 +16,14 @@ interface Props {
 }
 
 export const Donate = ({ onConnect }: Props) => {
-    const { distributionStaticData, currentAddress } = useContext(StateContext);
+    const { currentAddress } = useContext(StateContext);
     const { update } = useGlobalUpdate();
-    const { totalDonationBN } = useTotalDonation();
-    const { maxDonation } = useMaxDonation();
     const [tokenValue, setTokenValue] = useState<number>();
-    const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(distributionStaticData?.donationToken);
+    const { isEnoughAllowance, setIsEnoughAllowance } = useEnoughAllowance(SuDAO.address);
     const { isLoading: isApproveLoading, start: startApproveLoader, stop: stopApproveLoader } = useLoader();
     const { isLoading: isDonateLoading, start: startDonateLoader, stop: stopDonateLoader } = useLoader();
-    const { isLoading: isRewardsLoading, start: startRewardsLoader, stop: stopRewardsLoader } = useLoader();
     const [rewards, setRewards] = useState(0);
     const [usdBalance, setUSDBalance] = useState(0);
-    const accessNFTs = useAccessNFTs();
-
-    const startDate = new Date((distributionStaticData?.startTimestamp ?? 0) * 1000).toLocaleDateString();
-    const endDate = new Date((distributionStaticData?.deadlineTimestamp ?? 0) * 1000).toLocaleDateString();
-    const isDistributionOver = distributionStaticData && distributionStaticData.deadlineTimestamp * 1000 <= Date.now();
-
-    const goal = new BigNumber(distributionStaticData?.donationGoalMin ?? 0);
-    const percent = distributionStaticData ? totalDonationBN?.multipliedBy(100).div(goal).toNumber() : 0;
-
-    const minimumDonation = toHRNumber(
-        new BigNumber(distributionStaticData?.minimumDonation ?? 0),
-        distributionStaticData?.decimals ?? 18
-    );
 
     const handleTokenValueChange = (newTokenValue?: number) => {
         setTokenValue(newTokenValue);
@@ -49,7 +32,7 @@ export const Donate = ({ onConnect }: Props) => {
     const handleApprove = async () => {
         try {
             startApproveLoader();
-            await CommonFactory.approve(distributionStaticData?.donationToken);
+            await CommonFactory.approve(SuDAO.address);
             setIsEnoughAllowance(true);
             addSuccessNotification("Approve finished successfully");
             stopApproveLoader();
@@ -60,13 +43,10 @@ export const Donate = ({ onConnect }: Props) => {
     };
 
     const handleContribute = async () => {
-        if (!tokenValue || !accessNFTs?.length || !distributionStaticData) {
-            return;
-        }
+        if (!tokenValue) return;
         try {
-            const amount = fromHRNumber(tokenValue, distributionStaticData.decimals);
             startDonateLoader();
-            await DistributorFactory.participate(amount, accessNFTs[0]);
+            await DistributorFactory.participate(fromHRNumber(tokenValue, 18));
             update();
             addSuccessNotification("Donate finished successfully");
             stopDonateLoader();
@@ -76,29 +56,11 @@ export const Donate = ({ onConnect }: Props) => {
         }
     };
 
-    const handleContact = () => {
-        window.open("https://t.me/stableunit", "_blank");
-    };
-
-    const updateRewards = useMemo(
-        () =>
-            debounce((value: number) => {
-                startRewardsLoader();
-                DistributorFactory.getRewardAmount(fromHRNumber(value, 18)).then((newRewards) => {
-                    setRewards(newRewards ? toHRNumber(newRewards, 18) : 0);
-                    stopRewardsLoader();
-                });
-            }, 500),
-        []
-    );
-
     useEffect(() => {
         if (tokenValue !== undefined) {
-            updateRewards(tokenValue);
+            setRewards((tokenValue * 100 * 16) / 21);
         }
-    }, [tokenValue, updateRewards]);
-
-    const hasAccessNFT = accessNFTs && accessNFTs.length > 0;
+    }, [tokenValue]);
 
     const renderButtons = () => {
         if (!currentAddress) {
@@ -108,13 +70,7 @@ export const Donate = ({ onConnect }: Props) => {
                 </ButtonGradient>
             );
         }
-        if (!hasAccessNFT) {
-            return (
-                <ButtonGradient className="donate__button" onClick={handleContact}>
-                    Contact administrators
-                </ButtonGradient>
-            );
-        }
+
         return (
             <>
                 <ButtonGradient
@@ -127,15 +83,7 @@ export const Donate = ({ onConnect }: Props) => {
                 </ButtonGradient>
                 <ButtonGradient
                     loading={isDonateLoading}
-                    disabled={
-                        isDistributionOver ||
-                        !distributionStaticData ||
-                        !isEnoughAllowance ||
-                        !tokenValue ||
-                        tokenValue < minimumDonation ||
-                        tokenValue > maxDonation ||
-                        tokenValue > usdBalance
-                    }
+                    disabled={!isEnoughAllowance || !tokenValue || tokenValue > usdBalance}
                     className="donate__button"
                     onClick={handleContribute}
                 >
@@ -148,83 +96,23 @@ export const Donate = ({ onConnect }: Props) => {
     return (
         <GradientBorder borderRadius={24} className="donate-container">
             <div className="donate">
-                <div className="donate__section">
-                    <div className="donate__section__title">Start</div>
-                    <div className="donate__section__description">
-                        {distributionStaticData ? startDate : <LoaderLine height={26} width={105} />}
-                    </div>
-                </div>
-                <div className="donate__section">
-                    <div className="donate__section__title">End</div>
-                    <div className="donate__section__description">
-                        {distributionStaticData ? endDate : <LoaderLine height={26} width={105} />}
-                    </div>
-                </div>
-
-                <div className="donate__section">
-                    <div className="donate__section__title">
-                        Goal&nbsp;
-                        <Tooltip id="goal">
-                            <span>Percent of donation campaign goal</span>
-                        </Tooltip>
-                    </div>
-                    <ProgressBar className="donate__progress-bar" percent={percent ?? 0} />
-                </div>
-
-                {distributionStaticData?.symbol ? (
-                    <TokenInput
-                        onBalanceChange={(balance) => setUSDBalance(balance)}
-                        maxValue={maxDonation}
-                        disabled={!hasAccessNFT}
-                        className="donate__token-input"
-                        isTokenFixed
-                        tokenName={distributionStaticData.symbol}
-                        onValueChange={handleTokenValueChange}
-                        value={tokenValue}
-                    />
-                ) : (
-                    <LoaderLine height={93} width={434} className="donate__token-input" />
-                )}
-
-                <div className="donate__subtitle">
-                    <div>
-                        {distributionStaticData ? (
-                            `${minimumDonation} ${distributionStaticData.symbol}`
-                        ) : (
-                            <LoaderLine width={100} />
-                        )}
-                    </div>
-                    <div>&nbsp; minimum donation</div>
-                </div>
+                <TokenInput
+                    onBalanceChange={(balance) => setUSDBalance(balance)}
+                    className="donate__token-input"
+                    isTokenFixed
+                    tokenName="SuDAO"
+                    onValueChange={handleTokenValueChange}
+                    value={tokenValue}
+                />
 
                 <div className="donate__section" style={{ height: 42 }}>
                     <div className="donate__section__title">Total VeSuDAO reward</div>
-                    {isRewardsLoading ? (
-                        <LoaderLine height={20} width={100} borderRadius={8} />
-                    ) : (
-                        <div className="donate__section__description--large">
-                            {rewards.toLocaleString([], { maximumFractionDigits: 6 })}
-                        </div>
-                    )}
+                    <div className="donate__section__description--large">
+                        {rewards.toLocaleString([], { maximumFractionDigits: 2 })}
+                    </div>
                 </div>
 
                 <div className="donate__button-container">{renderButtons()}</div>
-
-                {isDistributionOver && <div className="donate__subtitle--red">Distribution is over</div>}
-
-                {tokenValue && distributionStaticData && tokenValue > maxDonation && (
-                    <div className="donate__subtitle--red">
-                        Your max donation is {maxDonation.toLocaleString()} {distributionStaticData?.symbol ?? ""}
-                    </div>
-                )}
-
-                {!hasAccessNFT && currentAddress ? (
-                    <div className="donate__subtitle--red">
-                        You don't have access NFT for this distribution.
-                        <br />
-                        Contact administrators to receive it.
-                    </div>
-                ) : null}
             </div>
         </GradientBorder>
     );

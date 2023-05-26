@@ -23,8 +23,6 @@ export const NETWORK: Record<NetworkType, NetworkType> = {
     unsupported: "unsupported",
 };
 
-export const supportedNetworks = [NETWORK.goerli];
-
 export const networkNames = {
     [NETWORK.eth]: "Ethereum",
     [NETWORK.polygon]: "Polygon",
@@ -83,7 +81,8 @@ export const getIdByNetworkName: (name: NetworkType) => number = (name) => {
     }
 };
 
-export const DEFAULT_NETWORK = NETWORK.goerli;
+export const supportedNetworks = [NETWORK.polygon];
+export const DEFAULT_NETWORK = NETWORK.polygon;
 export const DEFAULT_NETWORK_ID = getIdByNetworkName(DEFAULT_NETWORK);
 
 export const networkInfo = {

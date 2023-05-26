@@ -1,35 +1,27 @@
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
-import { ethers } from "ethers";
 import { Contract } from "web3-eth-contract";
 
 import CONTRACT_ERC20 from "contracts/ERC20.json";
-import Bonus from "contracts/Bonus.json";
 import Distributor from "contracts/TokenDistributorV4.json";
 import SuDAO from "contracts/SuDAO.json";
 import VeERC20 from "contracts/VeERC20.json";
-import { DistributionDataType } from "./types";
 import { SupportedTokensType } from "./currency";
 
-type ContractsType = "BonusContract" | "DistributorContract" | "SuDAOContract" | "VeERC20Contract";
+type ContractsType = "DistributorContract" | "SuDAOContract" | "VeERC20Contract";
 
 export const contracts: Record<ContractsType, Contract | undefined> = {
-    BonusContract: undefined,
     DistributorContract: undefined,
     SuDAOContract: undefined,
     VeERC20Contract: undefined,
 };
 
 export const initAllContracts = (web3: Web3) => {
-    setBonusContract(new web3.eth.Contract(Bonus.abi as any, Bonus.address));
     setDistributorContract(new web3.eth.Contract(Distributor.abi as any, Distributor.address));
     setSuDAOContract(new web3.eth.Contract(SuDAO.abi as any, SuDAO.address));
     setVeERC20Contract(new web3.eth.Contract(VeERC20.abi as any, VeERC20.address));
 };
 
-export const setBonusContract = (newContract: Contract) => {
-    contracts.BonusContract = newContract;
-};
 export const setDistributorContract = (newContract: Contract) => {
     contracts.DistributorContract = newContract;
 };
@@ -55,86 +47,13 @@ const tryToRunLocal = async (command: any, options: Record<string, any> = {}) =>
     return command;
 };
 
-export const BonusFactory = {
-    getAllocation: async (address: string) => {
-        if (address && contracts.BonusContract) {
-            return new BigNumber(await contracts.BonusContract.methods.getAllocation(address).call());
-        }
-        return undefined;
-    },
-    getDiscount: async (address: string) => {
-        if (address && contracts.BonusContract) {
-            return new BigNumber(await contracts.BonusContract.methods.getBonus(address).call());
-        }
-        return undefined;
-    },
-    getNftAllocation: async (address: string) => {
-        if (address && contracts.BonusContract) {
-            return new BigNumber(await contracts.BonusContract.methods.getNftAllocation(address).call());
-        }
-        return undefined;
-    },
-    getNftDiscount: async (address: string) => {
-        if (address && contracts.BonusContract) {
-            return new BigNumber(await contracts.BonusContract.methods.getNftBonus(address).call());
-        }
-        return undefined;
-    },
-};
-
 export const DistributorFactory = {
-    getDistributionStaticData: async () => {
-        if (contracts.DistributorContract) {
-            return (await contracts.DistributorContract.methods
-                .getDistributorStaticData()
-                .call()) as DistributionDataType;
-        }
-        return undefined;
-    },
-    getTotalDonation: async () => {
-        if (contracts.DistributorContract) {
-            return new BigNumber(await contracts.DistributorContract.methods.totalDonations().call());
-        }
-        return undefined;
-    },
-    participate: async (donationAmount: BigNumber, accessNft: string) => {
+    participate: async (donationAmount: BigNumber) => {
         if (contracts.DistributorContract && currentAddress) {
             return contracts.DistributorContract.methods
-                .participate(donationAmount.toString(10), accessNft)
+                .participate(donationAmount.toString(10))
                 .send({ from: currentAddress });
         }
-    },
-    getRewardAmount: async (donationAmount: BigNumber) => {
-        if (contracts.DistributorContract) {
-            return new BigNumber(
-                await contracts.DistributorContract.methods
-                    .getBondingCurveRewardAmountFromDonationUSD(donationAmount.toString(10))
-                    .call()
-            );
-        }
-        return undefined;
-    },
-    getAccessNFTs: async () => {
-        if (contracts.DistributorContract) {
-            return contracts.DistributorContract.methods.getAccessNftsForUser(currentAddress).call();
-        }
-        return undefined;
-    },
-    getMaximumDonationAmount: async (accessNfts?: string[]) => {
-        if (contracts.DistributorContract && accessNfts?.length) {
-            return new BigNumber(
-                await contracts.DistributorContract.methods
-                    .getMaximumDonationAmount(currentAddress, accessNfts[0])
-                    .call()
-            );
-        }
-        return new BigNumber(0);
-    },
-    getBonusRewarded: async () => {
-        if (contracts.DistributorContract) {
-            return new BigNumber(await contracts.DistributorContract.methods.bonusStats().call());
-        }
-        return undefined;
     },
 };
 
@@ -190,8 +109,3 @@ export const CommonFactory = {
         return (await tokenContract.methods.symbol().call()) as SupportedTokensType;
     },
 };
-
-export const isAddress = (address?: string) => address?.startsWith("0x") || address?.includes(".eth");
-
-export const ensToAddress = async (ens?: string) =>
-    ens?.includes(".eth") ? ethers.providers.getDefaultProvider().resolveName(ens) : ens;

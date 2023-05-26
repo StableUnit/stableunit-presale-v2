@@ -43,6 +43,7 @@ export const MenuModal = ({
     };
 
     return (
+        /* @ts-ignore */
         <Modal isOpen={visible} onRequestClose={onClose} className="menu-modal" overlayClassName="menu-modal-overlay">
             <div className="menu-modal__header">
                 <USDProInfo />

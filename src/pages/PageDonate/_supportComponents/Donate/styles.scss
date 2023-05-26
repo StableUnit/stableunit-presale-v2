@@ -18,16 +18,15 @@
         justify-content: space-between;
         align-items: center;
         color: white;
-        padding-bottom: 12px;
+        padding: 16px;
 
         &__title {
             display: flex;
             align-items: center;
 
             font-weight: 700;
-            font-size: 12px;
-            line-height: 16px;
-            padding-right: 12px;
+            font-size: 16px;
+            padding-right: 8px;
         }
 
         &__description {
@@ -37,8 +36,7 @@
 
             &--large {
                 font-weight: 500;
-                font-size: 32px;
-                line-height: 42px;
+                font-size: 27px;
                 color: $gray1;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -78,7 +76,7 @@
     }
 
     &__token-input {
-        margin: 35px 0 4px 0;
+        margin: 35px 0 12px 0;
     }
 
     &__button {
@@ -86,7 +84,7 @@
 
         &-container {
             width: calc(100% - 16px);
-            margin: 15px 8px 0 8px;
+            margin: 12px 8px 0 8px;
 
             display: flex;
             align-items: center;

@@ -38,6 +38,7 @@ export const NetworkModal = () => {
     };
 
     return (
+        /* @ts-ignore */
         <Modal
             isOpen={isNetworkModalVisible}
             onRequestClose={handleClose}

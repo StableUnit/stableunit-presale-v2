@@ -114,18 +114,6 @@ export const App = React.memo(() => {
         });
     };
 
-    const updateDistributionData = async () => {
-        const data = await DistributorFactory.getDistributionStaticData();
-        if (data) {
-            const decimals = (await CommonFactory.decimals(data.donationToken_)) ?? 18;
-            const symbol = await CommonFactory.symbol(data.donationToken_);
-            dispatch({
-                type: Actions.SetDistributionStaticData,
-                payload: { ...mapDistributionData(data), decimals, symbol },
-            });
-        }
-    };
-
     const onConnect = async () => {
         const provider = await web3Modal.connect();
         await subscribeProvider(provider);
@@ -142,8 +130,6 @@ export const App = React.memo(() => {
 
         const newChainId = await newWeb3.eth.getChainId();
         dispatch({ type: Actions.SetChainId, payload: newChainId });
-
-        await updateDistributionData();
     };
 
     const onBugClick = () => {

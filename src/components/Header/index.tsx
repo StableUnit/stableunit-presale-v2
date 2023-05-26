@@ -29,12 +29,6 @@ const LINKS: LinkType[] = [
         isDesktop: true,
         isMobile: true,
     },
-    {
-        href: "/tokenomics",
-        text: "Tokenomics",
-        isDesktop: true,
-        isMobile: true,
-    },
 ];
 
 export const Header = ({ onConnect, onDisconnect }: HeaderProps) => {

@@ -11,7 +11,6 @@ export enum Actions {
     SetUpdateFlag = "SET_UPDATE_FLAG",
     AddToUpdatePool = "ADD_TO_UPDATE_POOL",
     RemoveFromUpdatePool = "REMOVE_FROM_UPDATE_POOL",
-    SetDistributionStaticData = "SET_DISTRIBUTION_STATIC_DATA",
 }
 
 export type ActionType =
@@ -40,10 +39,6 @@ export type ActionType =
           payload: string;
       }
     | {
-          type: Actions.SetDistributionStaticData;
-          payload: DistributionDataTypeExpanded | undefined;
-      }
-    | {
           type: Actions.SetChainId;
           payload: number | undefined;
       };
@@ -55,7 +50,6 @@ export interface ReducerState {
     web3?: Web3;
     updateFlag?: boolean;
     updatePool?: string[];
-    distributionStaticData?: DistributionDataTypeExpanded;
 }
 
 const reducer: (state: ReducerState, action: ActionType) => ReducerState = (state, action) => {
@@ -101,11 +95,6 @@ const reducer: (state: ReducerState, action: ActionType) => ReducerState = (stat
                 web3: action.payload,
             };
         }
-        case Actions.SetDistributionStaticData:
-            return {
-                ...state,
-                distributionStaticData: action.payload,
-            };
         default:
             return state;
     }
