@@ -14,6 +14,7 @@ import "./styles.scss";
 interface TokenInputProps {
     id?: string;
     tokenName: SupportedTokensType;
+    tokenNameText?: string;
     className?: string;
     onTokenChange?: (newTokenName: SupportedTokensType) => void;
     onValueChange: (v?: number) => void;
@@ -29,6 +30,7 @@ interface TokenInputProps {
 export const TokenInput = ({
     id,
     tokenName,
+    tokenNameText,
     onTokenChange = () => null,
     onValueChange,
     className,
@@ -89,7 +91,7 @@ export const TokenInput = ({
                 {isTokenFixed ? (
                     <div className="token-input__data__fixed-token">
                         <div className="token-input__data__fixed-token__icon">{getTokenIcon(tokenName)}</div>
-                        <div className="token-input__data__fixed-token__label">{tokenName}</div>
+                        <div className="token-input__data__fixed-token__label">{tokenNameText || tokenName}</div>
                     </div>
                 ) : (
                     <TokenPicker

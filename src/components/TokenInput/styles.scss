@@ -61,6 +61,10 @@
             line-height: 18px;
             color: white !important;
 
+            &__label {
+                white-space: nowrap;
+            }
+
             &__icon {
                 height: 28px;
                 margin-right: 8px;

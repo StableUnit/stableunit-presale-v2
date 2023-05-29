@@ -100,6 +100,7 @@ export const Donate = ({ onConnect }: Props) => {
                     isTokenFixed
                     showBalance={false}
                     tokenName="SuDAO"
+                    tokenNameText="SuDAO legacy"
                     onValueChange={handleTokenValueChange}
                     value={usdBalance}
                     disabled
