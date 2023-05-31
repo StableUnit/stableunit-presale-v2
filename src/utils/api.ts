@@ -4,30 +4,25 @@ import { Contract } from "web3-eth-contract";
 
 import CONTRACT_ERC20 from "contracts/ERC20.json";
 import Distributor from "contracts/SuDAOUpgrader.json";
-import SuDAO from "contracts/SuDAO.json";
 import VeERC20 from "contracts/VeERC20v2.json";
 import { SupportedTokensType } from "./currency";
 
-type ContractsType = "DistributorContract" | "SuDAOContract" | "VeERC20Contract";
+type ContractsType = "DistributorContract" | "VeERC20Contract";
 
 export const contracts: Record<ContractsType, Contract | undefined> = {
     DistributorContract: undefined,
-    SuDAOContract: undefined,
     VeERC20Contract: undefined,
 };
 
 export const initAllContracts = (web3: Web3) => {
     setDistributorContract(new web3.eth.Contract(Distributor.abi as any, Distributor.address));
-    setSuDAOContract(new web3.eth.Contract(SuDAO.abi as any, SuDAO.address));
     setVeERC20Contract(new web3.eth.Contract(VeERC20.abi as any, VeERC20.address));
 };
 
 export const setDistributorContract = (newContract: Contract) => {
     contracts.DistributorContract = newContract;
 };
-export const setSuDAOContract = (newContract: Contract) => {
-    contracts.SuDAOContract = newContract;
-};
+
 export const setVeERC20Contract = (newContract: Contract) => {
     contracts.VeERC20Contract = newContract;
 };
