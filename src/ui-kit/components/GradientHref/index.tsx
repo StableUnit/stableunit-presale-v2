@@ -16,17 +16,17 @@ interface GradientBorderProps {
 
 export const GradientHref = ({ id, children, className, target, disabled, href, onClick }: GradientBorderProps) => {
     return href ? (
-        <NavLink
+        <a
             id={id}
             onClick={onClick}
-            to={href}
+            href={href}
             target={target}
             rel="noreferrer"
             className={cn("gradient-href", className, { "gradient-href--disabled": disabled })}
         >
             {/* @ts-ignore */}
             {children}
-        </NavLink>
+        </a>
     ) : (
         <div
             onClick={onClick}

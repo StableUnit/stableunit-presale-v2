@@ -1,0 +1,32 @@
+@import "src/ui-kit/styles/vars";
+
+.links-container {
+    margin: 20px 50px;
+    width: 480px;
+}
+
+.links {
+    text-align: center;
+    padding: 24px 30px;
+    box-sizing: border-box;
+    background: $black;
+    border-radius: 24px;
+    position: relative;
+
+    &__title {
+        font-size: 20px;
+    }
+
+    &__section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        padding: 16px;
+    }
+
+    @media only screen and (max-width: $mobile-width) {
+        padding: 15px 8px;
+        width: 100%;
+    }
+}
