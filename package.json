@@ -31,8 +31,8 @@
         "webpack": "4.44.2"
     },
     "scripts": {
-        "start": "TSC_COMPILE_ON_ERROR=true react-scripts start",
-        "build": "TSC_COMPILE_ON_ERROR=true react-scripts build",
+        "start": "TSC_COMPILE_ON_ERROR=true react-scripts --openssl-legacy-provider start",
+        "build": "TSC_COMPILE_ON_ERROR=true react-scripts --openssl-legacy-provider build",
         "test": "mocha --bail --require ts-node/register test/*.spec.ts --color --recursive --timeout 60000 --exit",
         "eject": "react-scripts eject",
         "storybook": "start-storybook -p 6006 -s public",
